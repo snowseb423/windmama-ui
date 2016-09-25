@@ -1,0 +1,115 @@
+@grey1: linear-gradient(60deg, #292929, #222222 ); // left-panel(desktop), right-panel(allDevice),
+@grey2: #1d1d1d; // header(allDevice),
+@grey3: linear-gradient(120deg, #000, #222222 ); // left-panel(mobil),
+@border: 1px solid black;
+@speed1: 300ms;
+@speed2: 500ms;
+
+html,body, .app, #left-panel, #right-panel { height: 100%; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+* { font-family: 'Open Sans Condensed', sans-serif; }
+
+body {
+
+  div { border: 0px solid black; }
+
+  #map         { z-index: 1; }
+  #header      { z-index: 4; }
+  #left-panel  { z-index: 2; }
+  #right-panel { z-index: 3; }
+
+  .inactive {
+    opacity: 0.5;
+    border: dashed 2px #444;
+  }
+
+  .elements-ui-absolute { // header + left-pane + right-panel
+    position: fixed;
+    top: 0;
+    transition-duration: @speed2;
+  }
+
+  .button { cursor: pointer; }
+
+  #header {
+    width: 100%;
+    height: 60px;
+    background: @grey2;
+    border-bottom: @border;
+    min-width: 450px;
+    color: white;
+    @media only screen and (max-device-width: 480px) { min-width: 0px; }
+    .container-left-menu {
+      background: black;
+      float: left;
+      i {
+        transition-duration: @speed2;
+        font-size: x-large;
+        padding: 18px;
+        transform: rotateZ(-180deg);
+      }
+      &.clicked i { transform: rotateX(0deg); }
+    }
+    h1 {
+      float: left;
+      padding: 11px 0;
+      width: 190px;
+      font-family: 'Abel', sans-serif;
+      font-weight: bolder;
+      margin: 0;
+      text-align: center;
+      font-size: 30px;
+      float: left;
+    }
+    .container-right-menu {
+      float: right;
+      padding: 20px;
+      width: 25px;
+      height: 20px;
+      div {
+        position: absolute;
+        transition-duration: 300ms;
+        width: 25px;
+        height: 5px;
+        background: white;
+        border-radius: 2.5px;
+      }
+      div:last-child { margin-top: 15px; }
+      &.clicked div:first-child { transform: rotate(45deg) translateX(5px) translateY(5px); }
+      &.clicked div:last-child { transform: rotate(-45deg) translateX(5.5px) translateY(-5.5px); }
+    }
+  }
+
+  #left-panel {
+    background: @grey1;
+    left: -260px;
+    width: 260px;
+    border-right: 1px;
+    &.clicked { left: 0; }
+    @media only screen and (max-device-width: 480px) {
+      background: @grey3;
+      width: 100%;
+      left: -100%;
+    }
+  }
+
+  #right-panel {
+    background: @grey1;
+    right: -260px;
+    width: 260px;
+    border-left: 1px;
+    &.clicked { right: 0;}
+    @media only screen and (max-device-width: 480px) {
+      background: @grey1;
+      width: 100%;
+      right: -100%;
+    }
+  }
+
+}

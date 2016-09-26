@@ -1,20 +1,27 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Header from './header.jsx';
+import LeftPanel from './leftPanel.jsx';
+import RightPanel from './rightPanel.jsx';
 import Map from './map.jsx';
-import Ui from './ui.jsx';
 
 function Layout(props) {
-  console.log(props[417]);
+  const store = props.allData;
   const styleApp = { height: 100 + '%' };
-  return (
-    <div style={styleApp}>
-      <Ui />
-      <Map />
-    </div>
-  );
+  return <div style={styleApp}>
+    <Header />
+    <LeftPanel store={store}/>
+    <RightPanel />
+    <Map />
+  </div>;
 }
 
 Layout.propTypes = {
-  location: PropTypes.array
+  allData: PropTypes.any
 };
 
-export default Layout;
+export default connect( allData => {
+  return {
+    allData
+  };
+})(Layout);

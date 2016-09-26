@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 
 function LeftPanel(props) {
-  var active = props.active,
-      classPanel = ' ';
-  if (active) {
-    classPanel = 'clicked';
-  } else if (!active) {
-    classPanel = ' ';
-  }
-  return <div className={'elements-ui-absolute ' + classPanel} id="left-panel" />;
+  const { detail, location } = props.store;
+  console.log(detail);
+  return <div className="elements-ui-absolute" id="left-panel">
+  </div>;
 }
 
-LeftPanel.propTypes = { active: PropTypes.bool };
+LeftPanel.propTypes = {
+  store: PropTypes.any,
+  detail: PropTypes.array,
+  location: PropTypes.array
+};
+
 export default LeftPanel;

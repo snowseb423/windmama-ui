@@ -1,15 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
-function RightPanel(props) {
-  var active = props.active,
-      classPanel = ' ';
-  if (active) {
-    classPanel = 'clicked';
-  } else if (!active) {
-    classPanel = ' ';
-  }
-  return <div className={'elements-ui-absolute ' + classPanel} id="right-panel" />;
+function RightPanel() {
+  return <div className="elements-ui-absolute" id="right-panel" />;
 }
 
-RightPanel.propTypes = { active: PropTypes.bool };
 export default RightPanel;

@@ -8,7 +8,7 @@ function LeftPanel(props) {
   } else if (!active) {
     classPanel = ' ';
   }
-  return <div className={'left-panel elements-ui-absolute ' + classPanel} id="left-panel" />;
+  return <div className={'elements-ui-absolute ' + classPanel} id="left-panel" />;
 }
 
 LeftPanel.propTypes = { active: PropTypes.bool };

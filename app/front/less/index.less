@@ -1,11 +1,12 @@
 @grey1: linear-gradient(60deg, #292929, #222222 ); // left-panel(desktop), right-panel(allDevice),
 @grey2: #1d1d1d; // header(allDevice),
 @grey3: linear-gradient(120deg, #000, #222222 ); // left-panel(mobil),
+@background-cover-widgets: radial-gradient(rgba(0,0,0,0.27), rgba(0,0,0,0.9));
 @border: 1px solid black;
 @speed1: 300ms;
 @speed2: 500ms;
 
-html,body, .app, #left-panel, #right-panel { height: 100%; }
+html, body, .app, #left-panel, #right-panel { height: 100%; }
 html, body {
   margin: 0;
   padding: 0;
@@ -13,16 +14,17 @@ html, body {
 }
 * { font-family: 'Open Sans Condensed', sans-serif; }
 body {
-  div { border: 0px solid black; }
-  #map         { z-index: 1; }
-  #header      { z-index: 4; }
-  #left-panel  { z-index: 2; }
-  #right-panel { z-index: 3; }
+  #map         { z-index: 0; }
+  #ui          { z-index: 1; }
+  #widgets     { z-index: 2; }
+  #left-panel  { z-index: 3; }
+  #right-panel { z-index: 4; }
+  #header      { z-index: 5; }
   .inactive {
     opacity: 0.5;
     border: dashed 2px #444;
   }
-  .elements-ui-absolute { // header + left-pane + right-panel
+  .elements-ui-absolute, .ui { // header + left-pane + right-panel
     position: fixed;
     top: 0;
     transition-duration: @speed2;
@@ -80,7 +82,7 @@ body {
     background: @grey1;
     left: -260px;
     width: 260px;
-    border-right: 1px;
+    border-right: @border;
     &.clicked { left: 0; }
     @media only screen and (max-device-width: 480px) {
       background: @grey3;
@@ -92,12 +94,17 @@ body {
     background: @grey1;
     right: -260px;
     width: 260px;
-    border-left: 1px;
+    border-left: @border;
     &.clicked { right: 0;}
     @media only screen and (max-device-width: 480px) {
       background: @grey1;
       width: 100%;
       right: -100%;
     }
+  }
+  #widgets {
+    background: @background-cover-widgets;
+    width: 100%;
+    height: 100%;
   }
 }

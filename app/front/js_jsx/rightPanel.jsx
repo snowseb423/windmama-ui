@@ -8,7 +8,7 @@ function RightPanel(props) {
   } else if (!active) {
     classPanel = ' ';
   }
-  return <div className={'right-panel elements-ui-absolute ' + classPanel} id="right-panel" />;
+  return <div className={'elements-ui-absolute ' + classPanel} id="right-panel" />;
 }
 
 RightPanel.propTypes = { active: PropTypes.bool };

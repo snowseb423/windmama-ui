@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Map from './map.jsx';
 import Ui from './ui.jsx';
 
-function Layout() {
+function Layout(props) {
+  console.log(props[417]);
   const styleApp = { height: 100 + '%' };
   return (
     <div style={styleApp}>
@@ -11,5 +12,9 @@ function Layout() {
     </div>
   );
 }
+
+Layout.propTypes = {
+  location: PropTypes.array
+};
 
 export default Layout;

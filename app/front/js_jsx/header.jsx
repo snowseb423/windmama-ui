@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import RightPanel from './rightPanel.jsx';
-import LeftPanel from './leftPanel.jsx';
 
-class Ui extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,21 +35,17 @@ class Ui extends Component {
     }
   }
   render() {
-    return <div className="Ui">
-      <div id="header" className="header elements-ui-absolute">
-        <div className={'container-left-menu button ' + this.state.classLeftMenu} onClick={() => this.leftClick()}>
-          <i className="fa fa-arrow-down" aria-hidden="true" />
-        </div>
-        <h1>WindMama.fr</h1>
-        <div className={'container-right-menu button '+ this.state.classRightMenu} onClick={() => this.rightClick()}>
-          <div />
-          <div />
-        </div>
+    return <div id="header" className="header elements-ui-absolute">
+      <div className={'container-left-menu button ' + this.state.classLeftMenu} onClick={() => this.leftClick()}>
+        <i className="fa fa-arrow-down" aria-hidden="true" />
       </div>
-      <LeftPanel active={this.state.leftActive} />
-      <RightPanel active={this.state.rightActive} />
+      <h1>WindMama.fr</h1>
+      <div className={'container-right-menu button '+ this.state.classRightMenu} onClick={() => this.rightClick()}>
+        <div />
+        <div />
+      </div>
     </div>;
   }
 }
 
-export default Ui;
+export default Header;

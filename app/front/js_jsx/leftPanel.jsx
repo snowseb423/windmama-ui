@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 function LeftPanel(props) {
   var active = props.active,
@@ -11,4 +11,5 @@ function LeftPanel(props) {
   return <div className={'left-panel elements-ui-absolute ' + classPanel} id="left-panel" />;
 }
 
+LeftPanel.propTypes = { active: PropTypes.bool };
 export default LeftPanel;

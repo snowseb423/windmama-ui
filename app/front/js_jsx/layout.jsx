@@ -7,7 +7,6 @@ import Map from './map.jsx';
 
 function Layout(props) {
   const { detail, location } = props;
-  console.log(detail.location);
   const attributes = {
     detail,
     location

@@ -19,4 +19,4 @@ ReactDOM.render(
   document.querySelector('.app')
 );
 
-export { store, clientUrl };
+export default store;

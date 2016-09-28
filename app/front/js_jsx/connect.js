@@ -1,13 +1,12 @@
 import io from 'socket.io-client';
-import { store, clientUrl } from './index.jsx';
+import store from './index.jsx';
 
-const socket = io.connect('http://localhost:8080/');
+const socket = io.connect('http://'+ window.location.hostname +':8080/');
 var update;
 var object = {
   detail: new Object(),
   location: new Object()
 };
-
 function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });
 }

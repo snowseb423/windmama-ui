@@ -6,28 +6,21 @@ import RightPanel from './rightPanel.jsx';
 import Map from './map.jsx';
 
 function Layout(props) {
-  const { detail, location } = props;
-  const attributes = {
-    detail,
-    location
-  };
   const styleApp = { height: 100 + '%' };
   return <div style={styleApp}>
     <Header />
-    <LeftPanel {...attributes} />
+    <LeftPanel {...props}/>
     <RightPanel />
     <Map />
   </div>;
 }
 
 Layout.propTypes = {
-  detail: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  state: PropTypes.object.isRequired
 };
 
 export default connect( state => {
   return {
-    location: state,
-    detail: state
+    state
   };
 })(Layout);

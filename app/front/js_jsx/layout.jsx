@@ -1,27 +1,34 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import Header from './header.jsx';
+import { connect } from 'react-redux';
 import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
 import Map from './map.jsx';
 
 function Layout(props) {
-  const store = props.allData;
+  const { detail, location } = props;
+  console.log(detail.location);
+  const attributes = {
+    detail,
+    location
+  };
   const styleApp = { height: 100 + '%' };
   return <div style={styleApp}>
     <Header />
-    <LeftPanel store={store}/>
+    <LeftPanel {...attributes} />
     <RightPanel />
     <Map />
   </div>;
 }
 
 Layout.propTypes = {
-  allData: PropTypes.any
+  detail: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
-export default connect( allData => {
+export default connect( state => {
   return {
-    allData
+    location: state,
+    detail: state
   };
 })(Layout);

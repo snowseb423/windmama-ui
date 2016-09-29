@@ -3,9 +3,10 @@ import store from './index.jsx';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var update;
-var object = {
-  detail: new Object(),
-  place: new Object()
+var object= new Object();
+ object = {
+  detail: {},
+  place: {}
 };
 
 function registerData(chanel, callback) {
@@ -14,16 +15,20 @@ function registerData(chanel, callback) {
 
 registerData('sendAllData', (data) => {
   let dataSplit = data[0].split(' ');
-  object.detail[dataSplit[0]] = data;
+  var id = dataSplit[0];
+  object.detail[Number(id)] = data;
 });
 
 registerData('sendAllLocation', (data) => {
-  var placeObject = new Object();
   data.forEach((element) => {
     let elementSplited = element.split(' ');
-    placeObject[elementSplited[0]] = element.split(' ');
+    var id = elementSplited[0];
+    object.place[Number(id)] = [
+      elementSplited[0],
+      elementSplited[1],
+      elementSplited[2]
+    ];
   });
-  object.place = placeObject;
 });
 
 registerData('sendPubsubData', (data) => {

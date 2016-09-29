@@ -21,7 +21,7 @@ body {
   #header      { z-index: 4; }
   .inactive {
     opacity: 0.5;
-    border: dashed 2px #444;
+    border: dashed 1px #555;
   }
   .elements-ui-absolute, .ui {
     position: fixed;
@@ -79,6 +79,7 @@ body {
   }
   #left-panel {
     background: @grey1;
+    padding-top: 70px;
     left: -260px;
     width: 260px;
     border-right: @border;
@@ -91,6 +92,7 @@ body {
   #left-panel { left: 0 !important; }
   #right-panel {
     background: @grey1;
+    padding-top: 70px;
     right: -260px;
     width: 260px;
     border-left: @border;
@@ -99,6 +101,10 @@ body {
       width: 100%;
       right: -100%;
     }
+  }
+  .child-panel {
+    margin: 0 auto 10px auto;
+    width: 92%;
   }
   #widgets {
     background: @background-cover-widgets;

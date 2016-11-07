@@ -1,7 +1,7 @@
 @grey1: linear-gradient(60deg, #292929, #222222 ); // left-panel(desktop), right-panel(allDevice),
 @grey2: #1d1d1d; // header(allDevice),
-@grey3: linear-gradient(120deg, #000, #222222 ); // left-panel(mobil),
-@background-cover-widgets: radial-gradient(rgba(0,0,0,0.27), rgba(0,0,0,0.9));
+@grey3: linear-gradient(120deg, #000, #222222 );
+@background-cover-widgets: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
 @border: 1px solid black;
 @speed1: 300ms;
 @speed2: 500ms;
@@ -15,13 +15,24 @@ html, body {
 }
 body {
   #map         { z-index: 0; }
-  #widgets     { z-index: 1; }
+  #cover-detail{ z-index: 1; }
   #left-panel  { z-index: 2; }
   #right-panel { z-index: 3; }
   #header      { z-index: 4; }
   .inactive {
     opacity: 0.5;
     border: dashed 1px #555;
+  }
+  input {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 2px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin: 0px 3% 10px 3%;
+    padding: 5px 0px;
+    width: 94%;
   }
   .elements-ui-absolute, .ui {
     position: fixed;
@@ -77,6 +88,19 @@ body {
       &.clicked div:last-child { transform: rotate(-45deg) translateX(5.5px) translateY(-5.5px); }
     }
   }
+  #cover-detail {
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    background: @background-cover-widgets;
+    .widget {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid black;
+      min-height: 50px;
+      width: 600px;
+      margin: 8px auto;
+    }
+  }
   #left-panel {
     background: @grey1;
     padding-top: 70px;
@@ -84,7 +108,6 @@ body {
     width: 260px;
     border-right: @border;
     @media only screen and (max-device-width: 480px) {
-      background: @grey3;
       width: 100%;
       left: -100%;
     }
@@ -105,10 +128,5 @@ body {
   .child-panel {
     margin: 0 auto 10px auto;
     width: 92%;
-  }
-  #widgets {
-    background: @background-cover-widgets;
-    width: 100%;
-    height: 100%;
   }
 }

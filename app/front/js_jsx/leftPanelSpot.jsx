@@ -7,18 +7,19 @@ function LeftPanelSpot(props) {
       detailSplited = firstDetail.split(' '),
       average = detailSplited[3],
       heading = -detailSplited[5];
-  const color = windColor[Math.round(unitType(average))];
-
-  const styleChild = {
-    color: '#DDD'
-  };
-  const styleSpanCity = {
-    fontStyle: 'italic'
-  };
+  var color;
+  if (average/1.852 <= 50) {
+    color = windColor[Math.round((average/1.852)-1)];
+  } else {
+    color = windColor[49];
+  }
+  const styleChild = { color: '#DDD' };
+  const stylePlace = { fontWeight: '600' };
   const styleSpanAverage = {
     color: color,
     float: 'right',
-    marginRight: '8px'
+    marginRight: '8px',
+    fontWeight: 600
   };
   const styleImgAverage = {
     transform: 'rotateZ(' + heading + 'deg)',
@@ -27,9 +28,9 @@ function LeftPanelSpot(props) {
   };
 
   return <div style={styleChild} className="child-panel button">
-    <span style={styleSpanCity}>{'Anémomètre - ' + place[0]}</span>
+    <span style={stylePlace}>{place[3]}</span>
     <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />
-    <span style={styleSpanAverage}>{unitType(average) + ' kn'}</span>
+    <span style={styleSpanAverage}>{unitType(average)}</span>
   </div>;
 }
 

@@ -3,6 +3,7 @@ import Header from './header.jsx';
 import { connect } from 'react-redux';
 import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
+import Detail from './detail.jsx';
 import Map from './map.jsx';
 
 function Layout(props) {
@@ -11,6 +12,7 @@ function Layout(props) {
     <Header />
     <LeftPanel {...props}/>
     <RightPanel />
+    <Detail />
     <Map />
   </div>;
 }

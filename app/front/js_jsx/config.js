@@ -12,7 +12,7 @@ const windColor = [
 ];
 
 function unitType(value) {
-  return Math.round(value/1.852);
+  return (Math.round(value/1.852) + ' nds');
 }
 
 export { windColor, unitType };

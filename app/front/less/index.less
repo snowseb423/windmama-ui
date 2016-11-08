@@ -14,11 +14,11 @@ html, body {
   * { font-family: 'Open Sans Condensed', sans-serif; }
 }
 body {
-  #map         { z-index: 0; }
-  #cover-detail{ z-index: 1; }
-  #left-panel  { z-index: 2; }
-  #right-panel { z-index: 3; }
-  #header      { z-index: 4; }
+  #map          { z-index: 0; }
+  #cover-detail { z-index: 1; }
+  #left-panel   { z-index: 2; }
+  #right-panel  { z-index: 2; }
+  #header       { z-index: 3; }
   .inactive {
     opacity: 0.5;
     border: dashed 1px #555;
@@ -52,12 +52,12 @@ body {
       background: black;
       float: left;
       i {
+        transform: rotateZ(-180deg);
         transition-duration: @speed2;
         font-size: x-large;
         padding: 18px;
-        transform: rotateZ(0deg);
       }
-      &.clicked i { transform: rotateZ(-180deg); }
+      &.clicked i { transform: rotateZ(0deg); }
     }
     h1 {
       float: left;
@@ -104,21 +104,22 @@ body {
   #left-panel {
     background: @grey1;
     padding-top: 70px;
-    left: -260px;
+    left: 0px;
     width: 260px;
     border-right: @border;
+    &.active { left: -260px; }
     @media only screen and (max-device-width: 480px) {
       width: 100%;
       left: -100%;
     }
   }
-  #left-panel { left: 0 !important; }
   #right-panel {
     background: @grey1;
     padding-top: 70px;
-    right: -260px;
+    right: 0px;
     width: 260px;
     border-left: @border;
+    &.active { right: -260px; }
     @media only screen and (max-device-width: 480px) {
       background: @grey1;
       width: 100%;
@@ -126,7 +127,7 @@ body {
     }
   }
   .child-panel {
-    margin: 0 auto 10px auto;
-    width: 92%;
+    margin: 0 3% 10px 3%;
+    width: 94%;
   }
 }

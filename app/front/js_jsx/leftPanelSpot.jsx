@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { unitType, windColor } from './config.js';
 
 function LeftPanelSpot(props) {
-  const { index, place, detail } = props;
+  const { place, detail } = props;
   var firstDetail = detail[0],
       detailSplited = firstDetail.split(' '),
       average = detailSplited[3],

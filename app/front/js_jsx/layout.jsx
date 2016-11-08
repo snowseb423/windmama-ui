@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Map from './map.jsx';
 import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
-import Detail from './detail.jsx';
+import Widgets from './widgets.jsx';
 
 
 class Layout extends Component {
@@ -16,7 +16,6 @@ class Layout extends Component {
       classRightMenu: ' '
     };
   }
-
   leftClick() {
     this.setState({
       leftActive: !this.state.leftActive
@@ -41,7 +40,6 @@ class Layout extends Component {
       this.state.leftActive = false;
     }
   }
-
   render() {
     const styleApp = { height: 100 + '%' };
     return <div style={styleApp}>
@@ -58,7 +56,7 @@ class Layout extends Component {
       </div>
       <LeftPanel active={this.state.leftActive} {...this.props} />
       <RightPanel active={this.state.rightActive} />
-      <Detail />
+      <Widgets active={this.state} />
     </div>;
   }
 }

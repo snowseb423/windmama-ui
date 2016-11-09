@@ -1,32 +1,39 @@
- import React, { PropTypes, Component } from 'react';
-
+import React, { PropTypes, Component } from 'react';
 
 class Widgets extends Component {
   constructor(props) {
     super(props);
-  }
-  render() {
-    const { leftActive, rightActive } = this.props.active;
-    var marginLeft = '0px';
-    var styleCover = {
-      width: window.innerWidth,
-      marginLeft: marginLeft
+    this.state = {
+      width: window.innerWidth + 'px',
+      marginLeft: '0px'
     };
-    if (leftActive === true) {
-      styleCover = {
+  }
+  updateDimensions() {
+    if (this.props.active.leftActive) {
+      this.state = {
         width: window.innerWidth - 260 + 'px',
         marginLeft: '260px'
       };
-    } else if (rightActive === true) {
-      styleCover = {
+    } else if (this.props.active.rightActive) {
+      this.state = {
         width: window.innerWidth - 260 + 'px',
-        marginLeft: marginLeft
+        marginLeft: '0px'
+      };
+    } else {
+      this.state = {
+        width: window.innerWidth + 'px',
+        marginLeft: '0px'
       };
     }
-    return <div className="elements-ui-absolute" id="cover-widgets" style={styleCover}>
-      <div id="information-widget" className="widget"/>
-      <div id="1h-widget-widget" className="widget"/>
-      <div id="24h-widget-widget" className="widget"/>
+  }
+  render() {
+    this.updateDimensions();
+    return <div className="elements-ui-absolute" id="cover-widgets" style={this.state} >
+      <div className="container-widgets" id="container-widgets">
+        <div id="information-widget" className="widget"/>
+        <div id="1h-widget-widget" className="widget"/>
+        <div id="24h-widget-widget" className="widget"/>
+      </div>
     </div>;
   }
 }
@@ -40,5 +47,4 @@ Widgets.propTypes = {
   place: PropTypes.object,
   allId: PropTypes.array
 };
-
 export default Widgets;

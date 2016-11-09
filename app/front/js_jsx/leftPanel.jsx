@@ -4,11 +4,11 @@ import LeftPanelSpot from './leftPanelSpot.jsx';
 function LeftPanel(props) {
   const { detail, place, allId } = props.state;
   const active = props.active;
-  var Class = 'elements-ui-absolute';
+  var Class = ' ';
   if (active == true) {
-    Class = 'elements-ui-absolute';
+    Class = ' ';
   } else {
-    Class = 'elements-ui-absolute active';
+    Class = 'active';
   }
   return <div className={Class} id="left-panel">
     <input type="text" placeholder="Recherche"/>

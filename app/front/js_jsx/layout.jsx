@@ -44,19 +44,21 @@ class Layout extends Component {
     const styleApp = { height: 100 + '%' };
     return <div style={styleApp}>
       <Map />
-      <div id="header" className="elements-ui-absolute">
-        <div className={'container-left-menu button ' + this.state.classLeftMenu} onClick={() => this.leftClick()}>
-          <i className="fa fa-arrow-down" aria-hidden="true" />
+      <div id="ui" className="elements-ui-absolute">
+        <div id="header" className="elements-ui-absolute">
+          <div className={'container-left-menu button ' + this.state.classLeftMenu} onClick={() => this.leftClick()}>
+            <i className="fa fa-arrow-down" aria-hidden="true" />
+          </div>
+          <h1>WindMama.fr</h1>
+          <div className={'container-right-menu button '+ this.state.classRightMenu} onClick={() => this.rightClick()}>
+            <div />
+            <div />
+          </div>
         </div>
-        <h1>WindMama.fr</h1>
-        <div className={'container-right-menu button '+ this.state.classRightMenu} onClick={() => this.rightClick()}>
-          <div />
-          <div />
-        </div>
+        <LeftPanel active={this.state.leftActive} {...this.props} />
+        <Widgets active={this.state} />
+        <RightPanel active={this.state.rightActive} />
       </div>
-      <LeftPanel active={this.state.leftActive} {...this.props} />
-      <RightPanel active={this.state.rightActive} />
-      <Widgets active={this.state} />
     </div>;
   }
 }

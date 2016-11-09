@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react';
 
 function RightPanel(props) {
   const active = props.active;
-  var Class = 'elements-ui-absolute';
+  var Class = ' ';
   if (active == true) {
-    Class = 'elements-ui-absolute';
+    Class = ' ';
   } else {
-    Class = 'elements-ui-absolute active';
+    Class = 'active';
   }
   return <div className={Class} id="right-panel" />;
 }

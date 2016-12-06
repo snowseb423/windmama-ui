@@ -4,12 +4,14 @@ import { unitType, windColor } from './config.js';
 function LeftPanelSpot(props) {
   const { place, detail } = props;
   var firstDetail = detail[0],
-      detailSplited = firstDetail.split(' '),
-      average = detailSplited[3],
+      detailSplited = firstDetail.split('|'),
+      max = detailSplited[4],
       heading = -detailSplited[5];
+  var placeSplited = place.split('|');
+  var city = placeSplited[3];
   var color;
-  if (average/1.852 <= 50) {
-    color = windColor[Math.round((average/1.852)-1)];
+  if (max/1.852 <= 50) {
+    color = windColor[Math.round((max/1.852)-1)];
   } else {
     color = windColor[49];
   }
@@ -28,9 +30,9 @@ function LeftPanelSpot(props) {
   };
 
   return <div style={styleChild} className="child-panel button">
-    <span style={stylePlace}>{place[3]}</span>
+    <span style={stylePlace}>{city}</span>
     <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />
-    <span style={styleSpanAverage}>{unitType(average)}</span>
+    <span style={styleSpanAverage}>{unitType(max)}</span>
   </div>;
 }
 

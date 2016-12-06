@@ -17,7 +17,7 @@ io.on('connection', function(socket) {
       });
     }
   });
-  client.smembers('location', (err, allLocation) => {
+  client.hgetall('location', (err, allLocation) => {
     socket.emit('sendAllLocation', allLocation);
   });
   subscriber.subscribe('pubsub');

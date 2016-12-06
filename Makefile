@@ -1,10 +1,10 @@
 
 #javascript path
-JS_SRC = app/front/js_jsx/index.jsx
+JS_SRC = app/js/index.jsx
 JS_TARGET = public/js/index.js
 
 #less path
-LESS_DIR = app/front/less/
+LESS_DIR = app/less/
 LESS_SRC = $(LESS_DIR)index.less
 LESS_TARGET = public/css/style.css
 

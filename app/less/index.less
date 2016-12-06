@@ -25,15 +25,14 @@ body {
     border: dashed 1px #555;
   }
   input {
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
     border: none;
     color: white;
     font-size: 18px;
     text-align: center;
-    margin: 0px 3% 10px 3%;
-    padding: 5px 0px;
-    width: 94%;
+    padding: 10px 0px;
+    &:active { border: none; }
   }
   .elements-ui-absolute {
     position: fixed;
@@ -117,16 +116,22 @@ body {
     transition-duration: @speed1;
     padding-top: 60px;
     min-width: 260px;
-    .child-panel {
-      margin: 0 3% 10px 3%;
-      width: 94%;
-    }
   }
   #left-panel {
     border-right: @border;
     margin-left: 0px;
     float: left;
     &.active { margin-left: -260px; }
+    .child-panel {
+      transition-duration: 100ms;
+      padding: 5px 10px;
+      background-color: rgba(0,0,0,0);
+      span:first-child { margin-left: 0px; }
+    }
+    .child-panel:hover {
+      background-color: rgba(0,0,0,0.25);
+      span:first-child { margin-left: 5px; }
+    }
   }
   #right-panel {
     border-left: @border;

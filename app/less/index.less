@@ -10,7 +10,6 @@ html, body, .app, #left-panel, #right-panel { height: 100%; }
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   * { font-family: 'Open Sans Condensed', sans-serif; }
 }
 body {
@@ -32,7 +31,7 @@ body {
     font-size: 18px;
     text-align: center;
     padding: 10px 0px;
-    &:active { border: none; }
+    &:focus { outline: none !important; }
   }
   .elements-ui-absolute {
     position: fixed;
@@ -122,15 +121,24 @@ body {
     margin-left: 0px;
     float: left;
     &.active { margin-left: -260px; }
+    .container-spot-left-panel {
+    }
     .child-panel {
+      position: absolute;
       transition-duration: 100ms;
       padding: 5px 10px;
       background-color: rgba(0,0,0,0);
-      span:first-child { margin-left: 0px; }
-    }
-    .child-panel:hover {
-      background-color: rgba(0,0,0,0.25);
-      span:first-child { margin-left: 5px; }
+      font-weight: 600;
+      color: #fff;
+      width: 240px;
+      span:first-child {
+        transition-duration: 100ms;
+        margin-left: 0px;
+      }
+      .child-panel:hover {
+        background-color: rgba(0,0,0,0.25);
+        span:first-child { margin-left: 3px; }
+      }
     }
   }
   #right-panel {
@@ -168,6 +176,11 @@ body {
       &.active {
         left: -100%;
         margin-left: inherit;
+      }
+      .child-panel {
+        width: 94%;
+        margin-left: 3%;
+        padding: 5px 0px;
       }
     }
     #right-panel {

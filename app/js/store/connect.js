@@ -1,13 +1,17 @@
 import io from 'socket.io-client';
+import { updateObject } from './actions.js';
 import store from './store.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
-var update;
-var object = {
+
+var initialState = {
   detail: {},
   place: {},
-  allId: []
+  allId: [],
+  leftActive: false,
+  rightActive: false
 };
+
 
 function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });
@@ -15,15 +19,19 @@ function registerData(chanel, callback) {
 registerData('sendAllData', (data) => {
   let dataSplit = data[0].split('|');
   var id = dataSplit[0];
-  object.detail[Number(id)] = data;
+  initialState.detail[Number(id)] = data;
 });
 registerData('sendAllLocation', (data) => {
-  object.place = data;
-  object.allId = Object.keys(data);
-});
-registerData('sendPubsubData', (data) => {
-  update = data;
-  store.dispatch({type: 'UPDATE_OBJECT'});
+  initialState.place = data;
+  initialState.allId = Object.keys(data);
 });
 
-export { object, update };
+
+var update;
+registerData('sendPubsubData', (data) => {
+  update = data;
+  store.dispatch(updateObject(update));
+});
+
+
+export default initialState;

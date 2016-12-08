@@ -5,7 +5,6 @@ import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
 import Widgets from './widgets.jsx';
 
-
 class Layout extends Component {
   constructor(props) {
     super(props);

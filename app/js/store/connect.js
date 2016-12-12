@@ -3,15 +3,11 @@ import { updateObject } from './actions.js';
 import store from './store.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
-
 var initialState = {
   detail: {},
   place: {},
-  allId: [],
-  leftActive: false,
-  rightActive: false
+  allId: []
 };
-
 
 function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });
@@ -26,12 +22,10 @@ registerData('sendAllLocation', (data) => {
   initialState.allId = Object.keys(data);
 });
 
-
 var update;
 registerData('sendPubsubData', (data) => {
   update = data;
   store.dispatch(updateObject(update));
 });
-
 
 export default initialState;

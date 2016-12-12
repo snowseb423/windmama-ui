@@ -1,4 +1,4 @@
-import initialState from './connect.js';
+import initialState from './connect';
 import { UPDATE_OBJECT, RIGHT_ACTIVE, LEFT_ACTIVE } from './actions.js';
 
 const windmamaApp = (state = initialState, action) => {
@@ -13,11 +13,11 @@ const windmamaApp = (state = initialState, action) => {
     case LEFT_ACTIVE:
       state.leftActive = !state.leftActive;
       state.rightActive = false;
-      break;
+      return state;
     case RIGHT_ACTIVE:
       state.rightActive = !state.rightActive;
       state.leftActive = false;
-      break;
+      return state;
     default:
       return state;
   }

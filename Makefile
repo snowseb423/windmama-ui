@@ -1,28 +1,24 @@
-
-#javascript path
-JS_SRC = app/js/index.jsx
-JS_TARGET = public/js/index.js
-
-#less path
 LESS_DIR = app/less/
 LESS_SRC = $(LESS_DIR)index.less
 LESS_TARGET = public/css/style.css
 
-#bin
+JS_SRC = app/js/index.jsx
+JS_TARGET = public/js/index.js
+OPTION_REACT = [ babelify --presets [ es2015 react ] ]
+
 WATCHIFY = ./node_modules/.bin/watchify
-EXORCIST = ./node_modules/.bin/exorcist
 WATCH = ./node_modules/.bin/watch
 LESSC = ./node_modules/.bin/lessc
+BROWSERIFY = ./node_modules/.bin/browserify
 
-#commands
-watch-js:
-	$(WATCHIFY) --verbose --debug -t [ babelify --presets [ es2015 react ] ] -o $(JS_TARGET) -- $(JS_SRC) | $(EXORCIST) $(JS_TARGET).map > $(JS_TARGET)
-
-watch-css:
+dev-js:
+	$(WATCHIFY) --verbose --debug -t $(OPTION_REACT) -o $(JS_TARGET) $(JS_SRC)
+dev-less:
 	$(WATCH) '$(LESSC) $(LESS_SRC) $(LESS_TARGET)' $(LESS_DIR)
 
-watch:
-	make -j4 watch-js watch-css
-
-init:
-	npm install watchify exorcist --save && npm install watch less --save-dev
+dev:
+	make -j4 dev-js dev-less
+clear:
+	rm -f $(JS_TARGET) $(LESS_TARGET)
+prod:
+	$(LESSC) $(LESS_SRC) $(LESS_TARGET) | $(BROWSERIFY) -t $(OPTION_REACT) -o $(JS_TARGET) $(JS_SRC)

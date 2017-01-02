@@ -1,6 +1,6 @@
 import initialState from './connect.js';
-import _ from 'lodash';
 import { EventEmitter } from 'events';
+import _ from 'lodash';
 
 var store = _.assign(
   initialState,

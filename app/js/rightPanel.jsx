@@ -1,10 +1,34 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import store from './store/store.js';
+import { typeOfActions } from './store/actions.js';
 
-function RightPanel() {
-  return <div className={false ? ' ' : 'active'} id="right-panel" />;
+
+class RightPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.updateStatePanel = this.updateStatePanel.bind(this);
+    this.state = {
+      active: this.props.rightActive
+    };
+  }
+  componentDidMount() {
+    store.on(typeOfActions.CHANGE_EVENT, this.updateStatePanel);
+  }
+  componentWillUnmount() {
+    store.removeListener(typeOfActions.CHANGE_EVENT, this.updateStatePanel);
+  }
+  updateStatePanel() {
+    this.setState({
+      active: store.rightActive
+    });
+  }
+  render() {
+    return <div className={this.state.active ? ' ' : 'active'} id="right-panel" />;
+  }
 }
 
-RightPanel.PropTypes = {
+RightPanel.propTypes = {
+  rightActive: PropTypes.bool
 };
 
 export default RightPanel;

@@ -9,11 +9,10 @@ class Ui extends Component {
   constructor(props) {
     super(props);
     this.state = store;
-    console.log(this.state);
   }
   render() {
     return <div id="ui" className="elements-ui-absolute">
-      <Header />
+      <Header leftActive={this.state.leftActive} rightActive={this.state.rightActive}/>
       <Widgets />
       <LeftPanel {...this.state} />
       <RightPanel />

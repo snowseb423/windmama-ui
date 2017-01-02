@@ -1,11 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import windmamaApp from './reducer.js';
 import initialState from './connect.js';
+import _ from 'lodash';
+import { EventEmitter } from 'events';
 
-const store = createStore(windmamaApp, initialState, compose(
-  applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-));
 
+
+var store = _.assign(initialState, EventEmitter.prototype);
 export default store;

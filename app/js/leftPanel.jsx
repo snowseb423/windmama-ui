@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
 function LeftPanel(props) {
-  const { detail, place, allId, leftActive } = props.state;
+  const { detail, place, allId, leftActive } = props;
   var maxOrder = [];
   for (var i = 0; i < allId.length; i++) {
     var max = parseInt(((detail[allId[i]])[0].split('|'))[4]);
@@ -28,6 +28,7 @@ function LeftPanel(props) {
 
 LeftPanel.propTypes = {
   active: PropTypes.bool,
+  leftActive: PropTypes.bool,
   state: PropTypes.object,
   allId: PropTypes.array,
   detail: PropTypes.object,

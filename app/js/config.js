@@ -1,4 +1,3 @@
-
 const windColor = [
   '#FFF','#0CFF4A','#0CFF4A','#0BE816','#0BE816',
   '#38FF07','#38FF07','#6DE805','#6DE805','#B8FF08',

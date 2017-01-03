@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
-class Last24HourslWidget extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
-  render() {
-    return <div className="widget" />;
-  }
+function Last24HourslWidget() {
+  // var { detail } = props;
+  // detail.forEach((element) => {
+  //
+  // });
+  // console.log(detail);
+  return <div className="widget" />;
 }
+
+Last24HourslWidget.propTypes = {
+  detail: PropTypes.any
+};
 
 export default Last24HourslWidget;

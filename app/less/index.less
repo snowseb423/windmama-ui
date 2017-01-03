@@ -3,6 +3,7 @@
 @grey3: linear-gradient(120deg, #000, #222222 );
 @background-cover-widgets: radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
 @border: 1px solid black;
+@speed0: 180ms;
 @speed1: 300ms;
 @speed2: 500ms;
 
@@ -11,7 +12,7 @@ html, body {
   background: #1aabe0;
   margin: 0;
   padding: 0;
-  * { font-family: 'Open Sans Condensed', sans-serif; }
+  * { font-family: 'Open Sans', sans-serif;; }
 }
 body {
   #map           { z-index: 0; }
@@ -107,7 +108,7 @@ body {
     }
   }
   #cover-widgets {
-    transition-duration: @speed1;
+    transition-duration: @speed0;
     opacity: 0;
     height: 100%;
     width: 100%;
@@ -124,11 +125,11 @@ body {
       max-width: 1400px;
       margin: auto;
       .widget {
-        background: rgba(0, 0, 0, 0.62);
-        border: 1px solid black;
-        padding: 10px;
-        margin-bottom: 10px;
+        background: rgba(0, 0, 0, 0.35);
       }
+    }
+    #Last2HoursWidget .containerOneDetail {
+      width: 8.33%;
     }
   }
   #left-panel, #right-panel {
@@ -146,13 +147,28 @@ body {
     .container-spot-left-panel {
     }
     .child-panel {
-      position: absolute;
       transition-duration: 100ms;
       padding: 5px 10px;
       background-color: rgba(0,0,0,0);
-      font-weight: 600;
-      color: #fff;
+      color: #fefefe;
       width: 240px;
+      animation-name: new-detail;
+      animation-duration: 200ms;
+      @keyframe new-detail {
+        from {
+          background-color: black;
+          margin-left: -300px;
+        }
+        to {
+          background-color: rgba(0,0,0,0);
+          margin-left: 0px;
+        }
+      }
+      span {
+        max-width: 160px;
+        overflow: inherit;
+        white-space: nowrap;
+      }
       span:first-child {
         transition-duration: 100ms;
         margin-left: 0px;
@@ -193,6 +209,12 @@ body {
         width: 95%;
         margin: 10px 2.5% 0 2.5%;
       }
+      #Last2HoursWidget .containerOneDetail {
+        width: 12.5%;
+      }
+    }
+    #left-panel, #right-panel {
+      border: none;
     }
     #left-panel {
       position: fixed;
@@ -208,6 +230,10 @@ body {
         width: 94%;
         margin-left: 3%;
         padding: 5px 0px;
+        &:hover {
+          background-color: transparent;
+          span:first-child { margin-left: 0px; }
+        }
       }
     }
     #right-panel {

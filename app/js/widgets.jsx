@@ -4,14 +4,14 @@ import { typeOfActions } from './store/actions.js';
 import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
-import LastDetailWidget from './lastDetailWidget.jsx';
 
 class Widgets extends Component {
   constructor(props) {
     super(props);
     this.updateStateCover = this.updateStateCover.bind(this);
     this.state = {
-      active: false
+      active: false,
+      detail: false
     };
   }
   componentDidMount() {
@@ -21,10 +21,17 @@ class Widgets extends Component {
     store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
   }
   updateStateCover() {
-    if(store.detailActive)
-      this.setState({ active: store.detailActive });
-    else
-      this.setState({ active: false });
+    if(store.detailActive) {
+      this.setState({
+        active: store.detailActive,
+        detail: store.detail[store.detailActive]
+      });
+    } else {
+      this.setState({
+        active: false,
+        detail: false
+      });
+    }
   }
   render() {
     var classNameIfActive;
@@ -34,10 +41,9 @@ class Widgets extends Component {
       classNameIfActive = ' ';
     return <div id="cover-widgets" className={classNameIfActive}>
       <div className="container-widgets" id="container-widgets">
-        <InfoWidget id={this.state.active} />
-        <LastDetailWidget />
-        <Last2HoursWidget />
-        <Last24HoursWidget />
+        <InfoWidget idStation={this.state.active} />
+        <Last2HoursWidget detail={this.state.detail} />
+        <Last24HoursWidget detail={this.state.detail} />
       </div>
     </div>;
   }

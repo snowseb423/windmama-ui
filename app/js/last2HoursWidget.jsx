@@ -1,16 +1,40 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
+import { windColor } from './config.js';
 
-class Last2HourslWidget extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
-  render() {
-    return <div className="widget" />;
-  }
+function color(value) {
+  if (value / 1.852 <= 50)
+    return windColor[Math.round(( value /1.852))];
+  else
+    return windColor[49];
 }
 
-export default Last2HourslWidget;
+function Last2HoursWidget(props) {
+  var { detail } = props;
+  var content;
+  if (detail) {
+    detail = detail.slice(0, 24);
+    content = detail.map((detail, i) => {
+      detail = detail.split('|');
+      return <div className="containerOneDetail" key={i} style={{textAlign: 'center',color: 'black',float: 'left', marginTop: '10px'}}>
+        <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
+          { detail[1]}
+        </div>
+        <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
+          <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ detail[5] +'deg)' }}/>
+        </div>
+        <div style={{background: color(detail[4]) }}>{ Math.round(detail[4] / 1.852)}</div>
+        <div style={{background: color(detail[3]) }}>{ Math.round(detail[3] / 1.852)}</div>
+        <div style={{background: color(detail[2]) }}>{ Math.round(detail[2] / 1.852)}</div>
+      </div>;
+    });
+  }
+  return <div className="widget" id="Last2HoursWidget">
+    {content}
+  </div>;
+}
+
+Last2HoursWidget.propTypes = {
+  detail: PropTypes.any
+};
+
+export default Last2HoursWidget;

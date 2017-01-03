@@ -3,17 +3,18 @@ import { Actions } from './store/actions.js';
 import store from './store/store.js';
 
 function InfoWidget(props) {
-  const { id } = props;
+  const { idStation } = props;
   const styleCityName = {
     padding: '2px 0',
     fontFamily: 'Abel',
     fontWeight: 'bolder',
     fontSize: '30px',
-    float: 'left'
+    float: 'left',
+    marginLeft: '10px'
   };
-  return <div className="widget" style={{ minHeight: '42px'}}>
-    <div style={styleCityName}>{id ? ((store.place[id]).split('|'))[3] : ' '}</div>
-    <div style={{ float: 'right'}}>
+  return <div className="widget" style={{ minHeight: '42px', padding: '10px 0'}}>
+    <div style={styleCityName}>{idStation ? ((store.place[idStation]).split('|'))[3] : ' '}</div>
+    <div style={{ float: 'right', marginRight: '10px'}}>
       <button className="button">
         <i className="fa fa-heart-o" aria-hidden="true" />
       </button>
@@ -25,7 +26,7 @@ function InfoWidget(props) {
 }
 
 InfoWidget.propTypes = {
-  id: PropTypes.any
+  idStation: PropTypes.any
 };
 
 export default InfoWidget;

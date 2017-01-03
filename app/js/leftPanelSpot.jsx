@@ -12,22 +12,20 @@ function LeftPanelSpot(props) {
   var city = placeSplited[3];
   var color;
   if (max/1.852 <= 50)
-    color = windColor[Math.round((max/1.852)-1)];
+    color = windColor[Math.round((max/1.852))];
   else
     color = windColor[49];
   const styleSpanAverage = {
     color: color,
     float: 'right',
-    marginRight: '8px',
-    fontWeight: 600
+    marginRight: '8px'
   };
   const styleImgAverage = {
     transform: 'rotateZ(' + heading + 'deg)',
-    float: 'right',
-    fontWeight: 'bold'
+    float: 'right'
   };
-  return <div style={{marginTop: 30 * index + 'px'}} className="child-panel button" onClick={() => Actions.requestDetailOfId(id)}>
-    <span>{city + ' _'+ id }</span>
+  return <div style={{ fontSize: '14px', color: '#CCC'}} className="child-panel button" onClick={() => Actions.requestDetailOfId(id)}>
+    <span>{city}</span>
     <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />
     <span style={styleSpanAverage}>{unitType(max)}</span>
   </div>;

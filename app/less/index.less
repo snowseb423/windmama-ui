@@ -1,13 +1,14 @@
 @grey1: linear-gradient(60deg, #292929, #222222 );
 @grey2: #1d1d1d;
 @grey3: linear-gradient(120deg, #000, #222222 );
-@background-cover-widgets: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+@background-cover-widgets: radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
 @border: 1px solid black;
 @speed1: 300ms;
 @speed2: 500ms;
 
 html, body, .app, #left-panel, #right-panel { height: 100%; }
 html, body {
+  background: #1aabe0;
   margin: 0;
   padding: 0;
   * { font-family: 'Open Sans Condensed', sans-serif; }
@@ -39,7 +40,18 @@ body {
     transition-duration: @speed2;
   }
   .button { cursor: pointer; }
+  button {
+    padding: 8px 14px;
+    border-radius: 2px;
+    background: black;
+    font-size: 19px;
+    color: white;
+    transition-duration: 200ms;
+    border: 0;
+    cursor: pointer;
+  }
   #header {
+    pointer-events: all;
     width: 100%;
     height: 60px;
     background: @grey2;
@@ -86,6 +98,7 @@ body {
     }
   }
   #ui {
+    pointer-events: none;
     width: 100%;
     height: 100%;
     display: flex;
@@ -94,10 +107,18 @@ body {
     }
   }
   #cover-widgets {
+    transition-duration: @speed1;
+    opacity: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    padding-top: 120px;
+    background: @background-cover-widgets;
+    padding-top: 80px;
+    color: #dcdcdc;
+    &.active {
+      opacity: 1;
+      padding-top: 120px;
+      pointer-events: all;
+    }
     .container-widgets {
       width: 60%;
       max-width: 1400px;
@@ -105,12 +126,13 @@ body {
       .widget {
         background: rgba(0, 0, 0, 0.62);
         border: 1px solid black;
-        min-height: 50px;
+        padding: 10px;
         margin-bottom: 10px;
       }
     }
   }
   #left-panel, #right-panel {
+    pointer-events: all;
     background: @grey1;
     transition-duration: @speed2;
     padding-top: 60px;
@@ -147,6 +169,10 @@ body {
     float: right;
     &.active { margin-right: -260px; }
   }
+  #map {
+    transition: @speed2;
+    &.blur { filter: blur(5px); }
+  }
 
 
   @media only screen and (max-device-width: 1100px) {
@@ -162,6 +188,7 @@ body {
     #cover-widgets {
       position: fixed;
       padding-top: 60px;
+      &.active { padding-top: 60px; }
       .container-widgets {
         width: 95%;
         margin: 10px 2.5% 0 2.5%;

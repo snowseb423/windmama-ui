@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { Actions } from './actions.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var initialState = {
@@ -6,7 +7,8 @@ var initialState = {
   place: {},
   allId: [],
   rightActive: false,
-  leftActive: false
+  leftActive: false,
+  detailActive: false
 };
 
 function registerData(chanel, callback) {
@@ -25,6 +27,7 @@ registerData('sendAllLocation', (data) => {
 var update;
 registerData('sendPubsubData', (data) => {
   update = data;
+  Actions.updateDetail(update);
 });
 
 export default initialState;

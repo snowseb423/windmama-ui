@@ -1,11 +1,10 @@
-import store from './store';
-import { Dispatcher } from 'flux';
-var AppDispatcher = new Dispatcher();
+import AppDispatcher from './dispatcher.js';
 
 export var typeOfActions = {
   LEFT_ACTIVATION: 'LEFT_ACTIVATION',
   RIGHT_ACTIVATION: 'RIGHT_ACTIVATION',
-  CHANGE_EVENT: 'change'
+  UPDATE_DETAIL: 'UPDATE_DETAIL',
+  REQUEST_DETAIL: 'REQUEST_DETAIL'
 };
 
 export var Actions = {
@@ -18,22 +17,17 @@ export var Actions = {
     AppDispatcher.dispatch({
       actionType: typeOfActions.RIGHT_ACTIVATION
     });
+  },
+  updateDetail: (update) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.UPDATE_DETAIL,
+      update: update
+    });
+  },
+  requestDetailOfId: (id) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.REQUEST_DETAIL,
+      id: id
+    });
   }
 };
-
-AppDispatcher.register((action) => {
-  switch (action.actionType) {
-    case typeOfActions.LEFT_ACTIVATION:
-      store.leftActive = !store.leftActive;
-      store.rightActive = false;
-      store.emit(typeOfActions.CHANGE_EVENT);
-      break;
-    case typeOfActions.RIGHT_ACTIVATION:
-      store.rightActive = !store.rightActive;
-      store.leftActive = false;
-      store.emit(typeOfActions.CHANGE_EVENT);
-      break;
-    default:
-      break;
-  }
-});

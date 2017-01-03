@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { unitType, windColor } from './config.js';
+import { Actions } from './store/actions.js';
+
 
 function LeftPanelSpot(props) {
   const { place, detail, index, max } = props;
@@ -24,8 +26,8 @@ function LeftPanelSpot(props) {
     float: 'right',
     fontWeight: 'bold'
   };
-  return <div style={{marginTop: 30 * index + 'px'}} className="child-panel button">
-    <span>{city + ' (id:'+ id +')'}</span>
+  return <div style={{marginTop: 30 * index + 'px'}} className="child-panel button" onClick={() => Actions.requestDetailOfId(id)}>
+    <span>{city + ' _'+ id }</span>
     <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />
     <span style={styleSpanAverage}>{unitType(max)}</span>
   </div>;
@@ -35,7 +37,7 @@ LeftPanelSpot.propTypes = {
   max: PropTypes.number,
   index: PropTypes.number,
   detail: PropTypes.array,
-  place: PropTypes.array
+  place: PropTypes.string
 };
 
 export default LeftPanelSpot;

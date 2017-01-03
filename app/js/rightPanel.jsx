@@ -12,10 +12,12 @@ class RightPanel extends Component {
     };
   }
   componentDidMount() {
-    store.on(typeOfActions.CHANGE_EVENT, this.updateStatePanel);
+    store.on(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
+    store.on(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
   }
   componentWillUnmount() {
-    store.removeListener(typeOfActions.CHANGE_EVENT, this.updateStatePanel);
+    store.removeListener(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
+    store.removeListener(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
   }
   updateStatePanel() {
     this.setState({

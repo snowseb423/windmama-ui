@@ -1,4 +1,4 @@
-import initialState from './connect.js';
+import initialState from './initialState.js';
 import { EventEmitter } from 'events';
 import _ from 'lodash';
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import store from './store/store.js';
 import { Actions, typeOfActions } from './store/actions.js';
 
@@ -12,10 +12,12 @@ class Header extends Component {
     };
   }
   componentDidMount() {
-    store.on(typeOfActions.CHANGE_EVENT, this.updateStateMenu);
+    store.on(typeOfActions.RIGHT_ACTIVATION, this.updateStateMenu);
+    store.on(typeOfActions.LEFT_ACTIVATION, this.updateStateMenu);
   }
   componentWillUnmount() {
-    store.removeListener(typeOfActions.CHANGE_EVENT, this.updateStateMenu);
+    store.removeListener(typeOfActions.RIGHT_ACTIVATION, this.updateStateMenu);
+    store.removeListener(typeOfActions.LEFT_ACTIVATION, this.updateStateMenu);
   }
   updateStateMenu() {
     this.setState({
@@ -36,9 +38,5 @@ class Header extends Component {
     </div>;
   }
 }
-Header.propTypes = {
-  rightActive: PropTypes.bool,
-  leftActive: PropTypes.bool
-};
 
 export default Header;

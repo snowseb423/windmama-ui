@@ -5,6 +5,7 @@ import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
 
+
 class Widgets extends Component {
   constructor(props) {
     super(props);
@@ -35,15 +36,24 @@ class Widgets extends Component {
   }
   render() {
     var classNameIfActive;
-    if(store.detailActive)
+    var detailPlace;
+    if(store.detailActive) {
       classNameIfActive = 'active';
-    else
+      var placeSplited = (store.place[this.state.active]).split('|');
+      detailPlace = 'PiouPiou n° ' + placeSplited[0] + ', ' + placeSplited[1] + '_' + placeSplited[2] + ', ' + placeSplited[4];
+    } else {
       classNameIfActive = ' ';
+    }
     return <div id="cover-widgets" className={classNameIfActive}>
       <div className="container-widgets" id="container-widgets">
         <InfoWidget idStation={this.state.active} />
         <Last2HoursWidget detail={this.state.detail} />
         <Last24HoursWidget detail={this.state.detail} />
+        <div className="widget">
+          <div style={{ fontSize: '15px', color: 'black', textAlign: 'center' }}>
+            {this.state.active ? detailPlace : ' '}
+          </div>
+        </div>
       </div>
     </div>;
   }

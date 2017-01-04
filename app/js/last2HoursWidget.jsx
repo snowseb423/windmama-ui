@@ -15,7 +15,7 @@ function Last2HoursWidget(props) {
     detail = detail.slice(0, 24);
     content = detail.map((detail, i) => {
       detail = detail.split('|');
-      return <div className="containerOneDetail" key={i} style={{textAlign: 'center',color: 'black',float: 'left', marginTop: '10px'}}>
+      return <div className="one-plot" key={i} style={{textAlign: 'center',color: 'black',float: 'left', marginTop: '10px'}}>
         <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
           { detail[1]}
         </div>
@@ -28,7 +28,7 @@ function Last2HoursWidget(props) {
       </div>;
     });
   }
-  return <div className="widget" id="Last2HoursWidget">
+  return <div className="widget" id="widget-2-hours">
     {content}
   </div>;
 }

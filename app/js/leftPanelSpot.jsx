@@ -4,12 +4,15 @@ import { Actions } from './store/actions.js';
 
 
 function LeftPanelSpot(props) {
-  const { place, detail, index, max } = props;
+  const { place, detail, max } = props;
   var detailSplited = detail[0].split('|'),
       id = detailSplited[0],
       heading = -detailSplited[5];
   var placeSplited = place.split('|');
   var city = placeSplited[3];
+  if (city.search('"') > -1) {
+    city = city.split('"')[1];
+  }
   var color;
   if (max/1.852 <= 50)
     color = windColor[Math.round((max/1.852))];
@@ -33,7 +36,6 @@ function LeftPanelSpot(props) {
 
 LeftPanelSpot.propTypes = {
   max: PropTypes.number,
-  index: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.string
 };

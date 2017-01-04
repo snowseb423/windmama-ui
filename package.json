@@ -24,10 +24,10 @@
   },
   "main": "app/app.js",
   "devDependencies": {
+    "watch": "^0.17.1",
     "eslint": "^3.3.1",
     "eslint-config-lightstream": "^1.1.0",
     "eslint-plugin-react": "^6.3.0",
-    "watch": "^0.17.1",
     "watchify": "^3.7.0"
   },
   "scripts": {

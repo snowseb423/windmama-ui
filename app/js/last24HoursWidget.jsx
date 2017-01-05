@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import { windColor } from './config.js';
+import { windColor } from './common.js';
 
 function Last24HourslWidget(props) {
   var { detail } = props;

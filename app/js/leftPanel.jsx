@@ -8,6 +8,7 @@ class LeftPanel extends Component {
   constructor(props) {
     super(props);
     this.updateStatePanel = this.updateStatePanel.bind(this);
+    this.changeOnResearch = this.changeOnResearch.bind(this);
     this.state = store;
   }
   componentDidMount() {
@@ -22,6 +23,9 @@ class LeftPanel extends Component {
   }
   updateStatePanel() {
     this.setState(store);
+  }
+  changeOnResearch(){
+    this.setState({search: document.getElementById('research').value});
   }
   render() {
     const { detail, place, allId, leftActive } = this.state;
@@ -38,12 +42,11 @@ class LeftPanel extends Component {
       return -1;
       return 0;
     });
-
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
-      <input type="text" placeholder="Recherche"/>
+      <input id="research" type="text" placeholder="Recherche par ville ou code postal." onChange={this.changeOnResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>
-         <LeftPanelSpot key={i} index={i} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} place={place[maxOrder[i].id]} {...item} />
+         <LeftPanelSpot key={i} index={i} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
        )}
       </div>
     </div>;

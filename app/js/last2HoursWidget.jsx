@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { windColor } from './config.js';
+import { windColor } from './common.js';
 
 function color(value) {
   if (value / 1.852 <= 50)

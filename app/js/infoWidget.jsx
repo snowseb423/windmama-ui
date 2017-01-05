@@ -15,7 +15,7 @@ function InfoWidget(props) {
   const styleButton = {
     float: 'right',
     marginRight: '10px'
-  }
+  };
   if(idStation) {
     city = store.place[idStation].split('|')[3];
     if (city.search('"') > -1) {

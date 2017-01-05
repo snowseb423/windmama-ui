@@ -26,6 +26,7 @@ AppDispatcher.register((action) => {
 
     case typeOfActions.UPDATE_DETAIL:
       var updateSplit = action.update.split('|');
+      store.idUpdate = action.idUpdate;
       if (store.detail[updateSplit[0]])
         store.detail[updateSplit[0]].unshift(action.update);
       else

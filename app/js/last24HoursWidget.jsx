@@ -5,7 +5,6 @@ import { windColor } from './config.js';
 function Last24HourslWidget(props) {
   var { detail } = props;
   if (detail) {
-
     var hour = [], heading = [], max = [], avg = [], min = [];
     var tempHour, tempHeading = [], tempMax = [], tempAvg = [], tempMin = [];
     detail.forEach((element) => {

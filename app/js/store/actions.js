@@ -21,7 +21,8 @@ export var Actions = {
   updateDetail: (update) => {
     AppDispatcher.dispatch({
       actionType: typeOfActions.UPDATE_DETAIL,
-      update: update
+      update: update,
+      idUpdate: update.split('|')[0]
     });
   },
   requestDetailOfId: (id) => {

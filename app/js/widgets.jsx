@@ -17,9 +17,14 @@ class Widgets extends Component {
   }
   componentDidMount() {
     store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.on(typeOfActions.UPDATE_DETAIL, () => {
+      if (this.state.active == store.idDetail)
+        this.updateStateCover;
+    });
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStateCover);
   }
   updateStateCover() {
     if(store.detailActive) {

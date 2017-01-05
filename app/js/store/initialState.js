@@ -8,7 +8,8 @@ var initialState = {
   allId: [],
   rightActive: false,
   leftActive: false,
-  detailActive: false
+  detailActive: false,
+  idUpdate: false
 };
 
 function registerData(chanel, callback) {

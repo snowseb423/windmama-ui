@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-
+import { windColor } from './config.js';
 
 function Last24HourslWidget(props) {
   var { detail } = props;
@@ -8,7 +8,6 @@ function Last24HourslWidget(props) {
 
     var hour = [], heading = [], max = [], avg = [], min = [];
     var tempHour, tempHeading = [], tempMax = [], tempAvg = [], tempMin = [];
-
     detail.forEach((element) => {
       var splitedElement = element.split('|');
       var splitedHour = splitedElement[1].split(':')[0];
@@ -26,20 +25,44 @@ function Last24HourslWidget(props) {
         tempMin.push(Number(splitedElement[2]));
       }
     });
-
-    console.log(max);
     var content = <div>
-      {max.map((max, index) => {
+      {hour.map((element, index) => {
         if (index != 0 && index <= 24) {
-          var y1 = index == 1 ? 100 - 20 : 100 - ( Math.round(max[index-1]) * 2 );
-          var y2 = Math.round(100-(max[index]*2));
-          var y3 = Math.round(100-(max[index]*2));
-          var y4 = Math.round(100-(max[index+1]*2));
-          return <div className="one-plot" key={index} style={{ float: 'left', marginTop: '10px', background: 'rgba(0, 0, 0, 0.35)'}}>
+
+          var y2Max = Math.round( 100 - ( max[index] * 2 ));
+          var y1Max = index == 1 ? y2Max : 100 - ( max[index-1] * 2 );
+          var y3Max = y2Max;
+          var y4Max = index == 24 ? y2Max : Math.round( 100 - ( max[index+1] * 2 ));
+
+          var y2Avg = Math.round( 100 - ( avg[index] * 2 ));
+          var y1Avg = index == 1 ? y2Avg : 100 - ( avg[index-1] * 2 );
+          var y3Avg = y2Avg;
+          var y4Avg = index == 24 ? y2Avg : Math.round( 100 - ( avg[index+1] * 2 ));
+
+          var y2Min = Math.round( 100 - ( min[index] * 2 ));
+          var y1Min = index == 1 ? y2Min : 100 - ( min[index-1] * 2 );
+          var y3Min = y2Min;
+          var y4Min = index == 24 ? y2Min : Math.round( 100 - ( min[index+1] * 2 ));
+
+          return <div className="one-plot" key={index} style={{ float: 'left', marginTop: '13px', background: 'rgba(0, 0, 0, 0.35)', textAlign: 'center', color: 'black'}}>
             <svg style={{ width: '100%', height: '100px'}}>
-              <line x1={'-50%'} y1={y1} x2={'50%'} y2={y2} stroke={'red'} strokeLinecap={'round'} strokeWidth={'1'} />;
-              <line x1={'50%'} y1={y3} x2={'150%'} y2={y4} stroke={'red'} strokeLinecap={'round'} strokeWidth={'3'} />;
+              {<line x1={'50%'} x2={'50%'} y1={'0'} y2={'100px'} stroke={'white'} strokeLinecap={'round'} strokeDasharray={'1, 6'}/>}
+              <line x1={'-50%'} y1={y1Max} x2={'50%'} y2={y2Max} stroke={'red'} strokeLinecap={'round'} strokeWidth={'3'} />;
+              <line x1={'50%'} y1={y3Max} x2={'150%'} y2={y4Max} stroke={'red'} strokeLinecap={'round'} strokeWidth={'3'} />;
+              <line x1={'-50%'} y1={y1Avg} x2={'50%'} y2={y2Avg} stroke={'orange'} strokeLinecap={'round'} strokeWidth={'2'} />;
+              <line x1={'50%'} y1={y3Avg} x2={'150%'} y2={y4Avg} stroke={'orange'} strokeLinecap={'round'} strokeWidth={'2'} />;
+              <line x1={'-50%'} y1={y1Min} x2={'50%'} y2={y2Min} stroke={'yellow'} strokeLinecap={'round'} strokeWidth={'1'} />;
+              <line x1={'50%'} y1={y3Min} x2={'150%'} y2={y4Min} stroke={'yellow'} strokeLinecap={'round'} strokeWidth={'1'} />;
             </svg>
+            <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
+              { element + 'h' }
+            </div>
+            <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
+              <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>
+            </div>
+            <div style={{background: windColor[Math.round(max[index])] }}>{Math.round(max[index])}</div>
+            <div style={{background: windColor[Math.round(avg[index])] }}>{Math.round(avg[index])}</div>
+            <div style={{background: windColor[Math.round(min[index])] }}>{Math.round(min[index])}</div>
           </div>;
         }
       })}

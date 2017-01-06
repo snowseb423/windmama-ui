@@ -19,11 +19,9 @@ dev-less:
 
 
 dev:
-	echo "8080" > app/.port
 	make -j4 dev-js dev-less
 clear:
-	rm -f app/.port $(JS_TARGET) $(LESS_TARGET)
+	rm -f $(JS_TARGET) $(LESS_TARGET)
 prod:
-	echo "80" > app/.port
 	npm install
 	$(LESSC) $(LESS_SRC) $(LESS_TARGET) | $(BROWSERIFY) -t $(OPTION_REACT) -o $(JS_TARGET) $(JS_SRC)

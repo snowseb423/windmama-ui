@@ -5,7 +5,7 @@ var express = require('express'),
     subscriber = redis.createClient(),
     app = express(),
     fs = require('fs'),
-    server = app.listen(fs.readFileSync('.port', 'UTF-8')),
+    server = app.listen(8080),
     io = socketio.listen(server);
 
 app.use(express.static('../public'));

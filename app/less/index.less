@@ -4,7 +4,10 @@
 @speed1: 300ms;
 @speed2: 500ms;
 
-html, body, .app, #left-panel, #right-panel { height: 100%; }
+html, body, .app { height: 100%; }
+body::scrollbar {
+    display: none;
+}
 html, body {
   background: #1aabe0;
   margin: 0;
@@ -35,8 +38,8 @@ body {
   }
   .elements-ui-absolute {
     position: fixed;
-    top: 0;
     transition-duration: @speed2;
+    top: 0;
   }
   .button { cursor: pointer; }
   button {
@@ -113,6 +116,7 @@ body {
     background: rgba(0,0,0,0.2);
     padding-top: 80px;
     color: #dcdcdc;
+    overflow: auto;
     &.active {
       opacity: 1;
       padding-top: 120px;
@@ -149,7 +153,6 @@ body {
       }
       span {
         max-width: 160px;
-        overflow: inherit;
         white-space: nowrap;
         &:first-child {
           transition-duration: 100ms;

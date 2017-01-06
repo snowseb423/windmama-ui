@@ -3,7 +3,6 @@ import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
-
 class LeftPanel extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +42,7 @@ class LeftPanel extends Component {
       return 0;
     });
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
-      <input id="research" type="text" placeholder="Recherche par ville ou code postal." onChange={this.changeOnResearch}/>
+      <input id="research" type="text" placeholder="Recherche (code postal, ville...)." onChange={this.changeOnResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>
          <LeftPanelSpot key={i} index={i} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} search={this.state.search} place={place[maxOrder[i].id]} {...item} />

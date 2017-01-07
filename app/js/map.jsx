@@ -21,33 +21,8 @@ class Map extends Component {
     });
     this.mapgl.once('load', () => {
       store.allId.forEach((element) => {
+        var detailSplited = store.detail[element][0].split('|'); // detailSplited[5] = heading
         var placeSplited = store.place[element].split('|');
-        this.mapgl.addSource('sensor' + element, {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [placeSplited[2], placeSplited[1]]
-                }
-              }
-            ]
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'sensor' + element,
-          'type': 'symbol',
-          'source': 'sensor' + element,
-          'layout': {
-            'icon-image': 'sensor-white',
-            'icon-size': 0.12
-          },
-          'paint': {}
-        });
         this.mapgl.addSource('heading' + element, {
           'type': 'geojson',
           'data': {

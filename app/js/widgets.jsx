@@ -41,24 +41,15 @@ class Widgets extends Component {
   }
   render() {
     var classNameIfActive;
-    var detailPlace;
-    if(store.detailActive) {
+    if(store.detailActive)
       classNameIfActive = 'active';
-      var placeSplited = (store.place[this.state.active]).split('|');
-      detailPlace = 'Pioupiou ' + placeSplited[0] + ', lat ' + placeSplited[1] + ', lng ' + placeSplited[2] + ', ' + placeSplited[4];
-    } else {
+    else
       classNameIfActive = ' ';
-    }
     return <div id="cover-widgets" className={classNameIfActive}>
       <div className="container-widgets" id="container-widgets">
         <InfoWidget idStation={this.state.active} />
         <Last2HoursWidget detail={this.state.detail} />
         <Last24HoursWidget detail={this.state.detail} />
-        <div style={{ float: 'left' }}className="widget">
-          <div style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
-            {this.state.active ? detailPlace : ' '}
-          </div>
-        </div>
       </div>
     </div>;
   }

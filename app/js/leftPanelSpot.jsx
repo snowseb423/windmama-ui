@@ -35,15 +35,14 @@ function LeftPanelSpot(props) {
     display: 'inherit'
   };
   var cityDetail = placeSplited[4];
-  if (search == false) {
+  if (search == false)
     styleContainer.display = 'inherit';
-  } else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 ) {
+  else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
     styleContainer.display = 'inherit';
-  } else if(search === undefined) {
+  else if(search === undefined)
     styleContainer.display = 'inherit';
-  } else {
+  else
     styleContainer.display = 'none';
-  }
   return <div style={styleContainer} className="child-panel button" onClick={() => Actions.requestDetailOfId(id)}>
     <span style={{ marginLeft: '7px'}}>{city}</span>
     <div style={{float: 'right', marginRight: '7px'}}>

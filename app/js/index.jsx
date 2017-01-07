@@ -4,5 +4,5 @@ import Layout from './layout.jsx';
 
 render(
   <Layout />,
-  document.querySelector('.app')
+  document.querySelector('#app')
 );

@@ -4,12 +4,9 @@
 @speed1: 300ms;
 @speed2: 500ms;
 
-html, body, .app { height: 100%; }
-body::scrollbar {
-    display: none;
-}
+html, body, #app { height: 100%; }
 html, body {
-  background: #1aabe0;
+  background: black;
   margin: 0;
   padding: 0;
   * { font-family: 'Open Sans', 'sans-serif'; }
@@ -127,6 +124,13 @@ body {
       max-width: 1400px;
       margin: auto;
     }
+    .widget .one-plot {
+      margin-top: 12px;
+      float: left;
+      background: rgba(0, 0, 0, 0.35);
+      text-align: center;
+      color: black;
+    }
     #widget-2-hours .one-plot { width: 8.33%; }
     #widget-24-hours .one-plot { width: 8.33%; }
   }
@@ -170,7 +174,6 @@ body {
     transition: @speed2;
     &.blur { filter: blur(15px); }
   }
-
 
   @media only screen and (max-device-width: 1100px) {
     #cover-widgets .container-widgets { width: 75%; }

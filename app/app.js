@@ -4,7 +4,6 @@ var express = require('express'),
     client = redis.createClient(),
     subscriber = redis.createClient(),
     app = express(),
-    fs = require('fs'),
     server = app.listen(8080),
     io = socketio.listen(server);
 

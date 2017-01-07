@@ -17,7 +17,7 @@ function InfoWidget(props) {
       info = info.substring(13);
     }
   }
-  return <div className="widget" style={{ padding: '10px 0', background: 'rgba(0, 0, 0, 0.35)' }}>
+  return <div className="widget" style={{ padding: '10px 0', background: 'rgba(255, 255, 255, 0.25)', color: 'black'}}>
     <div style={{ display: 'inline-block', width: '100%' }}>
       <button className="button" style={{ float: 'left', marginLeft: '10px'}} >favoris <i className="fa fa-heart-o" /></button>
       <button className="button"  style={{ float: 'right', marginRight: '10px'}} onClick={() => Actions.requestDetailOfId(false)}><i className="fa fa-times" /></button>

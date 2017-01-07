@@ -23,5 +23,4 @@ dev:
 clear:
 	rm -f $(JS_TARGET) $(LESS_TARGET)
 prod:
-	npm install
 	$(LESSC) $(LESS_SRC) $(LESS_TARGET) | $(BROWSERIFY) -t $(OPTION_REACT) -o $(JS_TARGET) $(JS_SRC)

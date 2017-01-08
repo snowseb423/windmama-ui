@@ -9,8 +9,7 @@ var initialState = {
   rightActive: false,
   leftActive: false,
   detailActive: false,
-  idUpdate: false,
-  location: false
+  idUpdate: false
 };
 
 function registerData(chanel, callback) {
@@ -25,21 +24,10 @@ registerData('sendAllLocation', (data) => {
   initialState.place = data;
   initialState.allId = Object.keys(data);
 });
-
 var update;
 registerData('sendPubsubData', (data) => {
   update = data;
   Actions.updateDetail(update);
 });
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition((position) => {
-    initialState.location = [
-      position.coords.latitude,
-      position.coords.longitude
-    ];
-  });
-} else
-  initialState.location = false;
 
 export default initialState;

@@ -22,6 +22,7 @@ class Map extends Component {
   }
   componentDidMount() {
     store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+
     this.mapgl = new mapboxgl.Map({
       style: styleMap[0],
       container: 'map',
@@ -30,6 +31,7 @@ class Map extends Component {
     });
     this.mapgl.dragRotate.disable();
     this.mapgl.touchZoomRotate.disableRotation();
+
     this.mapgl.once('load', () => {
       store.allId.forEach((element) => {
         var detailSplited = store.detail[element][0].split('|');
@@ -38,15 +40,13 @@ class Map extends Component {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [placeSplited[2], placeSplited[1]]
-                }
+            'features': [{
+              'type': 'Feature',
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [placeSplited[2], placeSplited[1]]
               }
-            ]
+            }]
           }
         });
         this.mapgl.addLayer({

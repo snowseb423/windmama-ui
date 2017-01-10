@@ -6,11 +6,25 @@ var initialState = {
   detail: {},
   place: {},
   allId: [],
+  mobile: false,
   rightActive: false,
   leftActive: false,
   detailActive: false,
   idUpdate: false
 };
+
+(()=>{
+  if(navigator.userAgent.match(/Android/i)
+  || navigator.userAgent.match(/webOS/i)
+  || navigator.userAgent.match(/iPhone/i)
+  || navigator.userAgent.match(/iPad/i)
+  || navigator.userAgent.match(/iPod/i)
+  || navigator.userAgent.match(/BlackBerry/i)
+  || navigator.userAgent.match(/Windows Phone/i) )
+    initialState.mobile = true;
+  else
+    initialState.mobile = false;
+})();
 
 function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });

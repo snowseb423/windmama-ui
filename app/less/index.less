@@ -33,6 +33,12 @@ body {
     padding: 10px 0px;
     &:focus { outline: none !important; }
   }
+  .tooltip {
+    width: 80px;
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+  }
   .elements-ui-absolute {
     position: fixed;
     transition-duration: @speed2;
@@ -107,7 +113,7 @@ body {
   }
   #cover-widgets {
     transition-duration: @speed0;
-    padding-top: 72px;
+    padding-top: 60px;
     opacity: 0;
     height: 100%;
     width: 100%;
@@ -119,19 +125,19 @@ body {
       pointer-events: all;
     }
     .container-widgets {
-      width: 60%;
-      max-width: 1400px;
+      max-width: 1250px;
       margin: auto;
+      padding: 15px;
     }
     .widget .one-plot {
-      margin-top: 12px;
+      margin-top: 15px;
       float: left;
       background: rgba(0, 0, 0, 0.35);
       text-align: center;
       color: black;
     }
-    #widget-2-hours .one-plot { width: 8.33%; }
-    #widget-24-hours .one-plot { width: 8.33%; }
+    #widget-2-hours .one-plot,
+    #widget-24-hours .one-plot { width: 8.333333%; }
   }
   #left-panel, #right-panel {
     pointer-events: all;
@@ -139,6 +145,7 @@ body {
     transition-duration: @speed2;
     padding-top: 60px;
     min-width: 260px;
+    min-height: 100%;
   }
   #left-panel {
     margin-left: 0px;
@@ -171,47 +178,31 @@ body {
   }
   #map {
     transition: @speed2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     &.blur { filter: blur(15px); }
   }
 
-  @media only screen and (max-device-width: 1100px) {
-    #cover-widgets .container-widgets { width: 75%; }
-  }
-  @media only screen and (max-device-width: 800px) {
-    #cover-widgets .container-widgets { width: 90%; }
-  }
-
   @media only screen and (max-device-width: 480px) {
-    #header { min-width: 0px; }
-    #ui { position: absolute; }
-    #cover-widgets {
-      position: fixed;
-      .container-widgets {
-        width: 93%;
-        margin: 0 3.5% 0 3.5%;
-      }
-      #widget-2-hours .one-plot { width: 16.666666%; }
-      #widget-24-hours .one-plot { width: 16.666666%; }
-    }
+    #cover-widgets #widget-2-hours .one-plot,
+    #cover-widgets #widget-24-hours .one-plot { width: 16.666666%; }
     #left-panel, #right-panel {
       position: fixed;
       margin-left: inherit;
       float: inherit;
       width: 100%;
     }
-    #left-panel {
-      left: 0%;
-      &.active {
-        left: -100%;
-        margin-left: inherit;
-      }
+    .tooltip { display: none; }
+    #left-panel { left: 0%; }
+    #right-panel { right: 0%; }
+    #left-panel.active {
+      left: -100%;
+      margin-left: inherit;
     }
-    #right-panel {
-      right: 0%;
-      &.active {
-        right: -100%;
-        margin-right: inherit;
-      }
+    #right-panel.active {
+      right: -100%;
+      margin-right: inherit;
     }
   }
 }

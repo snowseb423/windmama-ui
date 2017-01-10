@@ -1,4 +1,5 @@
 import AppDispatcher from './dispatcher.js';
+import store from './store.js';
 
 export var typeOfActions = {
   LEFT_ACTIVATION: 'LEFT_ACTIVATION',
@@ -30,5 +31,10 @@ export var Actions = {
       actionType: typeOfActions.REQUEST_DETAIL,
       id: id
     });
+    if (store.mobile) {
+      AppDispatcher.dispatch({
+        actionType: typeOfActions.LEFT_ACTIVATION
+      });
+    }
   }
 };

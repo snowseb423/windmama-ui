@@ -20,8 +20,12 @@ AppDispatcher.register((action) => {
       break;
 
     case typeOfActions.REQUEST_DETAIL:
-      store.detailActive = action.id;
+      store.idDetailActive = action.id;
       store.emit(typeOfActions.REQUEST_DETAIL);
+      break;
+
+    case typeOfActions.DISPLAY_DETAIL:
+      store.emit(typeOfActions.DISPLAY_DETAIL);
       break;
 
     case typeOfActions.UPDATE_DETAIL:

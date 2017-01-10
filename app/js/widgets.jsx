@@ -10,44 +10,53 @@ class Widgets extends Component {
   constructor(props) {
     super(props);
     this.updateStateCover = this.updateStateCover.bind(this);
+    this.updateStateCover = this.displayCover.bind(this);
     this.state = {
-      active: false,
+      idActive: false,
+      displayDetail: false,
       detail: false
     };
   }
   componentDidMount() {
     store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.on(typeOfActions.DISPLAY_DETAIL, this.displayCover);
     store.on(typeOfActions.UPDATE_DETAIL, () => {
-      if (this.state.active == store.idDetail)
+      if (this.state.idActive == store.idDetail)
         this.updateStateCover;
     });
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayCover);
     store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStateCover);
   }
   updateStateCover() {
-    if(store.detailActive) {
+    if(store.idDetailActive) {
       this.setState({
-        active: store.detailActive,
-        detail: store.detail[store.detailActive]
+        idActive: store.idDetailActive,
+        detail: store.detail[store.idDetailActive]
       });
     } else {
       this.setState({
-        active: false,
+        idActive: false,
         detail: false
       });
     }
   }
+  displayCover() {
+    this.setState({
+      displayDetail: true
+    });
+  }
   render() {
-    var classNameIfActive;
-    if(store.detailActive)
-      classNameIfActive = 'active';
+    var classIfActive;
+    if(this.state.displayDetail)
+      classIfActive = 'active';
     else
-      classNameIfActive = ' ';
-    return <div id="cover-widgets" className={classNameIfActive}>
+      classIfActive = '';
+    return <div id="cover-widgets" className={classIfActive}>
       <div className="container-widgets" id="container-widgets">
-        <InfoWidget idStation={this.state.active} />
+        <InfoWidget idStation={this.state.idActive} />
         <Last2HoursWidget detail={this.state.detail} />
         <Last24HoursWidget detail={this.state.detail} />
       </div>

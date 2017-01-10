@@ -6,9 +6,9 @@ import { windColor } from './common.js';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg';
 var styleMap = [
-    'mapbox://styles/arguelbenoit/cixn5ff94000p2smvtmzbq19h', // light
-    'mapbox://styles/arguelbenoit/cixneiyd600152rqs0zofik9f', // dark
-    'mapbox://styles/arguelbenoit/cixnofz09001k2rqsrvjb7iqg'  // satellite
+  'mapbox://styles/arguelbenoit/cixn5ff94000p2smvtmzbq19h', // light
+  'mapbox://styles/arguelbenoit/cixneiyd600152rqs0zofik9f', // dark
+  'mapbox://styles/arguelbenoit/cixnofz09001k2rqsrvjb7iqg'  // satellite
 ];
 
 class Map extends Component {
@@ -16,7 +16,7 @@ class Map extends Component {
     super(props);
     this.updateStateCover = this.updateStateCover.bind(this);
     this.state = {
-      detailActive: false,
+      idDetailActive: false,
       mapType: 'day'
     };
   }
@@ -86,14 +86,14 @@ class Map extends Component {
     store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
   }
   updateStateCover() {
-    if(store.detailActive)
-      this.setState({ detailActive: store.detailActive });
+    if(store.idDetailActive)
+      this.setState({ idDetailActive: store.idDetailActive });
     else
-      this.setState({ detailActive: false });
+      this.setState({ idDetailActive: false });
   }
   render() {
     var activeOrNot;
-    if (store.detailActive)
+    if (store.idDetailActive)
       activeOrNot = 'blur';
     else
       activeOrNot = ' ';

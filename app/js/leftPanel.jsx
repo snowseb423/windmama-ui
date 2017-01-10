@@ -42,7 +42,7 @@ class LeftPanel extends Component {
       return 0;
     });
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
-      <input id="research" type="text" placeholder="Recherche (code postal, ville...)." onChange={this.changeOnResearch}/>
+      <input id="research" type="text" placeholder="Recherche" onChange={this.changeOnResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>
          <LeftPanelSpot key={i} index={i} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} search={this.state.search} place={place[maxOrder[i].id]} {...item} />

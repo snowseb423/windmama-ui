@@ -9,7 +9,7 @@ var initialState = {
   mobile: false,
   rightActive: false,
   leftActive: false,
-  detailActive: false,
+  idDetailActive: false,
   idUpdate: false
 };
 

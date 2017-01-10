@@ -5,7 +5,8 @@ export var typeOfActions = {
   LEFT_ACTIVATION: 'LEFT_ACTIVATION',
   RIGHT_ACTIVATION: 'RIGHT_ACTIVATION',
   UPDATE_DETAIL: 'UPDATE_DETAIL',
-  REQUEST_DETAIL: 'REQUEST_DETAIL'
+  REQUEST_DETAIL: 'REQUEST_DETAIL',
+  DISPLAY_DETAIL: 'DISPLAY_DETAIL'
 };
 
 export var Actions = {
@@ -36,5 +37,10 @@ export var Actions = {
         actionType: typeOfActions.LEFT_ACTIVATION
       });
     }
+  },
+  displayDetail: () => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.DISPLAY_DETAIL
+    });
   }
 };

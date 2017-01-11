@@ -40,7 +40,6 @@ AppDispatcher.register((action) => {
 
     default:
       break;
-
   }
 });
 

@@ -5,12 +5,11 @@ import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
 
-
 class Widgets extends Component {
   constructor(props) {
     super(props);
     this.updateStateCover = this.updateStateCover.bind(this);
-    this.updateStateCover = this.displayCover.bind(this);
+    this.displayDetail = this.displayDetail.bind(this);
     this.state = {
       idActive: false,
       displayDetail: false,
@@ -19,7 +18,7 @@ class Widgets extends Component {
   }
   componentDidMount() {
     store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
-    store.on(typeOfActions.DISPLAY_DETAIL, this.displayCover);
+    store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.on(typeOfActions.UPDATE_DETAIL, () => {
       if (this.state.idActive == store.idDetail)
         this.updateStateCover;
@@ -27,7 +26,7 @@ class Widgets extends Component {
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
-    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayCover);
+    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStateCover);
   }
   updateStateCover() {
@@ -43,9 +42,9 @@ class Widgets extends Component {
       });
     }
   }
-  displayCover() {
+  displayDetail() {
     this.setState({
-      displayDetail: true
+      displayDetail: !this.state.displayDetail
     });
   }
   render() {

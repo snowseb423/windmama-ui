@@ -3,11 +3,6 @@ import { windColor } from './common.js';
 import { Actions } from './store/actions.js';
 import TooltipLeft from './tooltipLeft.jsx';
 
-function someFunc(id) {
-  Actions.requestDetailOfId(id);
-  Actions.displayDetail();
-}
-
 class LeftPanelSpot extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +13,14 @@ class LeftPanelSpot extends Component {
   }
   handleMouseOut() {
     this.setState({ hover: false });
+  }
+  someFunc(id) {
+    if (!store.idDetailActive) {
+      Actions.displayDetail();
+      Actions.requestDetailOfId(id);
+    } else {
+      Actions.requestDetailOfId(id);
+    }
   }
   render() {
     const { place, detail, max, search } = this.props;
@@ -60,7 +63,7 @@ class LeftPanelSpot extends Component {
     else
       styleContainer.display = 'none';
     var tooltip = this.state.hover ? <TooltipLeft detail={detail[0]}/> : '';
-    return <div style={styleContainer} className="child-panel button" onClick={() => someFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
+    return <div style={styleContainer} className="child-panel button" onClick={() => this.someFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
       {tooltip}
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>

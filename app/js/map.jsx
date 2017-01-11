@@ -10,18 +10,17 @@ var styleMap = [
   'mapbox://styles/arguelbenoit/cixneiyd600152rqs0zofik9f', // dark
   'mapbox://styles/arguelbenoit/cixnofz09001k2rqsrvjb7iqg'  // satellite
 ];
-
 class Map extends Component {
   constructor(props) {
     super(props);
-    this.updateStateCover = this.updateStateCover.bind(this);
+    this.blur = this.blur.bind(this);
     this.state = {
-      idDetailActive: false,
+      displayDetail: false,
       mapType: 'day'
     };
   }
   componentDidMount() {
-    store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.on(typeOfActions.DISPLAY_DETAIL, this.blur);
 
     this.mapgl = new mapboxgl.Map({
       style: styleMap[0],
@@ -83,20 +82,17 @@ class Map extends Component {
     });
   }
   componentWillUnmount() {
-    store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
+    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.blur);
   }
-  updateStateCover() {
-    if(store.idDetailActive)
-      this.setState({ idDetailActive: store.idDetailActive });
-    else
-      this.setState({ idDetailActive: false });
+  blur() {
+    this.setState({ displayDetail: !this.state.displayDetail });
   }
   render() {
     var activeOrNot;
-    if (store.idDetailActive)
+    if (this.state.displayDetail)
       activeOrNot = 'blur';
     else
-      activeOrNot = ' ';
+      activeOrNot = '';
     return <div className={activeOrNot} style={{ height: '100%' }} id="map" />;
   }
 }

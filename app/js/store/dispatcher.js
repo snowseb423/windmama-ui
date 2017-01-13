@@ -19,12 +19,8 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.RIGHT_ACTIVATION);
       break;
 
-    case typeOfActions.REQUEST_DETAIL:
-      store.idDetailActive = action.id;
-      store.emit(typeOfActions.REQUEST_DETAIL);
-      break;
-
     case typeOfActions.DISPLAY_DETAIL:
+      store.displayDetail = action.id;
       store.emit(typeOfActions.DISPLAY_DETAIL);
       break;
 

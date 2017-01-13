@@ -8,56 +8,45 @@ import Last24HoursWidget from './last24HoursWidget.jsx';
 class Widgets extends Component {
   constructor(props) {
     super(props);
-    this.updateStateCover = this.updateStateCover.bind(this);
     this.displayDetail = this.displayDetail.bind(this);
     this.state = {
-      idActive: false,
       displayDetail: false,
       detail: false
     };
   }
   componentDidMount() {
-    store.on(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
     store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.on(typeOfActions.UPDATE_DETAIL, () => {
-      if (this.state.idActive == store.idDetail)
-        this.updateStateCover;
+      if (this.state.displayDetail == store.displayDetail)
+        this.displayDetail;
     });
   }
   componentWillUnmount() {
-    store.removeListener(typeOfActions.REQUEST_DETAIL, this.updateStateCover);
     store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
-    store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStateCover);
+    store.removeListener(typeOfActions.UPDATE_DETAIL, this.displayDetail);
   }
-  updateStateCover() {
-    if(store.idDetailActive) {
+  displayDetail() {
+    if(store.displayDetail) {
       this.setState({
-        idActive: store.idDetailActive,
-        detail: store.detail[store.idDetailActive]
+        displayDetail: store.displayDetail,
+        detail: store.detail[store.displayDetail]
       });
     } else {
       this.setState({
-        idActive: false,
+        displayDetail: false,
         detail: false
       });
     }
   }
-  displayDetail() {
-    this.setState({
-      displayDetail: !this.state.displayDetail
-    });
-  }
   render() {
-    var classIfActive;
-    if(this.state.displayDetail)
-      classIfActive = 'active';
-    else
-      classIfActive = '';
-    return <div id="cover-widgets" className={classIfActive}>
+    var content = <div>
+      <InfoWidget idStation={this.state.displayDetail} />
+      <Last2HoursWidget detail={this.state.detail} />
+      <Last24HoursWidget detail={this.state.detail} />
+    </div>;
+    return <div id="cover-widgets" className={this.state.displayDetail ? 'active' : ''}>
       <div className="container-widgets" id="container-widgets">
-        <InfoWidget idStation={this.state.idActive} />
-        <Last2HoursWidget detail={this.state.detail} />
-        <Last24HoursWidget detail={this.state.detail} />
+        {this.state.displayDetail ? content : ''}
       </div>
     </div>;
   }

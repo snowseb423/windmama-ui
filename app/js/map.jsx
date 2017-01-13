@@ -6,6 +6,7 @@ import { windColor } from './common.js';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg';
 var styleMap = [
+  'mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu',  // outDoor
   'mapbox://styles/arguelbenoit/cixn5ff94000p2smvtmzbq19h', // light
   'mapbox://styles/arguelbenoit/cixneiyd600152rqs0zofik9f', // dark
   'mapbox://styles/arguelbenoit/cixnofz09001k2rqsrvjb7iqg'  // satellite
@@ -15,7 +16,7 @@ class Map extends Component {
     super(props);
     this.blur = this.blur.bind(this);
     this.state = {
-      displayDetail: false,
+      blur: false,
       mapType: 'day'
     };
   }
@@ -31,69 +32,67 @@ class Map extends Component {
     this.mapgl.dragRotate.disable();
     this.mapgl.touchZoomRotate.disableRotation();
 
-    this.mapgl.once('load', () => {
-      store.allId.forEach((element) => {
-        var detailSplited = store.detail[element][0].split('|');
-        var placeSplited = store.place[element].split('|');
-        this.mapgl.addSource('sensor-' + element, {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [{
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [placeSplited[2], placeSplited[1]]
-              }
-            }]
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'circle2-' + element,
-          'type': 'circle',
-          'source': 'sensor-' + element,
-          'paint': {
-            'circle-radius': 18,
-            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-            'circle-opacity': 0.2
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'circle3-' + element,
-          'type': 'circle',
-          'source': 'sensor-' + element,
-          'paint': {
-            'circle-radius': 10,
-            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-            'circle-opacity': 1
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'sensor-' + element,
-          'type': 'symbol',
-          'source': 'sensor-' + element,
-          'layout': {
-            'icon-image': 'arrow',
-            'icon-rotate': Number(detailSplited[5]),
-            'icon-size': 0.02
-          }
-        });
-      });
-    });
+    // this.mapgl.once('load', () => {
+    //   store.allId.forEach((element) => {
+    //     var detailSplited = store.detail[element][0].split('|');
+    //     var placeSplited = store.place[element].split('|');
+    //     this.mapgl.addSource('sensor-' + element, {
+    //       'type': 'geojson',
+    //       'data': {
+    //         'type': 'FeatureCollection',
+    //         'features': [{
+    //           'type': 'Feature',
+    //           'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [placeSplited[2], placeSplited[1]]
+    //           }
+    //         }]
+    //       }
+    //     });
+    //     this.mapgl.addLayer({
+    //       'id': 'circle2-' + element,
+    //       'type': 'circle',
+    //       'source': 'sensor-' + element,
+    //       'paint': {
+    //         'circle-radius': 18,
+    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+    //         'circle-opacity': 0.2
+    //       }
+    //     });
+    //     this.mapgl.addLayer({
+    //       'id': 'circle3-' + element,
+    //       'type': 'circle',
+    //       'source': 'sensor-' + element,
+    //       'paint': {
+    //         'circle-radius': 10,
+    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+    //         'circle-opacity': 1
+    //       }
+    //     });
+    //     this.mapgl.addLayer({
+    //       'id': 'sensor-' + element,
+    //       'type': 'symbol',
+    //       'source': 'sensor-' + element,
+    //       'layout': {
+    //         'icon-image': 'arrow',
+    //         'icon-rotate': Number(detailSplited[5]),
+    //         'icon-size': 0.02
+    //       }
+    //     });
+    //   });
+    // });
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.DISPLAY_DETAIL, this.blur);
   }
   blur() {
-    this.setState({ displayDetail: !this.state.displayDetail });
+    if (store.displayDetail)
+      this.setState({ blur: true });
+    else
+      this.setState({ blur: false });
   }
   render() {
-    var activeOrNot;
-    if (this.state.displayDetail)
-      activeOrNot = 'blur';
-    else
-      activeOrNot = '';
-    return <div className={activeOrNot} style={{ height: '100%' }} id="map" />;
+    return <div className={this.state.blur ? 'blur' : ''} style={{ height: '100%' }} id="map" />;
   }
 }
 

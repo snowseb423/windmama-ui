@@ -64,7 +64,7 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    var tooltip = this.state.hover ? <TooltipLeft detail={detail[0]}/> : '';
+    var tooltip = this.state.hover && !store.mobile ? <TooltipLeft detail={detail[0]}/> : '';
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
       {tooltip}
       <span style={{ marginLeft: '7px'}}>{city}</span>

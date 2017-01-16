@@ -21,9 +21,9 @@ function TooltipLeft(props) {
   return <div className="tooltip" style={styleTooltip}>
     <div style={styleArrow} />
     -- {detailSplited[1]} --<br />
-    <span style={{color: Math.round((detailSplited[2]/1.852)) < 50 ? windColor[Math.round((detailSplited[2]/1.852))] : windColor[49]}}>min {Math.round(detailSplited[2] / 1.852)} nds</span><br />
-    <span style={{color: Math.round((detailSplited[3]/1.852)) < 50 ? windColor[Math.round((detailSplited[3]/1.852))] : windColor[49]}}>moy {Math.round(detailSplited[3] / 1.852)} nds</span><br />
     <span style={{color: Math.round((detailSplited[4]/1.852)) < 50 ? windColor[Math.round((detailSplited[4]/1.852))] : windColor[49]}}>max {Math.round(detailSplited[4] / 1.852)} nds</span><br />
+    <span style={{color: Math.round((detailSplited[3]/1.852)) < 50 ? windColor[Math.round((detailSplited[3]/1.852))] : windColor[49]}}>moy {Math.round(detailSplited[3] / 1.852)} nds</span><br />
+    <span style={{color: Math.round((detailSplited[2]/1.852)) < 50 ? windColor[Math.round((detailSplited[2]/1.852))] : windColor[49]}}>min {Math.round(detailSplited[2] / 1.852)} nds</span><br />
   </div>;
 }
 

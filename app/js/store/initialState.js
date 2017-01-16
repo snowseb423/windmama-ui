@@ -1,11 +1,13 @@
 import io from 'socket.io-client';
 import { Actions } from './actions.js';
+import { readCookie } from '../common.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var initialState = {
   detail: {},
   place: {},
   allId: [],
+  bookmarks: [],
   mobile: false,
   rightActive: false,
   leftActive: false,
@@ -24,6 +26,11 @@ var initialState = {
     initialState.mobile = true;
   else
     initialState.mobile = false;
+})();
+
+(()=>{
+  var bookmarks = readCookie('bookmarks');
+  initialState.bookmarks = bookmarks.split('|');
 })();
 
 function registerData(chanel, callback) {

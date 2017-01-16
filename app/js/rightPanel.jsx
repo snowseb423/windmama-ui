@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
+import { readCookie } from './common.js';
+import Bookmark from './bookmark.jsx';
 
 
 class RightPanel extends Component {
@@ -25,6 +27,8 @@ class RightPanel extends Component {
     });
   }
   render() {
+    var bookmarkSplited = readCookie('bookmarks').split('|');
+    console.log(bookmarkSplited);
     return <div className={this.state.active ? ' ' : 'active'} id="right-panel" />;
   }
 }

@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
-import { readCookie } from './common.js';
-import Bookmark from './bookmark.jsx';
 
 
 class RightPanel extends Component {
@@ -16,19 +14,23 @@ class RightPanel extends Component {
   componentDidMount() {
     store.on(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
     store.on(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
+    store.on(typeOfActions.ADD_BOOKMARK, this.addBookmark);
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
     store.removeListener(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
+    store.removeListener(typeOfActions.ADD_BOOKMARK, this.addBookmark);
   }
   updateStatePanel() {
     this.setState({
       active: store.rightActive
     });
   }
+  addBookmark() {
+    console.log('cookies :  ' + document.cookie);
+    console.log('store   :  ' + store.bookmarks);
+  }
   render() {
-    var bookmarkSplited = readCookie('bookmarks').split('|');
-    console.log(bookmarkSplited);
     return <div className={this.state.active ? ' ' : 'active'} id="right-panel" />;
   }
 }

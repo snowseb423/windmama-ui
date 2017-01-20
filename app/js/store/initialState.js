@@ -30,7 +30,8 @@ var initialState = {
 
 (()=>{
   var bookmarks = readCookie('bookmarks');
-  initialState.bookmarks = bookmarks.split('|');
+  if (bookmarks)
+    initialState.bookmarks = bookmarks.split('|');
 })();
 
 function registerData(chanel, callback) {

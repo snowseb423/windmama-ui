@@ -4,7 +4,8 @@ export var typeOfActions = {
   LEFT_ACTIVATION: 'LEFT_ACTIVATION',
   RIGHT_ACTIVATION: 'RIGHT_ACTIVATION',
   UPDATE_DETAIL: 'UPDATE_DETAIL',
-  DISPLAY_DETAIL: 'DISPLAY_DETAIL'
+  DISPLAY_DETAIL: 'DISPLAY_DETAIL',
+  ADD_BOOKMARK: 'ADD_BOOKMARK'
 };
 
 export var Actions = {
@@ -28,6 +29,12 @@ export var Actions = {
   displayDetail: (id) => {
     AppDispatcher.dispatch({
       actionType: typeOfActions.DISPLAY_DETAIL,
+      id: id
+    });
+  },
+  addBookmark: (id) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.ADD_BOOKMARK,
       id: id
     });
   }

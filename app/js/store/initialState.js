@@ -7,7 +7,6 @@ var initialState = {
   detail: {},
   place: {},
   allId: [],
-  bookmarks: [],
   mobile: false,
   rightActive: false,
   leftActive: false,

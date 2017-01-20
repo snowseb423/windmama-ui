@@ -30,7 +30,7 @@ function InfoWidget(props) {
 }
 
 InfoWidget.propTypes = {
-  place: PropTypes.substring
+  place: PropTypes.any
 };
 
 export default InfoWidget;

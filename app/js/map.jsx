@@ -32,55 +32,55 @@ class Map extends Component {
     this.mapgl.dragRotate.disable();
     this.mapgl.touchZoomRotate.disableRotation();
 
-    // this.mapgl.once('load', () => {
-    //   store.allId.forEach((element) => {
-    //     var detailSplited = store.detail[element][0].split('|');
-    //     var placeSplited = store.place[element].split('|');
-    //     this.mapgl.addSource('sensor-' + element, {
-    //       'type': 'geojson',
-    //       'data': {
-    //         'type': 'FeatureCollection',
-    //         'features': [{
-    //           'type': 'Feature',
-    //           'geometry': {
-    //             'type': 'Point',
-    //             'coordinates': [placeSplited[2], placeSplited[1]]
-    //           }
-    //         }]
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'circle2-' + element,
-    //       'type': 'circle',
-    //       'source': 'sensor-' + element,
-    //       'paint': {
-    //         'circle-radius': 18,
-    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-    //         'circle-opacity': 0.2
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'circle3-' + element,
-    //       'type': 'circle',
-    //       'source': 'sensor-' + element,
-    //       'paint': {
-    //         'circle-radius': 10,
-    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-    //         'circle-opacity': 1
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'sensor-' + element,
-    //       'type': 'symbol',
-    //       'source': 'sensor-' + element,
-    //       'layout': {
-    //         'icon-image': 'arrow',
-    //         'icon-rotate': Number(detailSplited[5]),
-    //         'icon-size': 0.02
-    //       }
-    //     });
-    //   });
-    // });
+    this.mapgl.once('load', () => {
+      store.allId.forEach((element) => {
+        var detailSplited = store.detail[element][0].split('|');
+        var placeSplited = store.place[element].split('|');
+        this.mapgl.addSource('sensor-' + element, {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{
+              'type': 'Feature',
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [placeSplited[2], placeSplited[1]]
+              }
+            }]
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'circle2-' + element,
+          'type': 'circle',
+          'source': 'sensor-' + element,
+          'paint': {
+            'circle-radius': 18,
+            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+            'circle-opacity': 0.2
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'circle3-' + element,
+          'type': 'circle',
+          'source': 'sensor-' + element,
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+            'circle-opacity': 1
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'sensor-' + element,
+          'type': 'symbol',
+          'source': 'sensor-' + element,
+          'layout': {
+            'icon-image': 'arrow',
+            'icon-rotate': Number(detailSplited[5]),
+            'icon-size': 0.02
+          }
+        });
+      });
+    });
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.DISPLAY_DETAIL, this.blur);

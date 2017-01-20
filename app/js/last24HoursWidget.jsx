@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import { windColor } from './common.js';
 
-function Last24HourslWidget(props) {
+function Last24HoursWidget(props) {
   var { detail } = props;
   if (detail) {
     var hour = [], heading = [], max = [], avg = [], min = [];
@@ -72,8 +72,8 @@ function Last24HourslWidget(props) {
   </div>;
 }
 
-Last24HourslWidget.propTypes = {
+Last24HoursWidget.propTypes = {
   detail: PropTypes.any
 };
 
-export default Last24HourslWidget;
+export default Last24HoursWidget;

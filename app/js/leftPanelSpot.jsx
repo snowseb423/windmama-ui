@@ -8,16 +8,8 @@ class LeftPanelSpot extends Component {
     super(props);
     this.state = { hover: false };
   }
-  handleMouseIn() {
-    this.setState({
-      hover: true
-    });
-  }
-  handleMouseOut() {
-    this.setState({
-      hover: false
-    });
-  }
+  handleMouseIn() { this.setState({ hover: true }); }
+  handleMouseOut() { this.setState({ hover: false }); }
   sumFunc(id) {
     Actions.displayDetail(id);
     if (this.props.mobile)

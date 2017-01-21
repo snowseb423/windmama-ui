@@ -11,8 +11,9 @@ function InfoWidget(props) {
   };
   var id;
   if(place) {
-    id = place.split('|')[0];
-    var info = place.split('|')[4] + ', '+ 'Pioupiou: ' + id;
+    var placeSplited = place.split('|');
+    id = placeSplited[0];
+    var info = placeSplited[4] + ', '+ 'Pioupiou: ' + id;
     if (info.indexOf('Unnamed Road') >= 0) {
       info = info.substring(13);
     }

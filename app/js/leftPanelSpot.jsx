@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { windColor } from './common.js';
 import { Actions } from './store/actions.js';
 import TooltipLeft from './tooltipLeft.jsx';
-import store from './store/store.js';
 
 class LeftPanelSpot extends Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class LeftPanelSpot extends Component {
   }
   sumFunc(id) {
     Actions.displayDetail(id);
-    if (store.mobile)
+    if (this.props.mobile)
       Actions.leftActivation();
   }
   render() {
@@ -80,7 +79,8 @@ LeftPanelSpot.propTypes = {
   max: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.string,
-  search: PropTypes.any
+  search: PropTypes.any,
+  mobile: PropTypes.bool
 };
 
 export default LeftPanelSpot;

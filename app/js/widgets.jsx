@@ -11,8 +11,7 @@ class Widgets extends Component {
     this.displayDetail = this.displayDetail.bind(this);
     this.state = {
       displayDetail: false,
-      detail: false,
-      infoPlace: ''
+      detail: false
     };
   }
   componentDidMount() {

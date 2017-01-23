@@ -11,7 +11,8 @@ class Widgets extends Component {
     this.displayDetail = this.displayDetail.bind(this);
     this.state = {
       displayDetail: false,
-      detail: false
+      detail: false,
+      infoPlace: ''
     };
   }
   componentDidMount() {
@@ -40,7 +41,7 @@ class Widgets extends Component {
   }
   render() {
     var content = <div>
-      <InfoWidget idStation={this.state.displayDetail} />
+      <InfoWidget place={store.place[this.state.displayDetail]} />
       <Last2HoursWidget detail={this.state.detail} />
       <Last24HoursWidget detail={this.state.detail} />
     </div>;

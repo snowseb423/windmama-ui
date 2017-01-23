@@ -17,9 +17,9 @@ class LeftPanelSpot extends Component {
   }
   render() {
     const { place, detail, max, search, mobile } = this.props;
-    var detailSplited = detail[0].split('|'),
-        id = detailSplited[0],
-        heading = -detailSplited[5];
+    var detailSplited = detail[0].split('|');
+    var id = detailSplited[0];
+    var heading = -detailSplited[5];
     var placeSplited = place.split('|');
     var city = placeSplited[3];
     if (city.search('"') > -1)

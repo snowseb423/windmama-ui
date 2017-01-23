@@ -6,7 +6,7 @@ import Last24HoursWidget from './last24HoursWidget.jsx';
 function ContainerWidgets(props) {
   const { displayDetail, detail, place } = props;
   var content = <div className="container-widgets" id="container-widgets">
-    <InfoWidget place={place} />
+    <InfoWidget place={place[displayDetail]} />
     <Last2HoursWidget detail={detail} />
     <Last24HoursWidget detail={detail} />
   </div>;

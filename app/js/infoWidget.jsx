@@ -9,14 +9,12 @@ function InfoWidget(props) {
     fontSize: '18px',
     padding: '0 10px'
   };
-  var id;
-  if(place) {
+  if (place) {
     var placeSplited = place.split('|');
-    id = placeSplited[0];
+    var id = placeSplited[0];
     var info = placeSplited[4] + ', '+ 'Pioupiou: ' + id;
-    if (info.indexOf('Unnamed Road') >= 0) {
+    if (info.indexOf('Unnamed Road') >= 0)
       info = info.substring(13);
-    }
   }
   return <div className="widget" style={{ padding: '10px 0', background: 'rgba(255, 255, 255, 0.25)', color: 'black'}}>
     <div style={{ display: 'inline-block', width: '100%' }}>

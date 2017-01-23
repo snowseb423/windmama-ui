@@ -11,15 +11,13 @@ class Widgets extends Component {
     this.displayDetail = this.displayDetail.bind(this);
     this.state = {
       displayDetail: false,
-      detail: false
+      detail: false,
+      onePlace: false
     };
   }
   componentDidMount() {
     store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
-    store.on(typeOfActions.UPDATE_DETAIL, () => {
-      if (this.state.displayDetail == store.displayDetail)
-        this.displayDetail;
-    });
+    store.on(typeOfActions.UPDATE_DETAIL, this.displayDetail);
   }
   componentWillUnmount() {
     store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
@@ -29,18 +27,20 @@ class Widgets extends Component {
     if(store.displayDetail) {
       this.setState({
         displayDetail: store.displayDetail,
-        detail: store.detail[store.displayDetail]
+        detail: store.detail[store.displayDetail],
+        onePlace : store.place[store.displayDetail]
       });
     } else {
       this.setState({
         displayDetail: false,
-        detail: false
+        detail: false,
+        onePlace: false
       });
     }
   }
   render() {
     var content = <div>
-      <InfoWidget place={store.place[this.state.displayDetail]} />
+      <InfoWidget place={this.state.onePlace} />
       <Last2HoursWidget detail={this.state.detail} />
       <Last24HoursWidget detail={this.state.detail} />
     </div>;

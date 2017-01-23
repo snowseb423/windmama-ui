@@ -1,27 +1,11 @@
-import React, { Component } from 'react';
-import store from './store/store.js';
-import { typeOfActions } from './store/actions.js';
+import React, { PropTypes, Component } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
 class LeftPanel extends Component {
   constructor(props) {
     super(props);
-    this.updateStatePanel = this.updateStatePanel.bind(this);
     this.changeOnResearch = this.changeOnResearch.bind(this);
-    this.state = store;
-  }
-  componentDidMount() {
-    store.on(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
-    store.on(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
-    store.on(typeOfActions.UPDATE_DETAIL, this.updateStatePanel);
-  }
-  componentWillUnmount() {
-    store.removeListener(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
-    store.removeListener(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
-    store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStatePanel);
-  }
-  updateStatePanel() {
-    this.setState(store);
+    this.state = props.data;
   }
   changeOnResearch(){
     this.setState({search: document.getElementById('research').value});
@@ -51,5 +35,9 @@ class LeftPanel extends Component {
     </div>;
   }
 }
+
+LeftPanel.propTypes = {
+  data: PropTypes.object
+};
 
 export default LeftPanel;

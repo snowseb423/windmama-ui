@@ -7,10 +7,9 @@ var initialState = {
   place: {},
   allId: [],
   mobile: false,
-  rightActive: false,
-  leftActive: false,
   displayDetail: false,
-  idUpdate: false
+  idUpdate: false,
+  location: false
 };
 
 (()=>{

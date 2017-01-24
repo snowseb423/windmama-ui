@@ -5,13 +5,13 @@ class LeftPanel extends Component {
   constructor(props) {
     super(props);
     this.changeOnResearch = this.changeOnResearch.bind(this);
-    this.state = props.data;
+    this.state = { search: '' };
   }
   changeOnResearch(){
     this.setState({search: document.getElementById('research').value});
   }
   render() {
-    const { detail, place, allId, leftActive , mobile} = this.state;
+    const { detail, place, allId, leftActive , mobile} = this.props;
     var maxOrder = [];
     for (var i = 0; i < allId.length; i++) {
       var max = parseInt(((detail[allId[i]])[0].split('|'))[4]);
@@ -37,7 +37,11 @@ class LeftPanel extends Component {
 }
 
 LeftPanel.propTypes = {
-  data: PropTypes.object
+  leftActive: PropTypes.bool,
+  detail: PropTypes.any,
+  place: PropTypes.object,
+  allId: PropTypes.array,
+  mobile: PropTypes.bool
 };
 
 export default LeftPanel;

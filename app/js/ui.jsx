@@ -1,38 +1,32 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
 import Widgets from './widgets.jsx';
 import Header from './header.jsx';
-import store from './store/store.js';
-import { typeOfActions } from './store/actions.js';
 
-class Ui extends Component {
-  constructor(props) {
-    super(props);
-    this.updateStatePanel = this.updateStatePanel.bind(this);
-    this.state = store;
-  }
-  componentDidMount() {
-    store.on(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
-    store.on(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
-    store.on(typeOfActions.UPDATE_DETAIL, this.updateStatePanel);
-  }
-  componentWillUnmount() {
-    store.removeListener(typeOfActions.LEFT_ACTIVATION, this.updateStatePanel);
-    store.removeListener(typeOfActions.RIGHT_ACTIVATION, this.updateStatePanel);
-    store.removeListener(typeOfActions.UPDATE_DETAIL, this.updateStatePanel);
-  }
-  updateStatePanel() {
-    this.setState(store);
-  }
-  render() {
-    return <div id="ui" className="elements-ui-absolute">
-      <Header />
-      <LeftPanel data={this.state} />
-      <Widgets data={this.state} />
-      <RightPanel />
-    </div>;
-  }
+function Ui(props) {
+  const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile } = props;
+
+  const propsWidget = { displayDetail, detail, onePlace };
+  const propsLeftPanel = { detail, place, allId, leftActive, mobile };
+  const propsHeader = { leftActive, rightActive };
+  return <div id="ui" className="elements-ui-absolute">
+    <Header {...propsHeader}/>
+    <LeftPanel {...propsLeftPanel} />
+    <Widgets {...propsWidget} />
+    <RightPanel active={rightActive} />
+  </div>;
 }
+
+Ui.propTypes = {
+  leftActive: PropTypes.bool,
+  rightActive: PropTypes.bool,
+  displayDetail: PropTypes.any,
+  detail: PropTypes.any,
+  place: PropTypes.object,
+  onePlace: PropTypes.any,
+  allId: PropTypes.array,
+  mobile: PropTypes.bool
+};
 
 export default Ui;

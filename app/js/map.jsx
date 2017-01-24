@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import store from './store/store.js';
-import { typeOfActions } from './store/actions.js';
+import React, { PropTypes, Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { windColor } from './common.js';
 
@@ -12,88 +10,77 @@ var styleMap = [
   'mapbox://styles/arguelbenoit/cixnofz09001k2rqsrvjb7iqg'  // satellite
 ];
 class Map extends Component {
-  constructor(props) {
-    super(props);
-    this.blur = this.blur.bind(this);
-    this.state = {
-      blur: false,
-      mapType: 'day'
-    };
-  }
+  constructor(props) { super(props); }
   componentDidMount() {
-    store.on(typeOfActions.DISPLAY_DETAIL, this.blur);
-
     this.mapgl = new mapboxgl.Map({
       style: styleMap[0],
       container: 'map',
       center: [3.5, 46.7],
-      zoom: store.location ? 10 : 4.80
+      zoom: 4.80
     });
     this.mapgl.dragRotate.disable();
     this.mapgl.touchZoomRotate.disableRotation();
-
-    // this.mapgl.once('load', () => {
-    //   store.allId.forEach((element) => {
-    //     var detailSplited = store.detail[element][0].split('|');
-    //     var placeSplited = store.place[element].split('|');
-    //     this.mapgl.addSource('sensor-' + element, {
-    //       'type': 'geojson',
-    //       'data': {
-    //         'type': 'FeatureCollection',
-    //         'features': [{
-    //           'type': 'Feature',
-    //           'geometry': {
-    //             'type': 'Point',
-    //             'coordinates': [placeSplited[2], placeSplited[1]]
-    //           }
-    //         }]
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'circle2-' + element,
-    //       'type': 'circle',
-    //       'source': 'sensor-' + element,
-    //       'paint': {
-    //         'circle-radius': 18,
-    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-    //         'circle-opacity': 0.2
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'circle3-' + element,
-    //       'type': 'circle',
-    //       'source': 'sensor-' + element,
-    //       'paint': {
-    //         'circle-radius': 10,
-    //         'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-    //         'circle-opacity': 1
-    //       }
-    //     });
-    //     this.mapgl.addLayer({
-    //       'id': 'sensor-' + element,
-    //       'type': 'symbol',
-    //       'source': 'sensor-' + element,
-    //       'layout': {
-    //         'icon-image': 'arrow',
-    //         'icon-rotate': Number(detailSplited[5]),
-    //         'icon-size': 0.02
-    //       }
-    //     });
-    //   });
-    // });
-  }
-  componentWillUnmount() {
-    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.blur);
-  }
-  blur() {
-    if (store.displayDetail)
-      this.setState({ blur: true });
-    else
-      this.setState({ blur: false });
+    this.mapgl.once('load', () => {
+      this.props.allId.forEach((element) => {
+        var detailSplited = this.props.detail[element][0].split('|');
+        var placeSplited = this.props.place[element].split('|');
+        this.mapgl.addSource('sensor-' + element, {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{
+              'type': 'Feature',
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [placeSplited[2], placeSplited[1]]
+              }
+            }]
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'circle2-' + element,
+          'type': 'circle',
+          'source': 'sensor-' + element,
+          'paint': {
+            'circle-radius': 18,
+            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+            'circle-opacity': 0.2
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'circle3-' + element,
+          'type': 'circle',
+          'source': 'sensor-' + element,
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+            'circle-opacity': 1
+          }
+        });
+        this.mapgl.addLayer({
+          'id': 'sensor-' + element,
+          'type': 'symbol',
+          'source': 'sensor-' + element,
+          'layout': {
+            'icon-image': 'arrow',
+            'icon-rotate': Number(detailSplited[5]),
+            'icon-size': 0.02
+          }
+        });
+      });
+    });
   }
   render() {
-    return <div className={this.state.blur ? 'blur' : ''} style={{ height: '100%' }} id="map" />;
+    const { displayDetail } = this.props;
+    return <div className={displayDetail ? 'blur' : ''} style={{ height: '100%' }} id="map" />;
   }
 }
+
+Map.propTypes = {
+  displayDetail: PropTypes.any,
+  detail: PropTypes.any,
+  place: PropTypes.object,
+  allId: PropTypes.array
+};
 
 export default Map;

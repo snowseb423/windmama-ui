@@ -1,55 +1,26 @@
-import React, { Component } from 'react';
-import store from './store/store.js';
-import { typeOfActions } from './store/actions.js';
+import React, { PropTypes } from 'react';
 import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
 
-class Widgets extends Component {
-  constructor(props) {
-    super(props);
-    this.displayDetail = this.displayDetail.bind(this);
-    this.state = {
-      displayDetail: false,
-      detail: false,
-      onePlace: false
-    };
-  }
-  componentDidMount() {
-    store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
-    store.on(typeOfActions.UPDATE_DETAIL, this.displayDetail);
-  }
-  componentWillUnmount() {
-    store.removeListener(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
-    store.removeListener(typeOfActions.UPDATE_DETAIL, this.displayDetail);
-  }
-  displayDetail() {
-    if(store.displayDetail) {
-      this.setState({
-        displayDetail: store.displayDetail,
-        detail: store.detail[store.displayDetail],
-        onePlace : store.place[store.displayDetail]
-      });
-    } else {
-      this.setState({
-        displayDetail: false,
-        detail: false,
-        onePlace: false
-      });
-    }
-  }
-  render() {
-    var content = <div>
-      <InfoWidget place={this.state.onePlace} />
-      <Last2HoursWidget detail={this.state.detail} />
-      <Last24HoursWidget detail={this.state.detail} />
-    </div>;
-    return <div id="cover-widgets" className={this.state.displayDetail ? 'active' : ''}>
-      <div className="container-widgets" id="container-widgets">
-        {this.state.displayDetail ? content : ''}
-      </div>
-    </div>;
-  }
+function Widgets(props) {
+  const { displayDetail, detail, onePlace } = props;
+  var content = <div>
+    <InfoWidget place={onePlace} />
+    <Last2HoursWidget detail={detail[displayDetail]} />
+    <Last24HoursWidget detail={detail[displayDetail]} />
+  </div>;
+  return <div id="cover-widgets" className={displayDetail ? 'active' : ''}>
+    <div className="container-widgets" id="container-widgets">
+      {displayDetail ? content : ''}
+    </div>
+  </div>;
 }
+
+Widgets.propTypes = {
+  displayDetail: PropTypes.any,
+  detail: PropTypes.any,
+  onePlace: PropTypes.any
+};
 
 export default Widgets;

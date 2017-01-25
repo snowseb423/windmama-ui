@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { windColor } from './common.js';
 
-function TooltipLeft(props) {
+function Tooltip(props) {
   const detailSplited = props.detail.split('|');
   const styleTooltip = {
     left: '267px',
@@ -27,8 +27,8 @@ function TooltipLeft(props) {
   </div>;
 }
 
-TooltipLeft.propTypes = {
+Tooltip.propTypes = {
   detail: PropTypes.string
 };
 
-export default TooltipLeft;
+export default Tooltip;

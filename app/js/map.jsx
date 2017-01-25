@@ -69,6 +69,9 @@ class Map extends Component {
         });
       });
     });
+    this.props.allId.forEach((element)=>{
+      console.log(document.getElementById('sensor-' + element));
+    });
   }
   render() {
     const { displayDetail } = this.props;

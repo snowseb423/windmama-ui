@@ -24,53 +24,73 @@ class Map extends Component {
       this.props.allId.forEach((element) => {
         var detailSplited = this.props.detail[element][0].split('|');
         var placeSplited = this.props.place[element].split('|');
-        this.mapgl.addSource('sensor-' + element, {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [{
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [placeSplited[2], placeSplited[1]]
+        this.mapgl.addLayer(
+          'id': element,
+          'type': 'circle',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': "FeatureCollection",
+              'features': [{
+                'type': 'Feature',
+                'properties': {
+                  'icon': 'theatre'
+                },
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [-77.038659, 38.931567]
+                }
               }
-            }]
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'circle2-' + element,
-          'type': 'circle',
-          'source': 'sensor-' + element,
-          'paint': {
-            'circle-radius': 18,
-            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-            'circle-opacity': 0.2
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'circle3-' + element,
-          'type': 'circle',
-          'source': 'sensor-' + element,
-          'paint': {
-            'circle-radius': 10,
-            'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
-            'circle-opacity': 1
-          }
-        });
-        this.mapgl.addLayer({
-          'id': 'sensor-' + element,
-          'type': 'symbol',
-          'source': 'sensor-' + element,
-          'layout': {
-            'icon-image': 'arrow',
-            'icon-rotate': Number(detailSplited[5]),
-            'icon-size': 0.02
-          }
-        });
+            },
+           "layout": {
+               "icon-image": "{icon}-15",
+               "icon-allow-overlap": true
+           }
+        );
+        // this.mapgl.addLayer('sensor-' + element, {
+        //   'type': 'geojson',
+        //   'data': {
+        //     'type': 'FeatureCollection',
+        //     'features': [{
+        //       'type': 'Feature',
+        //       'geometry': {
+        //         'type': 'Point',
+        //         'coordinates': [placeSplited[2], placeSplited[1]]
+        //       }
+        //     }]
+        //   }
+        // });
+        // this.mapgl.addLayer({
+        //   'id': 'circle2-' + element,
+        //   'type': 'circle',
+        //   'source': 'sensor-' + element,
+        //   'paint': {
+        //     'circle-radius': 18,
+        //     'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+        //     'circle-opacity': 0.2
+        //   }
+        // });
+        // this.mapgl.addLayer({
+        //   'id': 'circle3-' + element,
+        //   'type': 'circle',
+        //   'source': 'sensor-' + element,
+        //   'paint': {
+        //     'circle-radius': 10,
+        //     'circle-color': windColor[Math.round((detailSplited[4]/1.852))],
+        //     'circle-opacity': 1
+        //   }
+        // });
+        // this.mapgl.addLayer({
+        //   'id': 'sensor-' + element,
+        //   'type': 'symbol',
+        //   'source': 'sensor-' + element,
+        //   'layout': {
+        //     'icon-image': 'arrow',
+        //     'icon-rotate': Number(detailSplited[5]),
+        //     'icon-size': 0.02
+        //   }
+        // });
       });
-    });
-    this.props.allId.forEach((element)=>{
-      console.log(document.getElementById('sensor-' + element));
     });
   }
   render() {

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ReactMapboxGl from 'react-mapbox-gl';
+import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 
 // latitude: 46.7,
 // longitude: 3.5,

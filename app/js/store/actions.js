@@ -1,6 +1,7 @@
 import AppDispatcher from './dispatcher.js';
 
 export var typeOfActions = {
+  SEND_DATA: 'SEND_DATA',
   LEFT_ACTIVATION: 'LEFT_ACTIVATION',
   RIGHT_ACTIVATION: 'RIGHT_ACTIVATION',
   UPDATE_DETAIL: 'UPDATE_DETAIL',
@@ -8,6 +9,11 @@ export var typeOfActions = {
 };
 
 export var Actions = {
+  // sendData: () => {
+  //   AppDispatcher.dispatch({
+  //     actionType: typeOfActions.SEND_DATA
+  //   });
+  // },
   leftActivation: () => {
     AppDispatcher.dispatch({
       actionType: typeOfActions.LEFT_ACTIVATION

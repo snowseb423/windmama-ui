@@ -1,25 +1,39 @@
-import React, {Component, PropTypes} from 'react';
-import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
+import mapboxgl from 'mapbox-gl';
+import { Actions } from './store/actions.js';
 
-// latitude: 46.7,
-// longitude: 3.5,
-// zoom: 4.80,
+var map = () => {
+  var mymap = new mapboxgl.Map({
+    style: 'mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu',
+    container: 'map',
+    center: [3.5, 46.7],
+    zoom: 4.80
+  });
+  mymap.dragRotate.disable();
+  mymap.touchZoomRotate.disableRotation();
+  // 'icon-rotate': Number(detailSplited[5]),
 
-class Map extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return <ReactMapboxGl style="mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu" accessToken="pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg" containerStyle={{ height: '100vh', width: '100vw' }}>
-      <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-        <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-      </Layer>
-    </ReactMapboxGl>;
-  }
-}
+  mymap.once('load', () => {
+    this.props.allId.forEach((element) => {
+      // var detailSplited = this.props.detail[element][0].split('|');
+      var placeSplited = this.props.place[element].split('|');
 
-Map.propTypes = {
-  displayDetail: PropTypes.any
+      var htmlMarker = document.createElement('div');
+          htmlMarker.className = 'marker marker_' + element;
+
+      // htmlMarker.innerHtml = <div className={'marker marker_' + element}>
+      //   <div />
+      //   <div />
+      // </div>;
+
+      htmlMarker.addEventListener('click', ()=> {
+        Actions.displayDetail(element);
+      });
+
+      var marker = new mapboxgl.Marker(htmlMarker);
+          marker.setLngLat([placeSplited[2], placeSplited[1]]);
+          marker.addTo(mymap);
+    });
+  });
 };
 
-export default Map;
+export default map;

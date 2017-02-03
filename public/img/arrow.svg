@@ -13,10 +13,10 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   width="512px"
-   height="512px"
-   viewBox="0 0 512 512"
-   enable-background="new 0 0 512 512"
+   width="14px"
+   height="14px"
+   viewBox="0 0 14 14"
+   enable-background="new 0 0 14 14"
    xml:space="preserve"
    inkscape:version="0.91 r13725"
    sodipodi:docname="arrow.svg"><metadata
@@ -43,7 +43,7 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="Layer_1" /><path
-     d="M 256,512 0,0 256,128 512,0 256,512 Z"
+     d="M 256,14 0,0 256,128 14,0 256,14 Z"
      id="path3"
      inkscape:connector-curvature="0"
      style="fill:#010101" /></svg>

@@ -4,13 +4,6 @@
 @speed1: 300ms;
 @speed2: 500ms;
 
-
-.trololo {
-  background: red;
-  width: 100px;
-  height: 100px;
-}
-
 html, body, #app { height: 100%; }
 html, body {
   background: #005e80;
@@ -181,6 +174,16 @@ body {
     height: 100%;
     position: absolute;
     &.blur { filter: blur(15px); }
+    .marker {
+      display: block;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      width: 16px;
+      height: 16px;
+      background: url(img/arrow.svg);
+    }
   }
 
   @media only screen and (max-device-width: 480px) {

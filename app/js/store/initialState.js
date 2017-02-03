@@ -32,6 +32,7 @@ registerData('sendAllData', (data) => {
   let dataSplit = data[0].split('|');
   var id = dataSplit[0];
   initialState.detail[Number(id)] = data;
+  // Actions.sendData();
 });
 registerData('sendAllLocation', (data) => {
   initialState.place = data;

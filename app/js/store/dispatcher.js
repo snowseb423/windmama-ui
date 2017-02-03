@@ -7,6 +7,11 @@ var AppDispatcher = new Dispatcher();
 AppDispatcher.register((action) => {
 
   switch (action.actionType) {
+
+    case typeOfActions.SEND_DATA:
+      store.emit(typeOfActions.SEND_DATA);
+      break;
+
     case typeOfActions.LEFT_ACTIVATION:
       store.leftActive = !store.leftActive;
       store.rightActive = false;

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Map from './map.jsx';
+import MapContainer from './mapContainer.jsx';
 import Ui from './ui.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
@@ -8,6 +8,7 @@ import { typeOfActions } from './store/actions.js';
 class Layout extends Component {
   constructor(props) {
     super(props);
+    // this.sendData = this.sendData.bind(this);
     this.displayDetail = this.displayDetail.bind(this);
     this.updateLeftPanel = this.updateLeftPanel.bind(this);
     this.updateRightPanel = this.updateRightPanel.bind(this);
@@ -18,6 +19,7 @@ class Layout extends Component {
     };
   }
   componentDidMount() {
+    // store.on(typeOfActions.SEND_DATA, this.sendData);
     store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.on(typeOfActions.UPDATE_DETAIL, this.displayDetail);
     store.on(typeOfActions.LEFT_ACTIVATION, this.updateLeftPanel);
@@ -48,7 +50,7 @@ class Layout extends Component {
     const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive };
     const propsMap = { place, allId, location, detail, displayDetail };
     return <div style={{height:'100%'}}>
-      <Map {...propsMap} />
+      <MapContainer {...propsMap} />
       <Ui {...propsUi} />
     </div>;
   }

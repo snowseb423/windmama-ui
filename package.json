@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "Ui of Windmama.fr",
   "dependencies": {
+    "async": "^2.1.4",
     "events": "^1.1.1",
     "express": "^4.13.3",
     "flux": "^3.1.2",
+    "jquery": "^3.1.1",
     "less": "^2.7.1",
     "lodash": "^4.16.6",
     "mapbox-gl": "^0.30.0",

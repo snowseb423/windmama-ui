@@ -48,8 +48,8 @@ class LeftPanel extends Component {
       cursor: 'pointer',
       opacity: '0.7',
       transform: this.state.scale,
-      transitionDuration: '300ms',
-      fontSize: 'larger'
+      transitionDuration: '200ms',
+      fontSize: '20px'
     };
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche" onChange={this.changeOnResearch}/>

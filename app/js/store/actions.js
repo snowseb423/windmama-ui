@@ -9,11 +9,18 @@ export var typeOfActions = {
 };
 
 export var Actions = {
-  // sendData: () => {
-  //   AppDispatcher.dispatch({
-  //     actionType: typeOfActions.SEND_DATA
-  //   });
-  // },
+  sendData: () => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.SEND_DATA
+    });
+  },
+  updateDetail: (update) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.UPDATE_DETAIL,
+      update: update,
+      idUpdate: update.split('|')[0]
+    });
+  },
   leftActivation: () => {
     AppDispatcher.dispatch({
       actionType: typeOfActions.LEFT_ACTIVATION
@@ -22,13 +29,6 @@ export var Actions = {
   rightActivation: () => {
     AppDispatcher.dispatch({
       actionType: typeOfActions.RIGHT_ACTIVATION
-    });
-  },
-  updateDetail: (update) => {
-    AppDispatcher.dispatch({
-      actionType: typeOfActions.UPDATE_DETAIL,
-      update: update,
-      idUpdate: update.split('|')[0]
     });
   },
   displayDetail: (id) => {

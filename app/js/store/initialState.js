@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 import $ from 'jquery';
 import { Actions } from './actions.js';
-
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var initialState = {
@@ -27,30 +26,19 @@ var initialState = {
     initialState.mobile = false;
 })();
 
-// registerData('sendAllData', (data) => {
-//   let dataSplit = data[0].split('|');
-//   var id = dataSplit[0];
-//   initialState.detail[Number(id)] = data;
-//   // Actions.sendData();
-// });
-
 $.post(location + 'detail', false, (detail) => {
   initialState.detail = JSON.parse(detail);
-  console.log(initialState.detail);
+  Actions.sendData();
 });
+
 $.post(location + 'place', false, (place) => {
   initialState.place = JSON.parse(place);
+  initialState.allId = Object.keys(initialState.place);
+  Actions.sendData();
 });
 
-
-function registerData(chanel, callback) {
-  socket.on(chanel, (data) => { callback(data); });
-}
-var update;
-registerData('sendPubsubData', (data) => {
-  update = data;
-  Actions.updateDetail(update);
+socket.on('sendPubsubData', (data) => {
+  Actions.updateDetail(data);
 });
-
 
 export default initialState;

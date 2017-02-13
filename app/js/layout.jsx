@@ -8,7 +8,6 @@ import { typeOfActions } from './store/actions.js';
 class Layout extends Component {
   constructor(props) {
     super(props);
-    // this.sendData = this.sendData.bind(this);
     this.displayDetail = this.displayDetail.bind(this);
     this.updateLeftPanel = this.updateLeftPanel.bind(this);
     this.updateRightPanel = this.updateRightPanel.bind(this);
@@ -19,7 +18,7 @@ class Layout extends Component {
     };
   }
   componentDidMount() {
-    // store.on(typeOfActions.SEND_DATA, this.sendData);
+    store.on(typeOfActions.SEND_DATA, this.displayDetail);
     store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.on(typeOfActions.UPDATE_DETAIL, this.displayDetail);
     store.on(typeOfActions.LEFT_ACTIVATION, this.updateLeftPanel);

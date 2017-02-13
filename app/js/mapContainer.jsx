@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Actions } from './store/actions.js';
 import { windColor } from './common.js';
+import Tooltip from './tooltip.jsx';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg';
 
@@ -57,7 +58,10 @@ class MapContainer extends Component {
     this.setState({hover: false });
   }
   render() {
-    return <div className={this.props.displayDetail ? 'blur' : ''} style={{ height: '100%' }} id="map" />;
+    return <div>
+      {this.state.hover ? <Tooltip id={this.state.hover} position={'map'} detail={this.props.detail[this.state.hover][0]}/> : ''}
+      <div className={this.props.displayDetail ? 'blur' : ''} style={{ height: '100%' }} id="map" />
+    </div>;
   }
 }
 

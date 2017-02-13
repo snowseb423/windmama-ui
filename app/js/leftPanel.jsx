@@ -56,7 +56,7 @@ class LeftPanel extends Component {
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>
-         <LeftPanelSpot key={i} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
+         <LeftPanelSpot key={i} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
        )}
       </div>
     </div>;

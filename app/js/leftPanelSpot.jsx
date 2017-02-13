@@ -12,11 +12,13 @@ class LeftPanelSpot extends Component {
     this.setState({
       hover: true
     });
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '1';
   }
   handleMouseOut() {
     this.setState({
       hover: false
     });
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.2';
   }
   sumFunc(id) {
     Actions.displayDetail(id);
@@ -63,7 +65,7 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    var tooltip = this.state.hover ? <Tooltip detail={detail[0]}/> : '';
+    var tooltip = this.state.hover ? <Tooltip position={'left'} detail={detail[0]}/> : '';
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
       {tooltip}
       <span style={{ marginLeft: '7px'}}>{city}</span>
@@ -76,6 +78,7 @@ class LeftPanelSpot extends Component {
 }
 
 LeftPanelSpot.propTypes = {
+  id: PropTypes.string,
   max: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.string,

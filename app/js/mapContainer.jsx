@@ -23,20 +23,20 @@ class MapContainer extends Component {
     this.mymap.touchZoomRotate.disableRotation();
     this.mymap.once('load', () => {
       this.props.allId.forEach((element) => {
+
         var placeSplited = this.props.place[element].split('|');
 
         var htmlMarker = document.createElement('div');
         htmlMarker.className = 'marker marker_' + element;
-
-        // htmlMarker.innerHtml = <div className={'marker marker_' + element}>
-        //   <div />
-        //   <div />
-        // </div>;
-
-        htmlMarker.addEventListener('click', ()=> {
+        htmlMarker.style.backgroundImage = 'url(img/arrow.svg)';
+        htmlMarker.style.width = '30px';
+        htmlMarker.style.height = '30px';
+        htmlMarker.addEventListener('click', () => {
           Actions.displayDetail(element);
         });
-
+        htmlMarker.addEventListener('mouseover', () => {
+          console.log('hover: ' + element);
+        });
         var marker = new mapboxgl.Marker(htmlMarker);
         marker.setLngLat([placeSplited[2], placeSplited[1]]);
         marker.addTo(this.mymap);

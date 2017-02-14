@@ -3,6 +3,8 @@ import mapboxgl from 'mapbox-gl';
 import { Actions } from './store/actions.js';
 import { windColor } from './common.js';
 import Tooltip from './tooltip.jsx';
+import store from './store/store.js';
+import { typeOfActions } from './store/actions.js';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg';
 
@@ -12,13 +14,15 @@ class MapContainer extends Component {
     this.state = { hover: false };
     this.handleMouseIn = this.handleMouseIn.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.shiftingMap = this.shiftingMap.bind(this);
   }
   componentDidMount() {
+    store.on(typeOfActions.SHIFTING_MAP, this.shiftingMap);
     this.mymap = new mapboxgl.Map({
       style: 'mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu',
       container: 'map',
-      center: [3.5, 46.7],
-      zoom: 4.80
+      center: this.props.mapPosition,
+      zoom: 5
     });
     this.mymap.dragRotate.disable();
     this.mymap.touchZoomRotate.disableRotation();
@@ -51,6 +55,9 @@ class MapContainer extends Component {
       });
     });
   }
+  shiftingMap() {
+    this.mymap.flyTo({center: store.mapPosition, zoom: 9});
+  }
   handleMouseIn(element) {
     this.setState({ hover: element });
     Actions.hoverId(element);
@@ -74,6 +81,7 @@ MapContainer.propTypes = {
   detail: PropTypes.any,
   place: PropTypes.object,
   allId: PropTypes.array,
+  mapPosition: PropTypes.array,
   mobile: PropTypes.bool
 };
 

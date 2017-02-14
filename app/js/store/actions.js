@@ -6,7 +6,8 @@ export var typeOfActions = {
   RIGHT_ACTIVATION: 'RIGHT_ACTIVATION',
   UPDATE_DETAIL: 'UPDATE_DETAIL',
   DISPLAY_DETAIL: 'DISPLAY_DETAIL',
-  HOVER_ID: 'HOVER_ID'
+  HOVER_ID: 'HOVER_ID',
+  SHIFTING_MAP: 'SHIFTING_MAP'
 };
 
 export var Actions = {
@@ -20,6 +21,12 @@ export var Actions = {
       actionType: typeOfActions.UPDATE_DETAIL,
       update: update,
       idUpdate: update.split('|')[0]
+    });
+  },
+  shiftingMap: (coord) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.SHIFTING_MAP,
+      coord: coord
     });
   },
   leftActivation: () => {

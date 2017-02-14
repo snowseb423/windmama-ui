@@ -15,7 +15,7 @@ function Tooltip2(props) {
   var content;
   detail = detail[hoverId];
   if (detail) {
-    detail = detail.slice(0, 10);
+    detail = detail.slice(0, 16);
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="plot" key={i}>
@@ -25,9 +25,9 @@ function Tooltip2(props) {
           <div style={{ borderTop: 'solid 1.5px'+ color(detail[2]), height: detail[2] + 'px' }}/>
         </div>
         <div style={{paddingTop: '5px', background: 'rgba(0,0,0,0.4)'}}>
-          <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ detail[5] +'deg)' }}/>
+          <img src="img/windheading.png" style={{margin:'auto', width: '16px', height: '16px', transform: 'rotateZ('+ detail[5] +'deg)' }}/>
         </div>
-        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0 0 7px 0', color: '#fff', fontSize: '13px', borderBottom: '1px solid rgba(0,0,0,0.2)'}}> {detail[1]} </div>
+        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0 0 7px 0', color: '#fff', fontSize: '10px', borderBottom: '1px solid rgba(0,0,0,0.2)'}}>{detail[1]}</div>
       </div>;
     });
   }

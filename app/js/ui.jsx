@@ -9,7 +9,7 @@ function Ui(props) {
   const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile, hoverId } = props;
 
   const propsWidget = { displayDetail, detail, onePlace };
-  const propsLeftPanel = { detail, place, allId, leftActive, mobile };
+  const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile };
   const propsHeader = { leftActive, rightActive };
   const propsTooltip2 = { hoverId, leftActive, detail, place };
   return <div id="ui" className="elements-ui-absolute">

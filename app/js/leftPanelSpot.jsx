@@ -13,18 +13,32 @@ class LeftPanelSpot extends Component {
       hover: true
     });
     Actions.hoverId(this.props.id);
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.6';
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '1';
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'white';
   }
   handleMouseOut() {
     this.setState({
       hover: false
     });
     document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.2';
+    document.querySelector('.marker_' + this.props.id).style.border = '0px solid transparent';
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'inherit';
   }
   sumFunc(id) {
-    Actions.displayDetail(id);
-    if (this.props.mobile)
+    const { place } = this.props;
+    if (!this.props.displayDetail && !this.props.mobile) {
+      Actions.shiftingMap([place.split('|')[2], place.split('|')[1]]);
+      setTimeout(() => { Actions.displayDetail(id); }, 1000);
+    } else if (!this.props.displayDetail && this.props.mobile) {
       Actions.leftActivation();
+      setTimeout(() => { Actions.shiftingMap([place.split('|')[2], place.split('|')[1]]); }, 500);
+      setTimeout(() => { Actions.displayDetail(id); }, 1500);
+    } else if (this.props.displayDetail && this.props.mobile) {
+      Actions.leftActivation();
+      Actions.displayDetail(id);
+    } else {
+      Actions.displayDetail(id);
+    }
   }
   render() {
     const { place, detail, max, search } = this.props;
@@ -84,6 +98,7 @@ LeftPanelSpot.propTypes = {
   detail: PropTypes.array,
   place: PropTypes.string,
   search: PropTypes.any,
+  displayDetail: PropTypes.any,
   mobile: PropTypes.bool
 };
 

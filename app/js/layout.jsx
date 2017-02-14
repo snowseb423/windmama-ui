@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+ import React, { Component, PropTypes } from 'react';
 import MapContainer from './mapContainer.jsx';
 import Ui from './ui.jsx';
 import store from './store/store.js';
@@ -46,9 +46,9 @@ class Layout extends Component {
   }
   render() {
     const { leftActive, rightActive, onePlace } = this.state;
-    const { displayDetail, detail, place, allId, mobile, hoverId } = this.props.data;
+    const { displayDetail, detail, place, allId, mobile, hoverId, mapPosition } = this.props.data;
     const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive, hoverId };
-    const propsMap = { place, allId, location, detail, displayDetail, mobile, hoverId };
+    const propsMap = { mapPosition, place, allId, location, detail, displayDetail, mobile, hoverId };
     return <div style={{height:'100%'}}>
       <MapContainer {...propsMap} />
       <Ui {...propsUi} />

@@ -11,7 +11,7 @@ var initialState = {
   displayDetail: false,
   idUpdate: false,
   hoverId: false,
-  location: false
+  mapPosition: [3.5, 46.7]
 };
 
 (()=>{

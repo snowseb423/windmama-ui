@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
+
 class LeftPanel extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +57,7 @@ class LeftPanel extends Component {
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>
-         <LeftPanelSpot key={i} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
+         <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
        )}
       </div>
     </div>;
@@ -66,6 +67,7 @@ class LeftPanel extends Component {
 LeftPanel.propTypes = {
   leftActive: PropTypes.bool,
   detail: PropTypes.any,
+  displayDetail: PropTypes.any,
   place: PropTypes.object,
   allId: PropTypes.array,
   mobile: PropTypes.bool

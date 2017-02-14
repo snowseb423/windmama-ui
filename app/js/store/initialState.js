@@ -10,6 +10,7 @@ var initialState = {
   mobile: false,
   displayDetail: false,
   idUpdate: false,
+  hoverId: false,
   location: false
 };
 

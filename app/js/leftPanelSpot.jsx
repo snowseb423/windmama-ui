@@ -12,7 +12,8 @@ class LeftPanelSpot extends Component {
     this.setState({
       hover: true
     });
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '1';
+    Actions.hoverId(this.props.id);
+    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.6';
   }
   handleMouseOut() {
     this.setState({

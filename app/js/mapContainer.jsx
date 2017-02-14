@@ -58,18 +58,22 @@ class MapContainer extends Component {
     this.setState({hover: false });
   }
   render() {
-    return <div>
-      {this.state.hover ? <Tooltip id={this.state.hover} position={'map'} detail={this.props.detail[this.state.hover][0]}/> : ''}
-      <div className={this.props.displayDetail ? 'blur' : ''} style={{ height: '100%' }} id="map" />
+    const { hover } = this.state;
+    const { detail, mobile, displayDetail } = this.props;
+    return <div className={displayDetail ? 'blur' : ''} id="map-container">
+      {hover && !mobile ? <Tooltip id={hover} position={'map'} detail={detail[hover][0]}/> : ''}
+      <div style={{ height: '100%' }} id="map" />
     </div>;
   }
 }
 
 MapContainer.propTypes = {
   displayDetail: PropTypes.any,
+  hoverId: PropTypes.any,
   detail: PropTypes.any,
   place: PropTypes.object,
-  allId: PropTypes.array
+  allId: PropTypes.array,
+  mobile: PropTypes.bool
 };
 
 export default MapContainer;

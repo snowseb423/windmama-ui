@@ -29,6 +29,12 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.DISPLAY_DETAIL);
       break;
 
+    case typeOfActions.HOVER_ID:
+      store.hoverId = action.id;
+      store.emit(typeOfActions.HOVER_ID);
+      console.log(store.hoverId);
+      break;
+
     case typeOfActions.UPDATE_DETAIL:
       var updateSplit = action.update.split('|');
       store.idUpdate = action.idUpdate;

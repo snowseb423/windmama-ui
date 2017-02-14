@@ -45,13 +45,16 @@ function Last24HourslWidget(props) {
 
           return <div className="one-plot" key={index}>
             <svg style={{ width: '100%', height: '100px'}}>
-              {<line x1={'50%'} x2={'50%'} y1={'0'} y2={'100px'} stroke={'white'} strokeLinecap={'round'} strokeDasharray={'1, 6'}/>}
-              <line x1={'-50%'} y1={y1Max} x2={'50%'} y2={y2Max} stroke={'#ff0095'} strokeLinecap={'round'} strokeWidth={'3'} />;
-              <line x1={'50%'} y1={y3Max} x2={'150%'} y2={y4Max} stroke={'#ff0095'} strokeLinecap={'round'} strokeWidth={'3'} />;
-              <line x1={'-50%'} y1={y1Avg} x2={'50%'} y2={y2Avg} stroke={'#ffcc00'} strokeLinecap={'round'} strokeWidth={'2'} />;
-              <line x1={'50%'} y1={y3Avg} x2={'150%'} y2={y4Avg} stroke={'#ffcc00'} strokeLinecap={'round'} strokeWidth={'2'} />;
-              <line x1={'-50%'} y1={y1Min} x2={'50%'} y2={y2Min} stroke={'#56b881'} strokeLinecap={'round'} strokeWidth={'1'} />;
-              <line x1={'50%'} y1={y3Min} x2={'150%'} y2={y4Min} stroke={'#56b881'} strokeLinecap={'round'} strokeWidth={'1'} />;
+              <line x1={'50%'} x2={'50%'} y1={'0'} y2={'100px'} stroke={'white'} strokeLinecap={'round'} strokeDasharray={'2'}/>
+              <line x1={'-50%'} y1={y1Max} x2={'50%'} y2={y2Max} stroke={'red'} strokeLinecap={'round'} strokeWidth={'2'} />
+              <circle cx={'50%'} cy={y2Max} r="4" fill={'red'} />
+              <line x1={'50%'} y1={y3Max} x2={'150%'} y2={y4Max} stroke={'red'} strokeLinecap={'round'} strokeWidth={'2'} />
+              <line x1={'-50%'} y1={y1Avg} x2={'50%'} y2={y2Avg} stroke={'orange'} strokeLinecap={'round'} strokeWidth={'2'} />
+              <line x1={'50%'} y1={y3Avg} x2={'150%'} y2={y4Avg} stroke={'orange'} strokeLinecap={'round'} strokeWidth={'2'} />
+              <circle cx={'50%'} cy={y2Avg} r="3" fill={'orange'} />
+              <line x1={'-50%'} y1={y1Min} x2={'50%'} y2={y2Min} stroke={'yellow'} strokeLinecap={'round'} strokeWidth={'1'} />
+              <line x1={'50%'} y1={y3Min} x2={'150%'} y2={y4Min} stroke={'yellow'} strokeLinecap={'round'} strokeWidth={'1'} />
+              <circle cx={'50%'} cy={y2Min} r="2" fill={'yellow'} />
             </svg>
             <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
               { element + 'h' }

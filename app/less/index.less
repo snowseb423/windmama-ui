@@ -103,6 +103,37 @@ body {
     height: 100%;
     display: flex;
   }
+  #tooltip2 {
+    width: 400px;
+    height: 89px;
+    position: absolute;
+    bottom: 15px;
+    transition-duration: 500ms;
+    p {
+      text-align: center;
+      margin: 0 0;
+      padding: 5px 0 8px 0;
+      height: 20px;
+      float: left;
+      background: rgba(255,255,255,0.3);
+      width: 100%;
+      font-weight: bold;
+      color: black;
+    }
+    .plot {
+      text-align: center;
+      width: 10%;
+      float: left;
+      .mesure {
+        opacity: 0.8;
+        div {
+          position: absolute;
+          bottom: 89px;
+          width: 10%;
+        }
+      }
+    };
+  }
   #cover-widgets {
     transition-duration: @speed1;
     padding-top: 60px;

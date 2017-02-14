@@ -53,6 +53,7 @@ class MapContainer extends Component {
   }
   handleMouseIn(element) {
     this.setState({ hover: element });
+    Actions.hoverId(element);
   }
   handleMouseOut() {
     this.setState({hover: false });

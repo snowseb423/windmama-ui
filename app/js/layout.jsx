@@ -47,7 +47,7 @@ class Layout extends Component {
   render() {
     const { leftActive, rightActive, onePlace } = this.state;
     const { displayDetail, detail, place, allId, mobile, hoverId } = this.props.data;
-    const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive };
+    const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive, hoverId };
     const propsMap = { place, allId, location, detail, displayDetail, mobile, hoverId };
     return <div style={{height:'100%'}}>
       <MapContainer {...propsMap} />

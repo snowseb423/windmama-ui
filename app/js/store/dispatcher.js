@@ -32,7 +32,6 @@ AppDispatcher.register((action) => {
     case typeOfActions.HOVER_ID:
       store.hoverId = action.id;
       store.emit(typeOfActions.HOVER_ID);
-      console.log(store.hoverId);
       break;
 
     case typeOfActions.UPDATE_DETAIL:

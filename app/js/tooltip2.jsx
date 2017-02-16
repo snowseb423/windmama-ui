@@ -15,25 +15,23 @@ function Tooltip2(props) {
   var content;
   detail = detail[hoverId];
   if (detail) {
-    detail = detail.slice(0, 16);
+    detail = detail.slice(0, 10);
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="plot" key={i}>
         <div className="mesure">
           <div style={{ background: color(detail[4]), height: detail[4] + 'px' }}/>
-          <div style={{ borderTop: 'solid 1.5px'+ color(detail[3]), height: detail[3] + 'px' }}/>
-          <div style={{ borderTop: 'solid 1.5px'+ color(detail[2]), height: detail[2] + 'px' }}/>
+          <div style={{ background: color(detail[3]), height: detail[3] + 'px' }}/>
+          <div style={{ background: color(detail[2]), height: detail[2] + 'px' }}/>
         </div>
-        <div style={{paddingTop: '5px', background: 'rgba(0,0,0,0.4)'}}>
-          <img src="img/windheading.png" style={{margin:'auto', width: '16px', height: '16px', transform: 'rotateZ('+ detail[5] +'deg)' }}/>
+        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0', color: '#fff', fontSize: '10px' }}>
+          {detail[1]}<br/>{detail[5] + '°'}
         </div>
-        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0 0 7px 0', color: '#fff', fontSize: '10px', borderBottom: '1px solid rgba(0,0,0,0.2)'}}>{detail[1]}</div>
       </div>;
     });
   }
   return <div id="tooltip2" style={{left: leftActive ? '275px' : '15px'}}>
     {content}
-    <p>{place}</p>
   </div>;
 }
 

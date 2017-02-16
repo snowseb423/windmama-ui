@@ -1,25 +1,17 @@
 import React, { PropTypes, Component } from 'react';
 import { windColor } from './common.js';
 import { Actions } from './store/actions.js';
-import Tooltip from './tooltip.jsx';
 
 class LeftPanelSpot extends Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false };
   }
   handleMouseIn() {
-    this.setState({
-      hover: true
-    });
     Actions.hoverId(this.props.id);
     document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '1';
     document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'white';
   }
   handleMouseOut() {
-    this.setState({
-      hover: false
-    });
     document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.2';
     document.querySelector('.marker_' + this.props.id).style.border = '0px solid transparent';
     document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'inherit';
@@ -80,9 +72,7 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    var tooltip = this.state.hover ? <Tooltip position={'left'} detail={detail[0]}/> : '';
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
-      { !mobile ? tooltip : ''}
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
         <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />

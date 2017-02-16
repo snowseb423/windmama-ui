@@ -13,7 +13,8 @@ function Tooltip(props) {
       fontSize: '12px',
       background: '#1d1d1d',
       color: 'rgba(255,255,255,0.7)',
-      width: '80px'
+      width: '80px',
+      overflow: 'inherit'
     };
     styleArrow = {
       marginTop: '5px',

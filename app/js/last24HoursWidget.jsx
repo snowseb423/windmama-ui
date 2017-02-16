@@ -70,8 +70,10 @@ function Last24HourslWidget(props) {
       })}
     </div>;
   }
-  return <div className="widget" id="widget-24-hours">
-    {detail ? content : ' '}
+  return <div className="container-single-widget">
+    <div className="widget" id="widget-24-hours">
+      {detail ? content : ' '}
+    </div>
   </div>;
 }
 

@@ -29,16 +29,16 @@ class LeftPanel extends Component {
   render() {
     const { detail, place, allId, leftActive , mobile} = this.props;
     var maxOrder = [];
-    for (var i = 0; i < allId.length; i++) {
-      var max = parseInt(((detail[allId[i]])[0].split('|'))[4]);
-      var id = (detail[allId[i]])[0].split('|')[0];
+    allId.forEach((element)=>{
+      var max = parseInt(((detail[element])[0].split('|'))[4]);
+      var id = (detail[element])[0].split('|')[0];
       maxOrder.push({id: id, max: max});
-    }
+    });
     maxOrder.sort((a, b) => {
       if (a.max < b.max)
-      return 1;
-      if (a.max > b.max)
-      return -1;
+        return 1;
+      else if (a.max > b.max)
+        return -1;
       return 0;
     });
     var iStyle = {

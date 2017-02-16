@@ -12,7 +12,7 @@ function Last2HoursWidget(props) {
   var { detail } = props;
   var content;
   if (detail) {
-    detail = detail.slice(0, 24);
+    detail = detail.slice(0, 36);
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="one-plot" key={i}>
@@ -28,8 +28,10 @@ function Last2HoursWidget(props) {
       </div>;
     });
   }
-  return <div className="widget" id="widget-2-hours">
-    {content}
+  return <div className="container-single-widget">
+    <div className="widget" id="widget-2-hours">
+      {content}
+    </div>
   </div>;
 }
 

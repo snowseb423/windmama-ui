@@ -48,8 +48,37 @@ const windColor = [
   '#8a32fd',
   '#8B33FF',
   '#8634FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
+  '#7E35FF',
   '#7E35FF'
-];
+]; // 50 to 80 idem
 
 function unitType(value) {
   return (Math.round(value/1.852) + ' nds');

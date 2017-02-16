@@ -41,7 +41,7 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
-    const { place, detail, max, search } = this.props;
+    const { mobile, place, detail, max, search } = this.props;
     var detailSplited = detail[0].split('|'),
         id = detailSplited[0],
         heading = -detailSplited[5];
@@ -82,7 +82,7 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'none';
     var tooltip = this.state.hover ? <Tooltip position={'left'} detail={detail[0]}/> : '';
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
-      {tooltip}
+      { !mobile ? tooltip : ''}
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
         <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />

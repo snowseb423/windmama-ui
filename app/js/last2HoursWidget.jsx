@@ -30,6 +30,9 @@ function Last2HoursWidget(props) {
   }
   return <div className="container-single-widget">
     <div className="widget" id="widget-2-hours">
+      <div className="info-widget">
+        36 derniers relevés de vent en nœuds
+      </div>
       {content}
     </div>
   </div>;

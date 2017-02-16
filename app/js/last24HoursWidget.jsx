@@ -72,6 +72,9 @@ function Last24HourslWidget(props) {
   }
   return <div className="container-single-widget">
     <div className="widget" id="widget-24-hours">
+      <div className="info-widget">
+        Moyennes en nœuds des 24 dernières heures
+      </div>
       {detail ? content : ' '}
     </div>
   </div>;

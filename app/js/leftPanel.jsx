@@ -53,7 +53,7 @@ class LeftPanel extends Component {
       fontSize: '20px'
     };
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
-      <input id="research" type="text" placeholder="Recherche" onChange={this.changeOnResearch}/>
+      <input id="research" type="text" placeholder="Recherche (code postal, ville...)" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <div className="container-spot-left-panel">
        {maxOrder.map((item, i) =>

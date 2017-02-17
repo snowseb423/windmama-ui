@@ -108,25 +108,25 @@ body {
     height: 100%;
   }
   #tooltip2 {
-    width: 500px;
+    width: 600px;
     height: 16px;
     position: absolute;
     bottom: 26px;
     transition-duration: 500ms;
     .plot {
       text-align: center;
-      width: 10%;
+      width: 8.333%;
       float: left;
       .mesure {
         opacity: 0.8;
         div {
           position: absolute;
           bottom: 18px;
-          width: 3.333%;
+          width: 2.5%;
         }
-        div:nth-of-type(1) { margin-left: 0.1%; }
-        div:nth-of-type(2) { margin-left: 3.333%; }
-        div:nth-of-type(3) { margin-left: 6.566%; }
+        div:nth-of-type(1) { margin-left: 0%; }
+        div:nth-of-type(2) { margin-left: 2.5%; }
+        div:nth-of-type(3) { margin-left: 5%; }
       }
     };
   }
@@ -166,11 +166,19 @@ body {
     #widget-2-hours {
       padding-right: 7.5px;
       .mesure {
-        height: 60px;
         transform: rotateZ(180deg);
-        div {
-          float: left;
+        div { float: left; }
+        div:nth-of-type(3) {
+          width: 40%;
+          opacity: 0.7;
+        }
+        div:nth-of-type(2) {
           width: 30%;
+          opacity: 0.4;
+        }
+        div:nth-of-type(1) {
+          width: 20%;
+          opacity: 0.2;
         }
         div:first-child { margin-left: 5%; }
       }
@@ -192,12 +200,9 @@ body {
   }
   #left-panel {
     left: 0px;
-    overflow: hidden;
     &.active { left: -260px; }
     .container-spot-left-panel {
-      overflow: scroll;
       height: 100%;
-      margin-right: -15px;
     }
     .child-panel {
       transition-duration: 100ms;
@@ -266,7 +271,6 @@ body {
     .tooltip { display: none; }
     #left-panel {
       left: 0%;
-      .container-spot-left-panel { margin-right: 0px; }
     }
     #right-panel {
       right: 0%;

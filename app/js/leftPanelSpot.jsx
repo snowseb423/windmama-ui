@@ -12,17 +12,11 @@ class LeftPanelSpot extends Component {
     this.setState({
       hover: true
     });
-    Actions.hoverId(this.props.id);
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '1';
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'white';
   }
   handleMouseOut() {
     this.setState({
       hover: false
     });
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.opacity = '0.2';
-    document.querySelector('.marker_' + this.props.id).style.border = '0px solid transparent';
-    document.querySelector('.marker_' + this.props.id +' .child-marker-1').style.background = 'inherit';
   }
   sumFunc(id) {
     const { place } = this.props;

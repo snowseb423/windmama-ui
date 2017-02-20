@@ -29,11 +29,6 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.DISPLAY_DETAIL);
       break;
 
-    case typeOfActions.HOVER_ID:
-      store.hoverId = action.id;
-      store.emit(typeOfActions.HOVER_ID);
-      break;
-
     case typeOfActions.SHIFTING_MAP:
       store.mapPosition = action.coord;
       store.emit(typeOfActions.SHIFTING_MAP);

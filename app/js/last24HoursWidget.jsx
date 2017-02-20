@@ -55,8 +55,6 @@ function Last24HourslWidget(props) {
           var y3Min = y2Min;
           var y4Min = index == 24 ? y2Min : Math.round( Max - min[index+1] )*2;
 
-          console.log(Max);
-
           return <div className="one-plot" key={index}>
             <svg style={{ width: '100%', height: Max*2 + 'px'}}>
               <line x1={'50%'} x2={'50%'} y1={'0'} y2={Max*2 +'px'} stroke={'white'} strokeLinecap={'round'} strokeDasharray={'2'}/>

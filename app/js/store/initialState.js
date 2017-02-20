@@ -10,7 +10,6 @@ var initialState = {
   mobile: false,
   displayDetail: false,
   idUpdate: false,
-  hoverId: false,
   mapPosition: [3.5, 46.7]
 };
 

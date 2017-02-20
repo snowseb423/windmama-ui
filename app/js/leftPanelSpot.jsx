@@ -12,6 +12,7 @@ class LeftPanelSpot extends Component {
     this.setState({
       hover: true
     });
+    Actions.hoverId(this.props.id);
   }
   handleMouseOut() {
     this.setState({
@@ -38,7 +39,7 @@ class LeftPanelSpot extends Component {
     const { mobile, place, detail, max, search } = this.props;
     var detailSplited = detail[0].split('|'),
         id = detailSplited[0],
-        heading = -detailSplited[5];
+        heading = detailSplited[5];
     var placeSplited = place.split('|');
     var city = placeSplited[3];
     if (city.search('"') > -1)

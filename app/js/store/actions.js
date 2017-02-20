@@ -44,5 +44,11 @@ export var Actions = {
       actionType: typeOfActions.DISPLAY_DETAIL,
       id: id
     });
+  },
+  hoverId: (id) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.HOVER_ID,
+      id: id
+    });
   }
 };

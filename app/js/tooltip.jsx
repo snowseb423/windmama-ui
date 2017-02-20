@@ -26,9 +26,10 @@ function Tooltip(props) {
       background: '#1d1d1d'
     };
   } else if (props.position === 'map') {
+    var evt = event || window.event;
     styleTooltip = {
-      left: window.event.clientX - 46 + 'px',
-      marginTop: window.event.clientY - 90 + 'px',
+      left: evt.clientX - 46 + 'px',
+      marginTop: evt.clientY - 90 + 'px',
       borderRadius: '2px',
       zIndex: '4',
       fontSize: '12px',

@@ -10,18 +10,21 @@ function InfoWidget(props) {
     padding: '0 10px'
   };
   if(place) {
-    var info = place.split('|')[4] + ', '+ 'Pioupiou: ' + place.split('|')[0];
-    if (info.indexOf('Unnamed Road') >= 0)
-      info = info.substring(13);
+    var info =  <div style={styleCityName}>
+                  {place.split('|')[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place.split('|')[0]} target="_blan">Pioupiou: {place.split('|')[0]}</a>
+                </div>;
+    if (place.split('|')[4].indexOf('Unnamed Road') >= 0) {
+      info =  <div style={styleCityName}>
+                {place.split('|')[4].substring(13) + ', '}<a href={'http://pioupiou.fr/fr/' + place.split('|')[0]} target="_blan">Pioupiou: {place.split('|')[0]}</a>
+              </div>;
+    }
   }
   return <div className="widget" style={{ padding: '10px 0', background: 'rgba(255, 255, 255, 0.25)', color: 'black'}}>
     <div style={{ display: 'inline-block', width: '100%' }}>
       <button className="button" style={{ opacity: '0.4', float: 'left', marginLeft: '10px'}} onClick={() => alert('Cette fonction sera bientôt disponible')}><i className="fa fa-heart-o" /> favoris</button>
       <button className="button"  style={{ float: 'right', marginRight: '10px'}} onClick={() => Actions.displayDetail(false)}><i className="fa fa-times" /></button>
     </div>
-    <div style={styleCityName}>
-      {info}
-    </div>
+    {info}
   </div>;
 }
 

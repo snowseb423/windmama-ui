@@ -7,7 +7,6 @@ import Tooltip2 from './tooltip2.jsx';
 
 function Ui(props) {
   const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile, hoverId } = props;
-
   const propsWidget = { displayDetail, detail, onePlace, leftActive, rightActive, mobile };
   const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile };
   const propsHeader = { leftActive, rightActive };

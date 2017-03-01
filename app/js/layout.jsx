@@ -14,7 +14,8 @@ class Layout extends Component {
     this.state = {
       leftActive: false,
       rightActive: false,
-      onePlace: false
+      onePlace: false,
+      content: <div />
     };
   }
   componentDidMount() {

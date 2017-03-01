@@ -29,10 +29,12 @@ class LeftPanel extends Component {
   render() {
     const { detail, place, allId, leftActive , mobile} = this.props;
     var maxOrder = [];
-      allId.forEach((element)=>{
-        var max = parseInt(((detail[element])[0].split('|'))[4]);
-        var id = (detail[element])[0].split('|')[0];
-        maxOrder.push({id: id, max: max});
+      allId.forEach((element) => {
+        if (typeof detail[element] !== 'undefined') {
+          var max = parseInt(detail[element][0].split('|')[4]);
+          var id = (detail[element])[0].split('|')[0];
+          maxOrder.push({id: id, max: max});
+        }
       });
     maxOrder.sort((a, b) => {
       if (a.max < b.max)

@@ -28,30 +28,31 @@ class MapContainer extends Component {
     this.mymap.touchZoomRotate.disableRotation();
     this.mymap.once('load', () => {
       this.props.allId.forEach((element) => {
+        if (typeof this.props.detail[element] !== 'undefined') {
+          var detailSplited = this.props.detail[element][0].split('|');
+          var placeSplited = this.props.place[element].split('|');
 
-        var detailSplited = this.props.detail[element][0].split('|');
-        var placeSplited = this.props.place[element].split('|');
+          var htmlMarker = document.createElement('div');
+          htmlMarker.className = 'marker marker_' + element;
 
-        var htmlMarker = document.createElement('div');
-        htmlMarker.className = 'marker marker_' + element;
+          htmlMarker.innerHTML =  '<div class="child-marker child-marker-1" style="background: ' + windColor[Math.round((detailSplited[4]/1.852))] + ';"></div>' +
+          '<div class="child-marker child-marker-2" style="background: ' + windColor[Math.round((detailSplited[4]/1.852))] + ';"></div>' +
+          '<img src="img/windheading2.png" width="100%" height="100%" class="child-marker child-marker-3" style="transform: scale(0.5) rotateZ(' + Number(detailSplited[5]) + 'deg);"></div>';
 
-        htmlMarker.innerHTML =  '<div class="child-marker child-marker-1" style="background: ' + windColor[Math.round((detailSplited[4]/1.852))] + ';"></div>' +
-                                '<div class="child-marker child-marker-2" style="background: ' + windColor[Math.round((detailSplited[4]/1.852))] + ';"></div>' +
-                                '<img src="img/windheading2.png" width="100%" height="100%" class="child-marker child-marker-3" style="transform: scale(0.5) rotateZ(' + Number(detailSplited[5]) + 'deg);"></div>';
+          htmlMarker.addEventListener('click', () => {
+            Actions.displayDetail(element);
+          });
+          htmlMarker.addEventListener('mouseover', () => {
+            this.handleMouseIn(element);
+          });
+          htmlMarker.addEventListener('mouseout', () => {
+            this.handleMouseOut();
+          });
 
-        htmlMarker.addEventListener('click', () => {
-          Actions.displayDetail(element);
-        });
-        htmlMarker.addEventListener('mouseover', () => {
-          this.handleMouseIn(element);
-        });
-        htmlMarker.addEventListener('mouseout', () => {
-          this.handleMouseOut();
-        });
-
-        var marker = new mapboxgl.Marker(htmlMarker);
-        marker.setLngLat([placeSplited[2], placeSplited[1]]);
-        marker.addTo(this.mymap);
+          var marker = new mapboxgl.Marker(htmlMarker);
+          marker.setLngLat([placeSplited[2], placeSplited[1]]);
+          marker.addTo(this.mymap);
+        }
       });
     });
   }

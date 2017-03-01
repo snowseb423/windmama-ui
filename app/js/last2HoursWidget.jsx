@@ -21,17 +21,17 @@ function Last2HoursWidget(props) {
         Max = Math.round(detail[4]);
     });
     if (Max < 20)
-      Max = 30;
+      Max = 24;
     else
-      Max = Max + 10;
+      Max = Max + 4;
 
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="one-plot" key={i}>
-        <div className="mesure" style={{height: Max*2 + 'px'}}>
-          <div style={{background: color(detail[2]), height: Math.round(detail[2])*2 }} />
-          <div style={{background: color(detail[3]), height: Math.round(detail[3])*2 }} />
-          <div style={{background: color(detail[4]), height: Math.round(detail[4])*2 }} />
+        <div className="mesure" style={{height: Max*1.3 + 'px'}}>
+          <div style={{background: color(detail[2]), height: Math.round(detail[2])*1.3 }} />
+          <div style={{background: color(detail[3]), height: Math.round(detail[3])*1.3 }} />
+          <div style={{background: color(detail[4]), height: Math.round(detail[4])*1.3 }} />
         </div>
         <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
           { detail[1]}

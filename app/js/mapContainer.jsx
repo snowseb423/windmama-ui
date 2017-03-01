@@ -41,6 +41,8 @@ class MapContainer extends Component {
 
           htmlMarker.addEventListener('click', () => {
             Actions.displayDetail(element);
+            if (this.props.mobile)
+              Actions.leftActive(false)
           });
           htmlMarker.addEventListener('mouseover', () => {
             this.handleMouseIn(element);

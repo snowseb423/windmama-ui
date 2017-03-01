@@ -3,7 +3,7 @@ import { windColor } from './common.js';
 
 function Tooltip(props) {
   const detailSplited = props.detail.split('|');
-  var styleTooltip = {}, styleArrow =  {};
+  var styleTooltip, styleArrow;
   if (props.position === 'left') {
     styleTooltip = {
       left: '267px',

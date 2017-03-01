@@ -9,26 +9,19 @@ var express = require('express'),
 
 app.use(express.static('../public'));
 
-var detail = {};
-client.keys('*', function(err, keys) {
-  keys.forEach( function(element) {
-    client.lrange(element, 0, -1, (err, singleData) => {
-      detail[element] = singleData;
+io.on('connection', function(socket) {
+  client.keys('*', function(err, keys) {
+    keys.forEach( function(element, i){
+      client.lrange(element, 0, -1, (err, singleData) => {
+        if (!err) { socket.emit('sendAllData', singleData); }
+      });
+      if(i == keys.length)
+        socket.emit('sendAllData', 'end');
     });
   });
-});
-
-app.post('/detail', function(req, res) {
-  res.end(JSON.stringify(detail));
-});
-
-app.post('/place', function(req, res){
-  client.hgetall('location', (err, place) => {
-    res.end(JSON.stringify(place));
+  client.hgetall('location', (err, allLocation) => {
+    socket.emit('sendAllLocation', allLocation);
   });
-});
-
-io.on('connection', function(socket) {
   subscriber.subscribe('pubsub');
   subscriber.on('message', function(channel, message){
     socket.emit('sendPubsubData', message.toString());

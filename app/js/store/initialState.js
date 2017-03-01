@@ -1,17 +1,17 @@
+
 import io from 'socket.io-client';
-import $ from 'jquery';
 import { Actions } from './actions.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var initialState = {
-  detail: {},
-  place: {},
-  allId: [],
-  mobile: false,
-  displayDetail: false,
-  idUpdate: false,
-  hoverId: false,
-  mapPosition: [3.5, 46.7]
+    detail: {},
+    place: {},
+    allId: [],
+    mobile: false,
+    displayDetail: false,
+    idUpdate: false,
+    hoverId: false,
+    mapPosition: [3.5, 46.7]
 };
 
 (()=>{
@@ -27,19 +27,27 @@ var initialState = {
     initialState.mobile = false;
 })();
 
-$.post(location + 'detail', false, (detail) => {
-  initialState.detail = JSON.parse(detail);
+function registerData(chanel, callback) {
+  socket.on(chanel, (data) => { callback(data); });
+}
+registerData('sendAllData', (data) => {
+  if (data != 'end') {
+    let dataSplit = data[0].split('|');
+    var id = dataSplit[0];
+    initialState.detail[Number(id)] = data;
+  } else if (data == 'end') {
+    Actions.sendData();
+  }
+});
+registerData('sendAllLocation', (data) => {
+  initialState.place = data;
+  initialState.allId = Object.keys(data);
   Actions.sendData();
 });
-
-$.post(location + 'place', false, (place) => {
-  initialState.place = JSON.parse(place);
-  initialState.allId = Object.keys(initialState.place);
-  Actions.sendData();
-});
-
-socket.on('sendPubsubData', (data) => {
-  Actions.updateDetail(data);
+var update;
+registerData('sendPubsubData', (data) => {
+  update = data;
+  Actions.updateDetail(update);
 });
 
 export default initialState;

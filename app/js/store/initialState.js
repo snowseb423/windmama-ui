@@ -37,6 +37,7 @@ registerData('sendAllData', (data) => {
     initialState.detail[Number(id)] = data;
   } else if (data == 'end') {
     Actions.sendData();
+    socket.close();
   }
 });
 registerData('sendAllLocation', (data) => {

@@ -16,7 +16,11 @@ function Widgets(props) {
     marginRight: rightActive && !mobile ? '260px' : '0px'
   };
 
-  return <div id="cover-widgets" className={displayDetail ? 'active' : ''}>
+  var heightCoverWidget = {
+    height: window.innerHeight - 60 + 'px'
+  };
+
+  return <div id="cover-widgets" style={heightCoverWidget} className={displayDetail ? 'active' : ''}>
     <div className="container-widgets" id="container-widgets" style={containerMargin}>
       {displayDetail ? content : ''}
     </div>

@@ -4,10 +4,11 @@ import { windColor } from './common.js';
 function Tooltip(props) {
   const detailSplited = props.detail.split('|');
   var styleTooltip, styleArrow;
+  var evt = event || window.event;
   if (props.position === 'left') {
     styleTooltip = {
       left: '267px',
-      marginTop: '-5px',
+      marginTop: document.querySelector('.container-spot-left-panel').scrollTop + 'px',
       borderRadius: '2px',
       zIndex: '4',
       fontSize: '12px',
@@ -26,7 +27,6 @@ function Tooltip(props) {
       background: '#1d1d1d'
     };
   } else if (props.position === 'map') {
-    var evt = event || window.event;
     styleTooltip = {
       left: evt.clientX - 46 + 'px',
       marginTop: evt.clientY - 90 + 'px',

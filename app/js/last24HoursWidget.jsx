@@ -12,16 +12,16 @@ function Last24HourslWidget(props) {
       var splitedHour = splitedElement[1].split(':')[0];
       if (splitedHour != tempHour && hour) {
         tempHour = splitedHour;
-        hour.push(splitedHour);
-        heading.push(_.mean(tempHeading)); tempHeading = [];
-        max.push(_.mean(tempMax)); tempMax = [];
-        avg.push(_.mean(tempAvg)); tempAvg = [];
-        min.push(_.mean(tempMin)); tempMin = [];
+        hour.unshift(splitedHour);
+        heading.unshift(_.mean(tempHeading)); tempHeading = [];
+        max.unshift(_.mean(tempMax)); tempMax = [];
+        avg.unshift(_.mean(tempAvg)); tempAvg = [];
+        min.unshift(_.mean(tempMin)); tempMin = [];
       } else if (splitedHour == tempHour) {
-        tempHeading.push(Number(splitedElement[5]));
-        tempMax.push(Number(splitedElement[4]));
-        tempAvg.push(Number(splitedElement[3]));
-        tempMin.push(Number(splitedElement[2]));
+        tempHeading.unshift(Number(splitedElement[5]));
+        tempMax.unshift(Number(splitedElement[4]));
+        tempAvg.unshift(Number(splitedElement[3]));
+        tempMin.unshift(Number(splitedElement[2]));
       }
     });
 
@@ -38,7 +38,6 @@ function Last24HourslWidget(props) {
     var content = <div>
       {hour.map((element, index) => {
         if (index != 0 && index <= 24) {
-
 
           var y2Max = Math.round( Max - max[index] )*2;
           var y1Max = index == 1 ? y2Max : Math.round( Max - max[index-1] )*2;
@@ -69,7 +68,7 @@ function Last24HourslWidget(props) {
               <circle cx={'50%'} cy={y2Min} r="2" fill={'#a5faf7'} />
             </svg>
             <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
-              { element + 'h' }
+              { element.toString().replace(/^(\d)$/,'0$1') +'-'+ (Number(element)+1).toString().replace(/^(\d)$/,'0$1')}
             </div>
             <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
               <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>
@@ -85,7 +84,7 @@ function Last24HourslWidget(props) {
   return <div className="container-single-widget">
     <div className="widget" id="widget-24-hours">
       <div className="info-widget">
-        Moyennes en nœuds des 24 dernières heures
+        Moyennes en nœuds des 24 dernières heures.
       </div>
       {detail ? content : ' '}
     </div>

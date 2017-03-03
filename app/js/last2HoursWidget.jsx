@@ -28,10 +28,10 @@ function Last2HoursWidget(props) {
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="one-plot" key={i}>
-        <div className="mesure" style={{height: Max*1.3 + 'px'}}>
-          <div style={{background: color(detail[2]), height: Math.round(detail[2])*1.3 }} />
-          <div style={{background: color(detail[3]), height: Math.round(detail[3])*1.3 }} />
-          <div style={{background: color(detail[4]), height: Math.round(detail[4])*1.3 }} />
+        <div className="mesure" style={{height: Max*1.65 + 'px'}}>
+          <div style={{background: color(detail[2]), height: Math.round(detail[2]) != 0 ? Math.round(detail[2])*1.65 : 1 }} />
+          <div style={{background: color(detail[3]), height: Math.round(detail[3]) != 0 ? Math.round(detail[3])*1.65 : 1 }} />
+          <div style={{background: color(detail[4]), height: Math.round(detail[4]) != 0 ? Math.round(detail[4])*1.65 : 1 }} />
         </div>
         <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
           { detail[1]}

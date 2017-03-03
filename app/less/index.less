@@ -137,6 +137,7 @@ body {
     };
   }
   #cover-widgets {
+    transition-duration: @speed2;
     opacity: 0;
     height: 100%;
     width: 100%;
@@ -148,6 +149,8 @@ body {
       pointer-events: all;
     }
     .container-widgets {
+      max-width: 1600px;
+      margin: auto;
       transition-duration: @speed2;
       padding: 15px;
       .info-widget {

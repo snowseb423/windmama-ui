@@ -11,17 +11,32 @@ function Widgets(props) {
     <Last24HoursWidget detail={detail[displayDetail]} />
   </div>;
 
-  const containerMargin = {
-    marginLeft: leftActive && !mobile ? '260px' : '0px',
-    marginRight: rightActive && !mobile ? '260px' : '0px'
-  };
+  // const containerMargin = {
+  //   marginLeft: leftActive && !mobile ? 260 : '0px',
+  //   marginRight: rightActive && !mobile ? '260px' : '0px'
+  // };
+
+  var widthContainer;
+  var marginLeftContainer;
+  if (!leftActive && !rightActive && !mobile) {
+    widthContainer = window.innerWidth;
+    marginLeftContainer = 0;
+  } else if (leftActive && !mobile) {
+    widthContainer = (window.innerWidth - 260) + 'px';
+    marginLeftContainer = 260;
+  } else if (rightActive && !mobile) {
+    widthContainer = (window.innerWidth - 260) + 'px';
+    marginLeftContainer = 0;
+  }
 
   var heightCoverWidget = {
-    height: window.innerHeight - 60 + 'px'
+    height: window.innerHeight - 60 + 'px',
+    width: widthContainer,
+    marginLeft: marginLeftContainer
   };
 
   return <div id="cover-widgets" style={heightCoverWidget} className={displayDetail ? 'active' : ''}>
-    <div className="container-widgets" id="container-widgets" style={containerMargin}>
+    <div className="container-widgets" id="container-widgets" >
       {displayDetail ? content : ''}
     </div>
   </div>;

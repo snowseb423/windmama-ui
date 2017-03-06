@@ -36,7 +36,7 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
-    const { mobile, place, detail, max, search } = this.props;
+    const { mobile, place, detail, max, search, index } = this.props;
     var detailSplited = detail[0].split('|'),
         id = detailSplited[0],
         heading = detailSplited[5];
@@ -44,8 +44,8 @@ class LeftPanelSpot extends Component {
     var city = placeSplited[3];
     if (city.search('"') > -1)
       city = city.split('"')[1];
-    if (city.length >= 20)
-      city = city.substring(0, 20) + '...';
+    if (city.length >= 19)
+      city = city.substring(0, 19) + '..';
     var color;
     if (max/1.852 <= 50)
       color = windColor[Math.round((max/1.852))];
@@ -75,7 +75,7 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    var tooltip = this.state.hover ? <Tooltip position={'left'} detail={detail[0]}/> : '';
+    var tooltip = this.state.hover ? <Tooltip index={index} position={'left'} detail={detail[0]}/> : '';
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
       { !mobile ? tooltip : ''}
       <span style={{ marginLeft: '7px'}}>{city}</span>
@@ -90,6 +90,7 @@ class LeftPanelSpot extends Component {
 LeftPanelSpot.propTypes = {
   id: PropTypes.string,
   max: PropTypes.number,
+  index: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.string,
   search: PropTypes.any,

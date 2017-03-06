@@ -11,11 +11,6 @@ function Widgets(props) {
     <Last24HoursWidget detail={detail[displayDetail]} />
   </div>;
 
-  // const containerMargin = {
-  //   marginLeft: leftActive && !mobile ? 260 : '0px',
-  //   marginRight: rightActive && !mobile ? '260px' : '0px'
-  // };
-
   var widthContainer;
   var marginLeftContainer;
   if (!leftActive && !rightActive && !mobile) {

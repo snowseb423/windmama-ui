@@ -8,7 +8,7 @@ function Tooltip(props) {
   if (props.position === 'left') {
     styleTooltip = {
       left: '267px',
-      marginTop: document.querySelector('.container-spot-left-panel').scrollTop + 'px',
+      top: (props.index*29) + 103 - document.querySelector('.container-spot-left-panel').scrollTop +'px',
       borderRadius: '2px',
       zIndex: '4',
       fontSize: '12px',
@@ -58,6 +58,7 @@ function Tooltip(props) {
 
 Tooltip.propTypes = {
   detail: PropTypes.string,
+  index: PropTypes.number,
   position: PropTypes.string
 };
 

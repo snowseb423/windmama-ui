@@ -20,7 +20,7 @@ function Last24HoursWidget(props) {
 
   var content = <div>
     {detailByHour.map((element, index)=>{
-      return <Last24HoursWidgetPlot data={element} key={index}/>;
+      return <Last24HoursWidgetPlot data={element} index={index} key={index}/>;
     })}
   </div>;
 

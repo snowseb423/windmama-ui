@@ -7,7 +7,8 @@ export var typeOfActions = {
   UPDATE_DETAIL: 'UPDATE_DETAIL',
   DISPLAY_DETAIL: 'DISPLAY_DETAIL',
   HOVER_ID: 'HOVER_ID',
-  SHIFTING_MAP: 'SHIFTING_MAP'
+  SHIFTING_MAP: 'SHIFTING_MAP',
+  CHANGE_VIEWPORT: 'CHANGE_VIEWPORT'
 };
 
 export var Actions = {
@@ -49,6 +50,12 @@ export var Actions = {
     AppDispatcher.dispatch({
       actionType: typeOfActions.HOVER_ID,
       id: id
+    });
+  },
+  changeViewport: (size) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.CHANGE_VIEWPORT,
+      size: size
     });
   }
 };

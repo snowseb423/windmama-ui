@@ -1,4 +1,3 @@
-
 import io from 'socket.io-client';
 import { Actions } from './actions.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
@@ -11,7 +10,9 @@ var initialState = {
     displayDetail: false,
     idUpdate: false,
     hoverId: false,
-    mapPosition: [3.5, 46.7]
+    mapPosition: [3.5, 46.7],
+    viewportWidth: window.innerWidth,
+    viewportHeight: window.innerHeight
 };
 
 (()=>{

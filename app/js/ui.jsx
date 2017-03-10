@@ -6,8 +6,8 @@ import Header from './header.jsx';
 import Tooltip2 from './tooltip2.jsx';
 
 function Ui(props) {
-  const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile, hoverId } = props;
-  const propsWidget = { displayDetail, detail, onePlace, leftActive, rightActive, mobile };
+  const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile, hoverId, viewportWidth, viewportHeight } = props;
+  const propsWidget = { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight };
   const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile };
   const propsHeader = { leftActive, rightActive };
   const propsTooltip2 = { hoverId, leftActive, detail, place };
@@ -29,7 +29,9 @@ Ui.propTypes = {
   place: PropTypes.object,
   onePlace: PropTypes.any,
   allId: PropTypes.array,
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  viewportWidth: PropTypes.number,
+  viewportHeight: PropTypes.number
 };
 
 export default Ui;

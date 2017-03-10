@@ -4,7 +4,7 @@ import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
 
 function Widgets(props) {
-  const { displayDetail, detail, onePlace, leftActive, rightActive, mobile } = props;
+  const { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight } = props;
   var content = <div>
     <InfoWidget place={onePlace} />
     <Last2HoursWidget detail={detail[displayDetail]} />
@@ -14,18 +14,18 @@ function Widgets(props) {
   var widthContainer;
   var marginLeftContainer;
   if (!leftActive && !rightActive && !mobile) {
-    widthContainer = window.innerWidth;
+    widthContainer = viewportWidth;
     marginLeftContainer = 0;
   } else if (leftActive && !mobile) {
-    widthContainer = (window.innerWidth - 260) + 'px';
+    widthContainer = (viewportWidth - 260) + 'px';
     marginLeftContainer = 260;
   } else if (rightActive && !mobile) {
-    widthContainer = (window.innerWidth - 260) + 'px';
+    widthContainer = (viewportWidth - 260) + 'px';
     marginLeftContainer = 0;
   }
 
   var heightCoverWidget = {
-    height: window.innerHeight - 60 + 'px',
+    height: viewportHeight - 60 + 'px',
     width: widthContainer,
     marginLeft: marginLeftContainer
   };

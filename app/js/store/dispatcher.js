@@ -34,6 +34,12 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.HOVER_ID);
       break;
 
+    case typeOfActions.CHANGE_VIEWPORT:
+      store.viewportWidth = action.size[0];
+      store.viewportHeight = action.size[1];
+      store.emit(typeOfActions.CHANGE_VIEWPORT);
+      break;
+
     case typeOfActions.SHIFTING_MAP:
       store.mapPosition = action.coord;
       store.emit(typeOfActions.SHIFTING_MAP);

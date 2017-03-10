@@ -11,6 +11,7 @@ class Layout extends Component {
     this.displayDetail = this.displayDetail.bind(this);
     this.updateLeftPanel = this.updateLeftPanel.bind(this);
     this.updateRightPanel = this.updateRightPanel.bind(this);
+
     this.state = {
       leftActive: false,
       rightActive: false,
@@ -20,6 +21,7 @@ class Layout extends Component {
   }
   componentDidMount() {
     store.on(typeOfActions.HOVER_ID, this.displayDetail);
+    store.on(typeOfActions.CHANGE_VIEWPORT, this.displayDetail);
     store.on(typeOfActions.SEND_DATA, this.displayDetail);
     store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
     store.on(typeOfActions.UPDATE_DETAIL, this.displayDetail);
@@ -47,8 +49,8 @@ class Layout extends Component {
   }
   render() {
     const { leftActive, rightActive, onePlace } = this.state;
-    const { displayDetail, detail, place, allId, mobile, hoverId, mapPosition } = this.props.data;
-    const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive, hoverId };
+    const { displayDetail, detail, place, allId, mobile, hoverId, mapPosition, viewportWidth, viewportHeight } = this.props.data;
+    const propsUi = { displayDetail, detail, onePlace, place, allId, mobile, rightActive, leftActive, hoverId, viewportWidth, viewportHeight };
     const propsMap = { mapPosition, place, allId, location, detail, displayDetail, mobile, hoverId };
     return <div style={{height:'100%'}}>
       <MapContainer {...propsMap} />
@@ -63,7 +65,9 @@ Layout.propTypes = {
   detail: PropTypes.any,
   place: PropTypes.object,
   allId: PropTypes.array,
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  viewportHeight: PropTypes.number,
+  viewportWidth: PropTypes.number
 };
 
 export default Layout;

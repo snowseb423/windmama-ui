@@ -27,7 +27,7 @@ class LeftPanel extends Component {
     });
   }
   render() {
-    const { detail, place, allId, leftActive , mobile} = this.props;
+    const { detail, place, allId, leftActive , mobile, viewportHeight} = this.props;
     var maxOrder = [];
       allId.forEach((element) => {
         if (typeof detail[element] !== 'undefined') {
@@ -55,7 +55,7 @@ class LeftPanel extends Component {
       fontSize: '20px'
     };
     const styleContainer = {
-      height: ( window.innerHeight - 102 ) + 'px'
+      height: ( viewportHeight - 102 ) + 'px'
     };
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
@@ -75,7 +75,8 @@ LeftPanel.propTypes = {
   displayDetail: PropTypes.any,
   place: PropTypes.object,
   allId: PropTypes.array,
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  viewportHeight: PropTypes.number
 };
 
 export default LeftPanel;

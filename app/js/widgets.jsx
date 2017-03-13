@@ -7,8 +7,8 @@ function Widgets(props) {
   const { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight } = props;
   var content = <div>
     <InfoWidget place={onePlace} />
+    <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} />
     <Last2HoursWidget detail={detail[displayDetail]} />
-    <Last24HoursWidget detail={detail[displayDetail]} />
   </div>;
 
   var widthContainer;
@@ -43,7 +43,9 @@ Widgets.propTypes = {
   rightActive: PropTypes.bool,
   displayDetail: PropTypes.any,
   detail: PropTypes.any,
-  onePlace: PropTypes.any
+  onePlace: PropTypes.any,
+  viewportWidth: PropTypes.number,
+  viewportHeight: PropTypes.number
 };
 
 export default Widgets;

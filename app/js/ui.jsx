@@ -8,7 +8,7 @@ import Tooltip2 from './tooltip2.jsx';
 function Ui(props) {
   const { leftActive, rightActive, displayDetail, detail, onePlace, place, allId, mobile, hoverId, viewportWidth, viewportHeight } = props;
   const propsWidget = { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight };
-  const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile };
+  const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile, viewportHeight };
   const propsHeader = { leftActive, rightActive };
   const propsTooltip2 = { hoverId, leftActive, detail, place };
   return <div id="ui" className="elements-ui-absolute">

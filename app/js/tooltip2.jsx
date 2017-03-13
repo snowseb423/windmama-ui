@@ -14,8 +14,8 @@ function Tooltip2(props) {
   place = placeSplited[3] +', '+ 'Pioupiou: ' + placeSplited[0];
   var content;
   detail = detail[hoverId];
+  detail = detail.slice(0, 12);
   if (detail) {
-    detail = detail.slice(0, 12);
     content = detail.map((detail, i) => {
       detail = detail.split('|');
       return <div className="plot" key={i}>

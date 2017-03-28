@@ -1,26 +1,29 @@
 import assign from 'object-assign';
 import MapGL from 'react-map-gl';
 import React, { Component, PropTypes } from 'react';
-import Overlay from './overlay.jsx';
+import OverlayMarker from './overlayMarker.jsx';
 // import Immutable from 'immutable';
 
 class ContainerMap extends Component {
   constructor(props) {
     super(props);
     this._onChangeViewport = this._onChangeViewport.bind(this);
-    const { mapPosition, mapZoom } = this.props.data;
+    const { mapPosition,mapZoom, viewportWidth, viewportHeight } = this.props.data;
     this.state = {
       viewport: {
         latitude: mapPosition[1],
         longitude: mapPosition[0],
         zoom: mapZoom[0],
-        width: this.props.data.viewportWidth,
-        height: this.props.data.viewportHeight
+        width: viewportWidth,
+        height: viewportHeight
       },
       options: {
         startDragLngLat: true,
         isDragging: true
-      }
+      },
+      mapStyle: 'mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu',
+      mapboxApiAccessToken: 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg',
+      location: {}
     };
   }
   _onChangeViewport(newViewport) {
@@ -28,19 +31,14 @@ class ContainerMap extends Component {
     this.setState({viewport});
   }
   render() {
-    const { viewport, options } = this.state;
+    const { viewport, options, mapStyle, mapboxApiAccessToken } = this.state;
     const locations = [
       {'longitude': -122.39851786165565, 'latitude': 37.78736425435588},
       {'longitude': -122.40015469418074, 'latitude': 37.78531678199267},
       {'longitude': -122.4124101516789, 'latitude': 37.80051001607987}
     ];
-    return <MapGL
-      onChangeViewport={this._onChangeViewport}
-      {...viewport}
-      mapStyle={'mapbox://styles/arguelbenoit/cixuf036e00632rqn6tcxdbuu'}
-      mapboxApiAccessToken={'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg'}
-    >
-      <Overlay {...viewport} {...options} locations={locations} />
+    return <MapGL onChangeViewport={this._onChangeViewport} {...viewport} mapStyle={mapStyle} mapboxApiAccessToken={mapboxApiAccessToken}>
+      <OverlayMarker {...viewport} {...options} locations={locations} />
     </MapGL>;
   }
 }

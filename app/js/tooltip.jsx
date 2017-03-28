@@ -1,65 +1,42 @@
 import React, { PropTypes } from 'react';
 import { windColor } from './common.js';
 
+function color(value) {
+  if (value / 1.852 <= 50)
+    return windColor[Math.round(( value /1.852))];
+  else
+    return windColor[49];
+}
+
 function Tooltip(props) {
-  const detailSplited = props.detail.split('|');
-  var styleTooltip, styleArrow;
-  var evt = event || window.event;
-  if (props.position === 'left') {
-    styleTooltip = {
-      left: '267px',
-      top: (props.index*29) + 103 - document.querySelector('.container-spot-left-panel').scrollTop +'px',
-      borderRadius: '2px',
-      zIndex: '4',
-      fontSize: '12px',
-      background: '#1d1d1d',
-      color: 'rgba(255,255,255,0.7)',
-      width: '80px',
-      overflow: 'inherit'
-    };
-    styleArrow = {
-      marginTop: '5px',
-      marginLeft: '-8px',
-      position: 'absolute',
-      transform: 'rotateZ(45deg)',
-      width: '10px',
-      height: '10px',
-      background: '#1d1d1d'
-    };
-  } else if (props.position === 'map') {
-    styleTooltip = {
-      left: evt.clientX - 46 + 'px',
-      marginTop: evt.clientY - 90 + 'px',
-      borderRadius: '2px',
-      zIndex: '4',
-      fontSize: '12px',
-      background: '#1d1d1d',
-      color: 'rgba(255,255,255,0.7)',
-      width: '80px'
-    };
-    styleArrow = {
-      marginTop: '67px',
-      marginLeft: '36px',
-      position: 'absolute',
-      transform: 'rotateZ(45deg)',
-      width: '10px',
-      height: '10px',
-      background: '#1d1d1d'
-    };
+  var { leftActive, detail, hoverId } = props;
+  var content;
+  detail = detail[hoverId];
+  detail = detail.slice(0, 12);
+  if (detail) {
+    content = detail.map((detail, i) => {
+      detail = detail.split('|');
+      return <div className="plot" key={i}>
+        <div className="mesure">
+          <div style={{ background: color(detail[4]), height: detail[4] + 'px' }}/>
+          <div style={{ background: color(detail[3]), height: detail[3] + 'px' }}/>
+          <div style={{ background: color(detail[2]), height: detail[2] + 'px' }}/>
+        </div>
+        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0', color: '#fff', fontSize: '10px' }}>
+          {detail[1]}<br/>{detail[5] + '°'}
+        </div>
+      </div>;
+    });
   }
-  return <div className="tooltip" style={styleTooltip}>
-    <div style={styleArrow} />
-    -- {detailSplited[1]} --<br />
-    <span style={{color: Math.round((detailSplited[4]/1.852)) < 50 ? windColor[Math.round((detailSplited[4]/1.852))] : windColor[49]}}>max {Math.round(detailSplited[4] / 1.852)} nds</span><br />
-    <span style={{color: Math.round((detailSplited[3]/1.852)) < 50 ? windColor[Math.round((detailSplited[3]/1.852))] : windColor[49]}}>moy {Math.round(detailSplited[3] / 1.852)} nds</span><br />
-    <span style={{color: Math.round((detailSplited[2]/1.852)) < 50 ? windColor[Math.round((detailSplited[2]/1.852))] : windColor[49]}}>min {Math.round(detailSplited[2] / 1.852)} nds</span><br />
+  return <div id="tooltip2" style={{left: leftActive ? '275px' : '15px'}}>
+    {content}
   </div>;
 }
 
 Tooltip.propTypes = {
-  detail: PropTypes.string,
-  index: PropTypes.number,
-  position: PropTypes.string
+  leftActive: PropTypes.bool,
+  detail: PropTypes.any,
+  hoverId: PropTypes.any
 };
 
 export default Tooltip;

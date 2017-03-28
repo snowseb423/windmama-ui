@@ -1,23 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { windColor } from './common.js';
 import { Actions } from './store/actions.js';
-import Tooltip from './tooltip.jsx';
 
 class LeftPanelSpot extends Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false };
-  }
-  handleMouseIn() {
-    this.setState({
-      hover: true
-    });
-    Actions.hoverId(this.props.id);
-  }
-  handleMouseOut() {
-    this.setState({
-      hover: false
-    });
   }
   sumFunc(id) {
     const { place } = this.props;
@@ -36,7 +23,7 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
-    const { mobile, place, detail, max, search, index } = this.props;
+    const { place, detail, max, search } = this.props;
     var detailSplited = detail[0].split('|'),
         id = detailSplited[0],
         heading = detailSplited[5];
@@ -67,7 +54,7 @@ class LeftPanelSpot extends Component {
       display: 'inherit'
     };
     var cityDetail = placeSplited[4];
-    if (search == false)
+    if (search === false)
       styleContainer.display = 'inherit';
     else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
       styleContainer.display = 'inherit';
@@ -75,12 +62,10 @@ class LeftPanelSpot extends Component {
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    var tooltip = this.state.hover ? <Tooltip index={index} position={'left'} detail={detail[0]}/> : '';
-    return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
-      { !mobile ? tooltip : ''}
+    return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={() => Actions.hoverId(this.props.id)} >
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
-        <img style={styleImgAverage} src="img/windheading.png" width="20px" height="20px" />
+        <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" />
         <span style={styleSpanAverage}>{Math.round(max / 1.852) + ' nds'}</span>
       </div>
     </div>;
@@ -88,14 +73,13 @@ class LeftPanelSpot extends Component {
 }
 
 LeftPanelSpot.propTypes = {
+  mobile: PropTypes.bool,
   id: PropTypes.string,
   max: PropTypes.number,
-  index: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.string,
   search: PropTypes.any,
-  displayDetail: PropTypes.any,
-  mobile: PropTypes.bool
+  displayDetail: PropTypes.any
 };
 
 export default LeftPanelSpot;

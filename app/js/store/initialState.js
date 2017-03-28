@@ -8,9 +8,10 @@ var initialState = {
     allId: [],
     mobile: false,
     displayDetail: false,
-    idUpdate: false,
     hoverId: false,
+    idUpdate: false,
     mapPosition: [3.5, 46.7],
+    mapZoom: [5.2],
     viewportWidth: window.innerWidth,
     viewportHeight: window.innerHeight
 };
@@ -32,19 +33,18 @@ function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });
 }
 registerData('sendAllData', (data) => {
-  if (data != 'end') {
+  if (data !== 'end') {
     let dataSplit = data[0].split('|');
     var id = dataSplit[0];
     initialState.detail[Number(id)] = data;
-  } else if (data == 'end') {
-    Actions.sendData();
+  } else if (data === 'end') {
     socket.close();
   }
 });
 registerData('sendAllLocation', (data) => {
   initialState.place = data;
   initialState.allId = Object.keys(data);
-  Actions.sendData();
+  setTimeout( () => { Actions.sendData(); }, 3000 );
 });
 var update;
 registerData('sendPubsubData', (data) => {

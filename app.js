@@ -7,7 +7,7 @@ var express = require('express'),
     server = app.listen(8080),
     io = socketio.listen(server);
 
-app.use(express.static('../public'));
+app.use(express.static('./public'));
 
 io.on('connection', function(socket) {
   client.keys('*', function(err, keys) {

@@ -10,14 +10,14 @@ function Last24HourslWidget(props) {
     detail.forEach((element) => {
       var splitedElement = element.split('|');
       var splitedHour = splitedElement[1].split(':')[0];
-      if (splitedHour != tempHour && hour) {
+      if (splitedHour !== tempHour && hour) {
         tempHour = splitedHour;
         hour.push(splitedHour);
         heading.push(_.mean(tempHeading)); tempHeading = [];
         max.push(_.mean(tempMax)); tempMax = [];
         avg.push(_.mean(tempAvg)); tempAvg = [];
         min.push(_.mean(tempMin)); tempMin = [];
-      } else if (splitedHour == tempHour) {
+      } else if (splitedHour === tempHour) {
         tempHeading.push(Number(splitedElement[5]));
         tempMax.push(Number(splitedElement[4]));
         tempAvg.push(Number(splitedElement[3]));
@@ -33,23 +33,23 @@ function Last24HourslWidget(props) {
     if (Max < 20)
       Max = 30;
     else
-      Max = Max + 10;
+      Max += 10;
 
     var content = <div>
       {hour.map((element, index) => {
-        if (index != 0 && index <= 24) {
+        if (index !== 0 && index <= 24) {
           const y2Max = Math.round( Max - max[index] )*2;
-          const y1Max = index == 1 ? y2Max : Math.round( Max - max[index-1] )*2;
+          const y1Max = index === 1 ? y2Max : Math.round( Max - max[index-1] )*2;
           const y3Max = y2Max;
-          const y4Max = index == 24 ? y2Max : Math.round( Max - max[index+1] )*2;
+          const y4Max = index === 24 ? y2Max : Math.round( Max - max[index+1] )*2;
           const y2Avg = Math.round( Max - avg[index] )*2;
-          const y1Avg = index == 1 ? y2Avg : Math.round( Max - avg[index-1] )*2;
+          const y1Avg = index === 1 ? y2Avg : Math.round( Max - avg[index-1] )*2;
           const y3Avg = y2Avg;
-          const y4Avg = index == 24 ? y2Avg : Math.round( Max - avg[index+1] )*2;
+          const y4Avg = index === 24 ? y2Avg : Math.round( Max - avg[index+1] )*2;
           const y2Min = Math.round( Max - min[index] )*2;
-          const y1Min = index == 1 ? y2Min : Math.round( Max - min[index-1] )*2;
+          const y1Min = index === 1 ? y2Min : Math.round( Max - min[index-1] )*2;
           const y3Min = y2Min;
-          const y4Min = index == 24 ? y2Min : Math.round( Max - min[index+1] )*2;
+          const y4Min = index === 24 ? y2Min : Math.round( Max - min[index+1] )*2;
           const svg = <svg style={{ width: '100%', height: Max*2 + 'px', shapeRendering: 'geometricPrecision'}}>
             <line x1={'50%'} x2={'50%'} y1={'0'} y2={Max*2 +'px'} stroke={'rgba(255,255,255,0.4)'} strokeLinecap={'round'} strokeDasharray={'2'}/>
             <line x1={'-50%'} y1={y1Max} x2={'50%'} y2={y2Max} stroke={'#ff226a'} strokeLinecap={'round'} strokeWidth={'2'} />
@@ -69,14 +69,14 @@ function Last24HourslWidget(props) {
               { element + 'h' }
             </div>
             <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
-              <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>
+              <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>
             </div>
             <div style={{background: windColor[Math.round(max[index]/1.852)] }}>{Math.round(max[index]/1.852)}</div>
             <div style={{background: windColor[Math.round(avg[index]/1.852)] }}>{Math.round(avg[index]/1.852)}</div>
             <div style={{background: windColor[Math.round(min[index]/1.852)] }}>{Math.round(min[index]/1.852)}</div>
           </div>;
-
-        }
+        } else
+          return '';
       })}
     </div>;
   }

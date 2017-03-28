@@ -31,7 +31,7 @@ function Last2HoursWidget(props) {
         { hour[i] }
       </div>
       <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
-        <img src="img/windheading.png" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[i] +'deg)' }}/>
+        <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[i] +'deg)' }}/>
       </div>
       <div style={{background: color(max[i]) }}>{ Math.round(Number(max[i]) / 1.852)}</div>
       <div style={{background: color(avg[i]) }}>{ Math.round(Number(avg[i]) / 1.852)}</div>

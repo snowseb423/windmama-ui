@@ -2,7 +2,7 @@ LESS_DIR = app/less/
 LESS_SRC = $(LESS_DIR)index.less
 LESS_TARGET = public/style.css
 
-JS_SRC = app/js/index.jsx
+JS_SRC = app/index.js
 JS_TARGET = public/index.js
 OPTION_REACT = [ babelify --presets [ es2015 react ] ]
 

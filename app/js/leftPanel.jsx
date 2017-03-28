@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
-
 class LeftPanel extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,7 @@ class LeftPanel extends Component {
   }
   changeOnResearch(){
     this.setState({search: document.getElementById('research').value});
-    if (document.getElementById('research').value == '')
+    if (document.getElementById('research').value === '')
       this.setState({ scale: 'scale(0)' });
     else
       this.setState({ scale: 'scale(1)' });
@@ -31,7 +30,7 @@ class LeftPanel extends Component {
     var maxOrder = [];
       allId.forEach((element) => {
         if (typeof detail[element] !== 'undefined') {
-          var max = parseInt(detail[element][0].split('|')[4]);
+          var max = parseInt(detail[element][0].split('|')[4], 10);
           var id = (detail[element])[0].split('|')[0];
           maxOrder.push({id: id, max: max});
         }
@@ -54,16 +53,13 @@ class LeftPanel extends Component {
       transitionDuration: '200ms',
       fontSize: '20px'
     };
-    const styleContainer = {
-      height: ( viewportHeight - 102 ) + 'px'
-    };
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
-      <div className="container-spot-left-panel" style={styleContainer}>
-       {maxOrder.map((item, i) =>
-         <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
-       )}
+      <div style={{ height: ( viewportHeight - 102 ) + 'px', overflowY: 'auto' }}>
+         {maxOrder.map((item, i) =>
+           <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
+         )}
       </div>
     </div>;
   }

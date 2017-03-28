@@ -3,7 +3,7 @@ import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
 
-function Widgets(props) {
+function ContainerWidget(props) {
   const { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight } = props;
   var content = <div>
     <InfoWidget place={onePlace} />
@@ -37,7 +37,7 @@ function Widgets(props) {
   </div>;
 }
 
-Widgets.propTypes = {
+ContainerWidget.propTypes = {
   mobile: PropTypes.bool,
   leftActive: PropTypes.bool,
   rightActive: PropTypes.bool,
@@ -48,4 +48,4 @@ Widgets.propTypes = {
   viewportHeight: PropTypes.number
 };
 
-export default Widgets;
+export default ContainerWidget;

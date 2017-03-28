@@ -12,7 +12,7 @@ function RightPanel(props) {
     <div className="link-container">
       <div style={{height: '30px', padding: '10px 0'}}>
         <a style={{width: '100%'}} href="http://pioupiou.fr/" target="_blank" >
-          <img src={'img/pioupiou-logo.svg'} width="100%" height="100%"/>
+          <img src="img/pioupiou-logo.svg" alt="" width="100%" height="100%"/>
         </a>
       </div>
       <button style={{width: '100%', padding: '10px'}}>

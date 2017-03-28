@@ -15,7 +15,6 @@ html, body {
   }
 }
 body {
-  #map           { z-index: 0; }
   #ui            { z-index: 1; }
   #cover-widgets { z-index: 1; }
   #left-panel    { z-index: 2; }
@@ -139,7 +138,6 @@ body {
   #cover-widgets {
     transition-duration: @speed2;
     opacity: 0;
-    background: rgba(0,0,0,0.2);
     color: #dcdcdc;
     overflow: auto;
     &.active {
@@ -205,22 +203,14 @@ body {
   #left-panel {
     left: 0px;
     &.active { left: -260px; }
-    .container-spot-left-panel {
-      overflow: auto;
-    }
     .child-panel {
-      transition-duration: 100ms;
+      transition-duration: 0;
       padding: 5px 0px;
       background-color: rgba(0,0,0,0);
       &:hover {
         background-color: rgba(0,0,0,0.25);
-      }
-      span {
-        max-width: 160px;
-        white-space: nowrap;
-        &:first-child {
-          transition-duration: 100ms;
-          margin-left: 0px;
+        span:first-child {
+          padding-left: 5px;
         }
       }
     }
@@ -234,38 +224,6 @@ body {
       bottom: 60px;
     }
   }
-  #map-container {
-    transition: @speed2;
-    &.blur { filter: blur(15px); }
-    #map {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      overflow: hidden;
-      .marker {
-        cursor: pointer;
-        width: 28px;
-        height: 28px;
-        margin-left: -14px;
-        margin-top: -14px;
-        border-radius: 50%;
-        .child-marker {
-          position: absolute;
-          width: 100%; height: 100%;
-          &.child-marker-1 {
-            border-radius: 50%;
-            opacity: 0.25;
-            background: red;
-          }
-          &.child-marker-2 {
-            transform: scale(0.65);
-            border-radius: 50%;
-            background: red;
-          }
-        }
-      }
-    }
-  }
   @media only screen and (max-device-width: 1100px) {
     #widget-2-hours .one-plot,
     #widget-24-hours .one-plot { width: 8.333333%; }
@@ -275,9 +233,7 @@ body {
     #cover-widgets #widget-24-hours .one-plot { width: 16.666666%; }
     #left-panel, #right-panel { width: 100%; }
     .tooltip { display: none; }
-    #left-panel {
-      left: 0%;
-    }
+    #left-panel { left: 0; }
     #right-panel {
       right: 0%;
       .link-container {

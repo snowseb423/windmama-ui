@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
+import ScrollArea from 'react-scrollbar';
 
 class LeftPanel extends Component {
   constructor(props) {
@@ -56,11 +57,11 @@ class LeftPanel extends Component {
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
-      <div style={{ height: ( viewportHeight - 102 ) + 'px', overflowY: 'auto' }}>
+      <ScrollArea smoothScrolling="true" speed={0.8} className="area" contentClassName="content" horizontal={false} style={{ height: ( viewportHeight - 102 ) + 'px'}}>
          {maxOrder.map((item, i) =>
            <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
          )}
-      </div>
+      </ScrollArea>
     </div>;
   }
 }

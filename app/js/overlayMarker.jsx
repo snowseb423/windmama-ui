@@ -1,14 +1,14 @@
-
 import { Component, PropTypes } from 'react';
 import r from 'r-dom';
 import { SVGOverlay } from 'react-map-gl';
 import assign from 'object-assign';
+import { Actions } from './store/actions.js';
+import { windColor } from './common.js';
 
 
 class OverlayMarker extends Component {
   constructor(props) {
     super(props);
-    // this._onClick = this._onClick.bind(this);
   }
   render() {
     const { locations } = this.props;
@@ -16,20 +16,23 @@ class OverlayMarker extends Component {
       redraw: function redraw(opt) {
         return r.g(locations.map((e, i) => {
           var pixel = opt.project([e.longitude, e.latitude]);
-          return r.g({key: i}, [
+          var color;
+          if (e.max/1.852 <= 50)
+            color = windColor[Math.round((e.max/1.852))];
+          else
+            color = windColor[49];
+          return r.g({ key: i}, [
             r.circle({
               cx: pixel[0],
               cy: pixel[1],
-              r: 10,
-              fill: 'red',
-              style: { opacity: 0.5 }
+              r: 11,
+              fill: color
             }),
             r.circle({
               cx: pixel[0],
               cy: pixel[1],
-              r: 16,
-              fill: 'red',
-              style: { opacity: 0.3 }
+              r: 10,
+              fill: 'black'
             }),
             r.image({
               xlinkHref: 'img/marker.svg',
@@ -37,9 +40,11 @@ class OverlayMarker extends Component {
               y: pixel[1] - 8,
               style: {
                 pointerEvents: 'all',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                transform: 'rotateZ('+ e.heading +'deg 100 100)'
               },
-              onClick: () => console.log('tralala')
+              onClick: () => Actions.displayDetail(e.id),
+              onMouseOver: () => Actions.hoverId(e.id)
             })
           ]);
         }));

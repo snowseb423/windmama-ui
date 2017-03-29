@@ -7,15 +7,9 @@ class LeftPanelSpot extends Component {
     super(props);
   }
   sumFunc(id) {
-    const { place } = this.props;
-    if (!this.props.displayDetail && !this.props.mobile) {
-      Actions.shiftingMap([place.split('|')[2], place.split('|')[1]]);
-      setTimeout(() => { Actions.displayDetail(id); }, 1000);
-    } else if (!this.props.displayDetail && this.props.mobile) {
-      Actions.leftActivation();
-      setTimeout(() => { Actions.shiftingMap([place.split('|')[2], place.split('|')[1]]); }, 500);
-      setTimeout(() => { Actions.displayDetail(id); }, 1500);
-    } else if (this.props.displayDetail && this.props.mobile) {
+    if (!this.props.mobile && !this.props.displayDetail) {
+      Actions.displayDetail(id);
+    } else if (this.props.mobile) {
       Actions.leftActivation();
       Actions.displayDetail(id);
     } else {

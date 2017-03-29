@@ -40,11 +40,6 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.CHANGE_VIEWPORT);
       break;
 
-    case typeOfActions.SHIFTING_MAP:
-      store.mapPosition = action.coord;
-      store.emit(typeOfActions.SHIFTING_MAP);
-      break;
-
     case typeOfActions.UPDATE_DETAIL:
       var updateSplit = action.update.split('|');
       store.idUpdate = action.idUpdate;

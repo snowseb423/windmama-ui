@@ -25,14 +25,18 @@ class OverlayMarker extends Component {
             r.circle({
               cx: pixel[0],
               cy: pixel[1],
-              r: 11,
-              fill: color
+              r: 20,
+              fill: color,
+              style: { opacity: 0.1 }
             }),
             r.circle({
               cx: pixel[0],
               cy: pixel[1],
               r: 10,
-              fill: 'black'
+              fill: '#000',
+              stroke: color,
+              strokeWidth: 2,
+              style: { opacity: 0.5 }
             }),
             r.image({
               xlinkHref: 'img/marker.svg',
@@ -40,8 +44,7 @@ class OverlayMarker extends Component {
               y: pixel[1] - 8,
               style: {
                 pointerEvents: 'all',
-                cursor: 'pointer',
-                transform: 'rotateZ('+ e.heading +'deg 100 100)'
+                cursor: 'pointer'
               },
               onClick: () => Actions.displayDetail(e.id),
               onMouseOver: () => Actions.hoverId(e.id)

@@ -16,19 +16,20 @@ function Tooltip(props) {
   if (detail) {
     content = detail.map((detail, i) => {
       detail = detail.split('|');
+      let height = 140;
       return <div className="plot" key={i}>
-        <div className="mesure">
-          <div style={{ background: color(detail[4]), height: detail[4] + 'px' }}/>
-          <div style={{ background: color(detail[3]), height: detail[3] + 'px' }}/>
-          <div style={{ background: color(detail[2]), height: detail[2] + 'px' }}/>
-        </div>
-        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '0', color: '#fff', fontSize: '10px' }}>
+        <svg style={{ width: '100%', height: height + 'px', shapeRendering: 'geometricPrecision'}}>
+          <circle cx={'50%'} cy={height - detail[4]} r="5" fill={'#ff226a'} />
+          <circle cx={'50%'} cy={height - detail[3]} r="3.5" fill={'#ffac10'} />
+          <circle cx={'50%'} cy={height - detail[2]} r="3" fill={'#5bfa00'} />
+        </svg>;
+        <div style={{ background: '#1f1f1f', padding: '0', color: '#fff', fontSize: '10px' }}>
           {detail[1]}<br/>{detail[5] + '°'}
         </div>
       </div>;
     });
   }
-  return <div id="tooltip2" style={{left: leftActive ? '275px' : '15px'}}>
+  return <div id="tooltip" style={{left: leftActive ? '275px' : '15px'}}>
     {content}
   </div>;
 }

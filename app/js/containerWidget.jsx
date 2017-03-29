@@ -7,8 +7,8 @@ function ContainerWidget(props) {
   const { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight } = props;
   var content = <div>
     <InfoWidget place={onePlace} />
-    <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} />
     <Last2HoursWidget detail={detail[displayDetail]} />
+    <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} />
   </div>;
 
   var widthContainer;

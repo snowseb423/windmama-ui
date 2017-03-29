@@ -1,12 +1,4 @@
 import React, { PropTypes } from 'react';
-import { windColor } from './common.js';
-
-function color(value) {
-  if (value / 1.852 <= 50)
-    return windColor[Math.round(( value /1.852))];
-  else
-    return windColor[49];
-}
 
 function Tooltip(props) {
   var { leftActive, detail, hoverId } = props;
@@ -34,7 +26,7 @@ function Tooltip(props) {
         </svg>
         <div style={{ background: 'rgba(255,255,255,0.25)', padding: '0', color: '#fff', textShadow: '0px 0px 2px black' , fontSize: '14px' }}>
           {now[1]}<br/>
-          <img src="img/windheading.png" width={16} height={16} style={{transform: 'rotateZ('+ now[5] +'deg)'}} />
+          <img src="img/windheading.png" width={20} height={20} style={{transform: 'rotateZ('+ now[5] +'deg)'}} />
         </div>
       </div>;
     });

@@ -27,7 +27,7 @@ function Last2HoursWidget(props) {
   });
   array = min.map((element, i) => {
     return <div className="one-plot" key={i}>
-      <div style={{background: 'rgba(0,0,0,0.55)', padding: '7px 0', color: '#fff', fontSize: '13px'}}>
+      <div style={{background: 'rgba(255,255,255,0.25)', padding: '7px 0', color: '#fff',textShadow: '0 0 2px black', fontSize: '13px'}}>
         { hour[i] }
       </div>
       <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
@@ -41,7 +41,7 @@ function Last2HoursWidget(props) {
   return <div className="container-single-widget">
     <div className="widget" id="widget-2-hours">
       <div className="info-widget">
-        48 derniers relevés de vent en nœuds
+        48 derniers relevés de vent en nœuds (ordre décroissant)
       </div>
       {array}
     </div>

@@ -108,7 +108,7 @@ body {
     width: 900px;
     height: 16px;
     position: absolute;
-    bottom: 190px;
+    bottom: 196px;
     transition-duration: @speed2;
     .plot {
       text-align: center;
@@ -134,7 +134,7 @@ body {
         padding: 10px 0 10px 10px;
         background: rgba(255, 255, 255, 0.25);
         margin-top: 15px;
-        color: black;
+        color: #fff;
       }
       .container-single-widget {
         width: 100%;
@@ -143,30 +143,12 @@ body {
     }
     .widget .one-plot {
       margin-top: 15px;
-      float: left;
       background: rgba(0, 0, 0, 0.35);
       text-align: center;
       color: black;
     }
-    #widget-2-hours {
-      .mesure {
-        transform: rotateZ(180deg);
-        div { float: left; }
-        div:nth-of-type(3) {
-          width: 40%;
-          opacity: 0.7;
-        }
-        div:nth-of-type(2) {
-          width: 30%;
-          opacity: 0.4;
-        }
-        div:nth-of-type(1) {
-          width: 20%;
-          opacity: 0.2;
-        }
-        div:first-child { margin-left: 5%; }
-      }
-    }
+    #widget-2-hours .one-plot { float: left; }
+    #widget-24-hours .one-plot { float: right; }
     #widget-2-hours .one-plot,
     #widget-24-hours .one-plot { width: 4.166666667%; }
   }

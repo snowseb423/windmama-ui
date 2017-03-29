@@ -27,8 +27,8 @@ class ContainerMap extends Component {
         isDragging: true
       },
       mapboxDepend: {
-        mapStyle: 'mapbox://styles/arguelbenoit/cj0trv1lk00jt2rnyoo93gnld',
-        mapboxApiAccessToken: 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg',
+        mapStyle: 'mapbox://styles/arguelbenoit/cj0urisrp00m02rqpr2zw3tqp',
+        mapboxApiAccessToken: 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg'
       },
       locations: [],
       displayDetail: false

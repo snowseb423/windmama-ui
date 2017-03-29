@@ -20,7 +20,7 @@ function Last24HourslWidget(props) {
         tempAvg = [];
         min.lenght !== 0 ? min.push(_.mean(tempMin)) : min.push(tempMin);
         tempMin = [];
-        console.log(max + ' ' + avg + ' ' + min);
+        // console.log(max + ' ' + avg + ' ' + min);
       } else if (splitedHour === tempHour) {
         tempHeading.push(Number(eS[5]));
         tempMax.push(Number(eS[4]));

@@ -27,7 +27,7 @@ class OverlayMarker extends Component {
               cy: pixel[1],
               r: 20,
               fill: color,
-              style: { opacity: 0.1 }
+              style: { opacity: 0.25 }
             }),
             r.circle({
               cx: pixel[0],
@@ -35,8 +35,8 @@ class OverlayMarker extends Component {
               r: 10,
               fill: '#000',
               stroke: color,
-              strokeWidth: 2,
-              style: { opacity: 0.5 }
+              strokeWidth: 3,
+              style: { opacity: 0.9 }
             }),
             r.image({
               xlinkHref: 'img/marker.svg',

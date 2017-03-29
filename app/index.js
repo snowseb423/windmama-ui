@@ -9,7 +9,7 @@ import ContainerMap from './js/containerMap.jsx';
 
 var debouceResize = debounce(function() {
   Actions.changeViewport([window.innerWidth, window.innerHeight]);
-}, 250);
+}, 200);
 window.addEventListener('resize', debouceResize);
 
 

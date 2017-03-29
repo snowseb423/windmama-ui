@@ -1,5 +1,5 @@
-@grey1: #1f1f1f;
-@grey2: #1d1d1d;
+@grey1: #313131;
+@grey2: #313131;
 @speed0: 180ms;
 @speed1: 300ms;
 @speed2: 500ms;
@@ -105,26 +105,15 @@ body {
     height: 100%;
   }
   #tooltip {
-    width: 600px;
+    width: 900px;
     height: 16px;
     position: absolute;
-    bottom: 26px;
-    transition-duration: 500ms;
+    bottom: 190px;
+    transition-duration: @speed2;
     .plot {
       text-align: center;
-      width: 8.333%;
+      width: 5.5555555%;
       float: left;
-      .mesure {
-        opacity: 0.8;
-        div {
-          position: absolute;
-          bottom: 18px;
-          width: 2.5%;
-        }
-        div:nth-of-type(1) { margin-left: 0%; }
-        div:nth-of-type(2) { margin-left: 2.5%; }
-        div:nth-of-type(3) { margin-left: 5% ; }
-      }
     };
   }
   #cover-widgets {
@@ -194,6 +183,7 @@ body {
   }
   #left-panel {
     left: 0px;
+    border-right: 1px solid black;
     &.active { left: -260px; }
     .child-panel {
       transition-duration: 0;
@@ -208,6 +198,7 @@ body {
     }
   }
   #right-panel {
+    border-left: 1px solid black;
     right: 0px;
     &.active { right: -260px; }
     .link-container {

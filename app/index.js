@@ -7,11 +7,8 @@ import ContainerUi from './js/containerUi.jsx';
 import ContainerMap from './js/containerMap.jsx';
 
 
-var debouceResize = debounce(function() {
-  Actions.changeViewport([window.innerWidth, window.innerHeight]);
-}, 200);
-window.addEventListener('resize', debouceResize);
-
+var resize = debounce( () => Actions.changeViewport([window.innerWidth, window.innerHeight]) , 200 );
+window.addEventListener('resize', resize);
 
 render(
   <div style={{height:'100%'}} >

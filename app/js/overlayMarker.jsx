@@ -11,7 +11,7 @@ class OverlayMarker extends Component {
     super(props);
   }
   render() {
-    const { locations } = this.props;
+    const { locations, mobile } = this.props;
     return r(SVGOverlay, assign({}, this.props, {
       redraw: function redraw(opt) {
         return r.g(locations.map((e, i) => {
@@ -21,33 +21,40 @@ class OverlayMarker extends Component {
             color = windColor[Math.round((e.max/1.852))];
           else
             color = windColor[49];
-          return r.g({ key: i}, [
+          return r.g({
+            key: i,
+            onClick: () => Actions.displayDetail(e.id),
+            onMouseOver: () => Actions.hoverId(e.id),
+            style: {
+              pointerEvents: 'all',
+              cursor: 'pointer',
+              transform: mobile ?
+                         'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(0.95)' :
+                         'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(0.90)'
+            }
+          }, [
             r.circle({
-              cx: pixel[0],
-              cy: pixel[1],
+              cx: 0,
+              cy: 0,
               r: 20,
               fill: color,
-              style: { opacity: 0.25 }
+              style: { opacity: 0.15 }
             }),
             r.circle({
-              cx: pixel[0],
-              cy: pixel[1],
-              r: 10,
+              cx: 0,
+              cy: 0,
+              r: 11,
               fill: '#000',
               stroke: color,
-              strokeWidth: 3,
-              style: { opacity: 0.9 }
+              strokeWidth: 2,
+              style: { opacity: 0.8 }
             }),
-            r.image({
-              xlinkHref: 'img/marker.svg',
-              x: pixel[0] - 8,
-              y: pixel[1] - 8,
+            r.polyline({
+              points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
+              fill: color,
               style: {
-                pointerEvents: 'all',
-                cursor: 'pointer'
-              },
-              onClick: () => Actions.displayDetail(e.id),
-              onMouseOver: () => Actions.hoverId(e.id)
+                transform: 'rotateZ(' + e.heading + 'deg) '
+              }
             })
           ]);
         }));
@@ -59,6 +66,7 @@ class OverlayMarker extends Component {
 export default OverlayMarker;
 
 OverlayMarker.propTypes = {
+  mobile: PropTypes.boolean,
   locations: PropTypes.array.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,

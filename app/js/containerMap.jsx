@@ -4,21 +4,21 @@ import React, { Component, PropTypes } from 'react';
 import OverlayMarker from './overlayMarker.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
-// import Immutable from 'immutable';
+import debounce from 'debounce';
 
 class ContainerMap extends Component {
   constructor(props) {
     super(props);
     this._onChangeViewport = this._onChangeViewport.bind(this);
-    this.resize = this.resize.bind(this);
-    this.loadSensor = this.loadSensor.bind(this);
-    this.displayDetail = this.displayDetail.bind(this);
-    const { mapPosition,mapZoom, viewportWidth, viewportHeight } = this.props.data;
+    this._loadSensor = this._loadSensor.bind(this);
+    this._displayDetail = this._displayDetail.bind(this);
+    this._resize = this._resize.bind(this);
+    const { viewportWidth, viewportHeight } = this.props.data;
     this.state = {
       viewport: {
-        latitude: mapPosition[1],
-        longitude: mapPosition[0],
-        zoom: mapZoom[0],
+        latitude: 46.7,
+        longitude: 3.5,
+        zoom: 5.5,
         width: viewportWidth,
         height: viewportHeight
       },
@@ -35,24 +35,25 @@ class ContainerMap extends Component {
     };
   }
   componentDidMount() {
-    // store.on(typeOfActions.CHANGE_VIEWPORT, this.resize);
-    store.on(typeOfActions.SEND_DATA, this.loadSensor);
-    store.on(typeOfActions.UPDATE_DETAIL, this.loadSensor);
-    store.on(typeOfActions.DISPLAY_DETAIL, this.displayDetail);
+    store.on(typeOfActions.SEND_DATA, this._loadSensor);
+    store.on(typeOfActions.UPDATE_DETAIL, this._loadSensor);
+    store.on(typeOfActions.DISPLAY_DETAIL, this._displayDetail);
+    store.on(typeOfActions.CHANGE_VIEWPORT, this._resize);
   }
-  displayDetail() {
-    this.setState({displayDetail: this.props.data.displayDetail});
-  }
-  resize() {
+  _resize() {
     const { viewportWidth, viewportHeight } = this.props.data;
     const viewport = assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight});
     this.setState({viewport});
+    this.forceUpdate();
+  }
+  _displayDetail() {
+    this.setState({displayDetail: this.props.data.displayDetail});
   }
   _onChangeViewport(newViewport) {
     const viewport = assign({}, this.state.viewport, newViewport);
     this.setState({viewport});
   }
-  loadSensor() {
+  _loadSensor() {
     const { allId, detail, place } = this.props.data;
     var allSpots = [];
     allId.forEach((e) => {
@@ -73,8 +74,9 @@ class ContainerMap extends Component {
   }
   render() {
     const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
-    return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(10px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
-      <OverlayMarker {...viewport} {...options} locations={locations} />
+    const { mobile } = this.props.data;
+    return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(10px)' : 'blur(0px)'}} onResize={this._resize} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
+      <OverlayMarker mobile={mobile}{...viewport} {...options} locations={locations} />
     </MapGL>;
   }
 }

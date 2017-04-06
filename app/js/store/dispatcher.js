@@ -41,13 +41,12 @@ AppDispatcher.register((action) => {
       break;
 
     case typeOfActions.UPDATE_DETAIL:
-      var updateSplit = action.update.split('|');
-      store.idUpdate = action.idUpdate;
-      if (store.detail[updateSplit[0]])
-        store.detail[updateSplit[0]].unshift(action.update);
-      else
-        store.detail[updateSplit[0]] = [action.update];
-      store.emit(typeOfActions.UPDATE_DETAIL);
+      var id = action.update[0];
+      if (store.detail[id] && store.place[id]) {
+        store.detail[id].unshift(action.update);
+        store.idUpdate = id;
+        store.emit(typeOfActions.UPDATE_DETAIL);
+      }
       break;
 
     default:

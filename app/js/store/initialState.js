@@ -10,8 +10,6 @@ var initialState = {
     displayDetail: false,
     hoverId: false,
     idUpdate: false,
-    mapPosition: [3.5, 46.7],
-    mapZoom: [5.2],
     viewportWidth: window.innerWidth,
     viewportHeight: window.innerHeight
 };
@@ -32,24 +30,30 @@ var initialState = {
 function registerData(chanel, callback) {
   socket.on(chanel, (data) => { callback(data); });
 }
+
 registerData('sendAllData', (data) => {
   if (data !== 'end') {
-    let dataSplit = data[0].split('|');
-    var id = dataSplit[0];
-    initialState.detail[Number(id)] = data;
+    let id = Number(data[0].split('|')[0]);
+    initialState.detail[id] = new Array;
+    data.forEach((e) => {
+      let a = e.split('|');
+      initialState.detail[id].push(a);
+    });
   } else if (data === 'end') {
     socket.close();
   }
 });
+
 registerData('sendAllLocation', (data) => {
-  initialState.place = data;
   initialState.allId = Object.keys(data);
-  setTimeout( () => { Actions.sendData(); }, 3000 );
+  initialState.allId.forEach((e)=>{
+    initialState.place[e] = data[e].split('|');
+  });
+  setTimeout( () => Actions.sendData(), 3000 );
 });
-var update;
+
 registerData('sendPubsubData', (data) => {
-  update = data;
-  Actions.updateDetail(update);
+  Actions.updateDetail(data.split('|'));
 });
 
 export default initialState;

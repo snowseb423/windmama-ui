@@ -57,18 +57,15 @@ class ContainerMap extends Component {
     const { allId, detail, place } = this.props.data;
     var allSpots = [];
     allId.forEach((e) => {
-      const placeS = place[e].split('|');
-      const detailS = detail[e][0].split('|');
-      if (placeS[1] !== 'null')
-        allSpots.push(
-          {
-            'longitude': placeS[2],
-            'latitude': placeS[1],
-            'heading': detailS[5],
-            'max': detailS[4],
-            'id': detailS[0]
-          }
-        );
+      if (place[e][1] !== 'null') {
+        allSpots.push({
+          'longitude': place[e][2],
+          'latitude': place[e][1],
+          'heading': detail[e][0][5],
+          'max': detail[e][0][4],
+          'id': detail[e][0][0]
+        });
+      }
     });
     this.setState({locations: allSpots});
   }

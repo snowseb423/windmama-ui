@@ -20,7 +20,7 @@ export var Actions = {
     AppDispatcher.dispatch({
       actionType: typeOfActions.UPDATE_DETAIL,
       update: update,
-      idUpdate: update.split('|')[0]
+      idUpdate: update[0]
     });
   },
   leftActivation: () => {

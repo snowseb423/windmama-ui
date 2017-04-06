@@ -11,7 +11,7 @@ class OverlayMarker extends Component {
     super(props);
   }
   render() {
-    const { locations, mobile } = this.props;
+    const { locations } = this.props;
     return r(SVGOverlay, assign({}, this.props, {
       redraw: function redraw(opt) {
         return r.g(locations.map((e, i) => {
@@ -28,26 +28,24 @@ class OverlayMarker extends Component {
             style: {
               pointerEvents: 'all',
               cursor: 'pointer',
-              transform: mobile ?
-                         'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(0.95)' :
-                         'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(0.90)'
+              transform: 'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(0.9)'
             }
           }, [
             r.circle({
               cx: 0,
               cy: 0,
-              r: 20,
+              r: 22,
               fill: color,
               style: { opacity: 0.15 }
             }),
             r.circle({
               cx: 0,
               cy: 0,
-              r: 11,
+              r: 12,
               fill: '#000',
               stroke: color,
-              strokeWidth: 2,
-              style: { opacity: 0.8 }
+              strokeWidth: 3,
+              style: { opacity: 0.75 }
             }),
             r.polyline({
               points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
@@ -66,7 +64,6 @@ class OverlayMarker extends Component {
 export default OverlayMarker;
 
 OverlayMarker.propTypes = {
-  mobile: PropTypes.boolean,
   locations: PropTypes.array.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,

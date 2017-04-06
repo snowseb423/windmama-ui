@@ -4,7 +4,6 @@ import React, { Component, PropTypes } from 'react';
 import OverlayMarker from './overlayMarker.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
-import debounce from 'debounce';
 
 class ContainerMap extends Component {
   constructor(props) {
@@ -23,8 +22,8 @@ class ContainerMap extends Component {
         height: viewportHeight
       },
       options: {
-        startDragLngLat: true,
-        isDragging: true
+        startDragLngLat: false,
+        isDragging: false
       },
       mapboxDepend: {
         mapStyle: 'mapbox://styles/arguelbenoit/cj0urisrp00m02rqpr2zw3tqp',
@@ -41,10 +40,11 @@ class ContainerMap extends Component {
     store.on(typeOfActions.CHANGE_VIEWPORT, this._resize);
   }
   _resize() {
-    const { viewportWidth, viewportHeight } = this.props.data;
-    const viewport = assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight});
-    this.setState({viewport});
-    this.forceUpdate();
+    // const { viewportWidth, viewportHeight } = this.props.data;
+    // this.setState({
+    //   viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
+    // });
+    // this.forceUpdate(() => console.log(this.state.viewport.width));
   }
   _displayDetail() {
     this.setState({displayDetail: this.props.data.displayDetail});
@@ -74,9 +74,8 @@ class ContainerMap extends Component {
   }
   render() {
     const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
-    const { mobile } = this.props.data;
-    return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(10px)' : 'blur(0px)'}} onResize={this._resize} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
-      <OverlayMarker mobile={mobile}{...viewport} {...options} locations={locations} />
+    return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(5px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
+      <OverlayMarker {...viewport} {...options} locations={locations} />
     </MapGL>;
   }
 }

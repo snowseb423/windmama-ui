@@ -15,8 +15,7 @@ function Last24HourslWidget(props) {
     var hour = [], heading = [], max = [], avg = [], min = [];
     var tempHour, tempHeading = [], tempMax = [], tempAvg = [], tempMin = [];
     detail.forEach((e) => {
-      let eS = e.split('|');
-      let splitedHour = eS[1].split(':')[0];
+      let splitedHour = e[1].split(':')[0];
       if (splitedHour !== tempHour) {
         tempHour = splitedHour;
         hour.push(splitedHour);
@@ -28,10 +27,10 @@ function Last24HourslWidget(props) {
         tempMin.length !== 0 ? min.push(_.mean(tempMin)) : '';
         tempMin = [];
       } else if (splitedHour === tempHour) {
-        tempHeading.push(Number(eS[5]));
-        tempMax.push(Number(eS[4]));
-        tempAvg.push(Number(eS[3]));
-        tempMin.push(Number(eS[2]));
+        tempHeading.push(Number(e[5]));
+        tempMax.push(Number(e[4]));
+        tempAvg.push(Number(e[3]));
+        tempMin.push(Number(e[2]));
       }
     });
     var Max = 0;

@@ -18,16 +18,15 @@ class LeftPanelSpot extends Component {
   }
   render() {
     const { place, detail, max, search } = this.props;
-    var detailSplited = detail[0].split('|'),
-        id = detailSplited[0],
-        heading = detailSplited[5];
-    var placeSplited = place.split('|');
-    var city = placeSplited[3];
+    const id = detail[0];
+    const heading = detail[5];
+    const cityDetail = place[4];
+    var city = place[3];
+    var color;
     if (city.search('"') > -1)
       city = city.split('"')[1];
     if (city.length >= 19)
       city = city.substring(0, 19) + '..';
-    var color;
     if (max/1.852 <= 50)
       color = windColor[Math.round((max/1.852))];
     else
@@ -47,7 +46,6 @@ class LeftPanelSpot extends Component {
       width: '100%',
       display: 'inherit'
     };
-    var cityDetail = placeSplited[4];
     if (search === false)
       styleContainer.display = 'inherit';
     else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
@@ -71,7 +69,7 @@ LeftPanelSpot.propTypes = {
   id: PropTypes.string,
   max: PropTypes.number,
   detail: PropTypes.array,
-  place: PropTypes.string,
+  place: PropTypes.array,
   search: PropTypes.any,
   displayDetail: PropTypes.any
 };

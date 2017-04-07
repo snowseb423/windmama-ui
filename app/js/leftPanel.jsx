@@ -29,13 +29,13 @@ class LeftPanel extends Component {
   render() {
     const { detail, place, allId, leftActive , mobile, viewportHeight} = this.props;
     var maxOrder = [];
-      allId.forEach((element) => {
-        if (typeof detail[element] !== 'undefined') {
-          var max = parseInt(detail[element][0].split('|')[4], 10);
-          var id = (detail[element])[0].split('|')[0];
-          maxOrder.push({id: id, max: max});
-        }
-      });
+    allId.forEach((e) => {
+      if (typeof detail[e] !== 'undefined')
+        maxOrder.push({
+          id: detail[e][0][0],
+          max: parseInt(detail[e][0][4], 10)
+        });
+    });
     maxOrder.sort((a, b) => {
       if (a.max < b.max)
         return 1;
@@ -43,6 +43,7 @@ class LeftPanel extends Component {
         return -1;
       return 0;
     });
+    console.log(maxOrder);
     var iStyle = {
       position: 'absolute',
       marginLeft: '-26px',
@@ -58,9 +59,9 @@ class LeftPanel extends Component {
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <ScrollArea smoothScrolling={true} speed={0.8} className="area" contentClassName="content" horizontal={false} style={{ height: ( viewportHeight - 102 ) + 'px'}}>
-         {maxOrder.map((item, i) =>
-           <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
-         )}
+       {maxOrder.map((item, i) =>
+         <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
+       )}
       </ScrollArea>
     </div>;
   }

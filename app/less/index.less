@@ -56,22 +56,26 @@ body {
     opacity: 0.15;
     stroke-width: 8;
     animation-name: anim;
-    animation-duration: 500ms;
+    animation-duration: 1s;
     @keyframes anim {
       0% {
         opacity: 0.15;
         stroke-width: 8;
         transform: scale(1);
-      }
-      75% {
-        opacity: 0.6;
-        stroke-width: 2;
-        transform: scale(2.5);
-      }
-      100% {
-        opacity: 0.15;
+      } 75% {
+        opacity: 1;
+        stroke-width: 0.5;
+        transform: scale(3.5);
+      } 90% {
+        opacity: 0;
+        stroke-width: 0.5;
+        transform: scale(3.5);
+      } 95% {
+        opacity: 0;
         stroke-width: 8;
         transform: scale(1);
+      } 100% {
+        opacity: 0.15;
       }
     }
   }
@@ -131,7 +135,7 @@ body {
     width: 900px;
     height: 16px;
     position: absolute;
-    bottom: 196px;
+    bottom: 226px;
     transition-duration: @speed2;
     .plot {
       text-align: center;

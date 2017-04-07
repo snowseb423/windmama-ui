@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 function Tooltip(props) {
-  var { leftActive, detail, hoverId } = props;
+  var { leftActive, detail, hoverId, place } = props;
   var content;
   detail = detail[hoverId];
   detail = detail.slice(0, 18);
@@ -31,15 +31,33 @@ function Tooltip(props) {
       </div>;
     });
   }
+  const styleLocation = {
+    width: 900,
+    display: 'inline-block',
+    textAlign: 'center',
+    marginTop: 1,
+    padding: '2px 0',
+    background: 'rgba(255,255,255,0.25',
+    textShadow: '0px 0px 4px black',
+    color: '#fff',
+    fontSize: '17px',
+    fontWeight: 'bold'
+  };
+  var cityLocation = place[hoverId][4];
+  if (place[hoverId][4].indexOf('Unnamed Road') >= 0)
+    cityLocation = place[hoverId][4].substring(13);
+
   return <div id="tooltip" style={{left: leftActive ? '275px' : '15px'}}>
     {content}
+    <div style={styleLocation}>{cityLocation}</div>
   </div>;
 }
 
 Tooltip.propTypes = {
   leftActive: PropTypes.bool,
   detail: PropTypes.any,
-  hoverId: PropTypes.any
+  hoverId: PropTypes.any,
+  place: PropTypes.object
 };
 
 export default Tooltip;

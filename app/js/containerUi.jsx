@@ -3,7 +3,7 @@ import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
 import ContainerWidget from './containerWidget.jsx';
 import Header from './header.jsx';
-// import Tooltip from './tooltip.jsx';
+import Tooltip from './tooltip.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
 
@@ -67,6 +67,7 @@ class ContainerUi extends Component {
       <Header leftActive={leftActive} rightActive={rightActive}/>
       <LeftPanel {...propsLeftPanel} />
       <ContainerWidget {...propsWidget} />
+      {hoverId && !mobile && !displayDetail ? <Tooltip {...propsTooltip} /> : ''}
       <RightPanel active={rightActive} />
     </div>;
   }
@@ -77,5 +78,3 @@ ContainerUi.propTypes = {
 };
 
 export default ContainerUi;
-
-// {hoverId && !mobile && !displayDetail ? <Tooltip {...propsTooltip} /> : ''}

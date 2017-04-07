@@ -7,9 +7,9 @@ function Tooltip(props) {
   detail = detail.slice(0, 18);
   if (detail) {
     content = detail.map((e, i) => {
-      let now = e.split('|');
-      let next = i >= 1 ? detail[i-1].split('|') : now;
-      let prev = i == 17 ? now : detail[i+1].split('|');
+      let now = e;
+      let next = i >= 1 ? detail[i-1]: now;
+      let prev = i == 17 ? now : detail[i+1];
       let height = 150;
       return <div className="plot" key={i}>
         <svg style={{ width: '100%', height: height, shapeRendering: 'geometricPrecision'}}>

@@ -71,8 +71,9 @@ class ContainerMap extends Component {
   }
   render() {
     const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
+    const { idUpdate } = this.props.data;
     return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(5px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
-      <OverlayMarker {...viewport} {...options} locations={locations} />
+      <OverlayMarker {...viewport} {...options} locations={locations} idUpdate={idUpdate}/>
     </MapGL>;
   }
 }

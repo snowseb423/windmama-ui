@@ -52,6 +52,29 @@ body {
     border: 0;
     cursor: pointer;
   }
+  .animation-circle {
+    opacity: 0.15;
+    stroke-width: 8;
+    animation-name: anim;
+    animation-duration: 500ms;
+    @keyframes anim {
+      0% {
+        opacity: 0.15;
+        stroke-width: 8;
+        transform: scale(1);
+      }
+      75% {
+        opacity: 0.6;
+        stroke-width: 2;
+        transform: scale(2.5);
+      }
+      100% {
+        opacity: 0.15;
+        stroke-width: 8;
+        transform: scale(1);
+      }
+    }
+  }
   #header {
     border-bottom: 1px solid black;
     pointer-events: all;

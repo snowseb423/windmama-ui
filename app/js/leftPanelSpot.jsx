@@ -18,8 +18,8 @@ class LeftPanelSpot extends Component {
   }
   render() {
     const { place, detail, max, search } = this.props;
-    const id = detail[0];
-    const heading = detail[5];
+    const id = detail[0][0];
+    const heading = detail[0][5];
     const cityDetail = place[4];
     var city = place[3];
     var color;

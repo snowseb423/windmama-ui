@@ -18,12 +18,11 @@ function Last2HoursWidget(props) {
       hour = [],
       heading = [];
   detail.forEach((e) => {
-    var eS = e.split('|');
-    hour.push(eS[1]);
-    min.push(eS[2]);
-    avg.push(eS[3]);
-    max.push(eS[4]);
-    heading.push(eS[5]);
+    hour.push(e[1]);
+    min.push(e[2]);
+    avg.push(e[3]);
+    max.push(e[4]);
+    heading.push(e[5]);
   });
   array = min.map((element, i) => {
     return <div className="one-plot" key={i}>

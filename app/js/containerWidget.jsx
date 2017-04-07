@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
 import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
-import Last24HoursWidget from './last24HoursWidget.jsx';
+// import Last24HoursWidget from './last24HoursWidget.jsx';
 
 function ContainerWidget(props) {
   const { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight } = props;
   var content = <div>
     <InfoWidget place={onePlace} />
     <Last2HoursWidget detail={detail[displayDetail]} />
-    <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} />
   </div>;
 
   var widthContainer;
@@ -49,3 +48,7 @@ ContainerWidget.propTypes = {
 };
 
 export default ContainerWidget;
+
+
+
+{/* <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} /> */}

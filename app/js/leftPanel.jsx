@@ -43,7 +43,6 @@ class LeftPanel extends Component {
         return -1;
       return 0;
     });
-    console.log(maxOrder);
     var iStyle = {
       position: 'absolute',
       marginLeft: '-26px',

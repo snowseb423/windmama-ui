@@ -11,12 +11,12 @@ function InfoWidget(props) {
   };
   if(place) {
     var info = <div style={styleCityName}>
-      {place.split('|')[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place.split('|')[0]} target="_blan">Pioupiou_n°{place.split('|')[0]}</a>
+      {place[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a>
     </div>;
-    if (place.split('|')[4].indexOf('Unnamed Road') >= 0) {
-    info = <div style={styleCityName}>
-      {place.split('|')[4].substring(13) + ', '}<a href={'http://pioupiou.fr/fr/' + place.split('|')[0]} target="_blan">Pioupiou_n°{place.split('|')[0]}</a>
-    </div>;
+    if (place[4].indexOf('Unnamed Road') >= 0) {
+      info = <div style={styleCityName}>
+        {place[4].substring(13) + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a>
+      </div>;
     }
   }
   return <div className="widget" style={{ padding: '10px 0', background: 'rgba(255, 255, 255, 0.25)', color: '#fff'}}>

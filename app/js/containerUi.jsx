@@ -53,7 +53,6 @@ class ContainerUi extends Component {
       this.setState({ onePlace : place[displayDetail] });
     else
       this.setState({ onePlace: false });
-    // console.log(this.state.onePlace)
   }
   newViewportSize() {
     this.forceUpdate();

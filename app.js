@@ -9,9 +9,9 @@ var express = require('express'),
 
 app.use(express.static('./public'));
 
-io.on('connection', function(socket) {
-  client.keys('*', function(err, keys) {
-    keys.forEach( function(element, i){
+io.on('connection', socket => {
+  client.keys('*', (err, keys) => {
+    keys.forEach( (element, i) => {
       client.lrange(element, 0, -1, (err, singleData) => {
         if (!err) { socket.emit('sendAllData', singleData); }
       });
@@ -23,7 +23,7 @@ io.on('connection', function(socket) {
     socket.emit('sendAllLocation', allLocation);
   });
   subscriber.subscribe('pubsub');
-  subscriber.on('message', function(channel, message){
+  subscriber.on('message', (channel, message) => {
     socket.emit('sendPubsubData', message.toString());
   });
 });

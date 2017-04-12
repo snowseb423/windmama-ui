@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { knots } from './common.js';
 
 function Tooltip(props) {
   var { leftActive, detail, hoverId, place } = props;
@@ -16,7 +17,7 @@ function Tooltip(props) {
           <circle cx={'50%'} cy={height - (now[4]/1)} r="5" fill={'#ff226a'} />
           <line x1={'-50%'} y1={height - (next[4]/1)} x2={'50%'} y2={height - (now[4]/1)} stroke={'#ff226a'} strokeLinecap={'round'} strokeWidth={'2'} />
           <line x1={'50%'} y1={height - (now[4]/1)} x2={'150%'} y2={height - (prev[4]/1)} stroke={'#ff226a'} strokeLinecap={'round'} strokeWidth={'2'} />
-          <text x={'50%'} y={height - (now[4]/1)} style={{fill: '#ff226a', fontSize: '12px', transform: 'translate(-3px, -10px)'}}>{Math.round(now[4]/1.852)}</text>
+          <text x={'50%'} y={height - (now[4]/1)} style={{fill: '#ff226a', fontSize: '12px', transform: 'translate(-3px, -10px)'}}>{knots(now[4])}</text>
           <circle cx={'50%'} cy={height - (now[3]/1)} r="3.5" fill={'#ffac10'} />
           <line x1={'-50%'} y1={height - (next[3]/1)} x2={'50%'} y2={height - (now[3]/1)} stroke={'#ffac10'} strokeLinecap={'round'} strokeWidth={'2'} />
           <line x1={'50%'} y1={height - (now[3]/1)} x2={'150%'} y2={height - (prev[3]/1)} stroke={'#ffac10'} strokeLinecap={'round'} strokeWidth={'2'} />

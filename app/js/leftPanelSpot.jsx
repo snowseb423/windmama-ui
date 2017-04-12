@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { windColor } from './common.js';
+import { getColor, knots } from './common.js';
 import { Actions } from './store/actions.js';
 
 class LeftPanelSpot extends Component {
@@ -22,17 +22,12 @@ class LeftPanelSpot extends Component {
     const heading = detail[0][5];
     const cityDetail = place[4];
     var city = place[3];
-    var color;
     if (city.search('"') > -1)
       city = city.split('"')[1];
-    if (city.length >= 19)
-      city = city.substring(0, 19) + '..';
-    if (max/1.852 <= 50)
-      color = windColor[Math.round((max/1.852))];
-    else
-      color = windColor[49];
+    if (city.length >= 20)
+      city = city.substring(0, 20) + '...';
     const styleSpanAverage = {
-      color: color,
+      color: getColor(max),
       float: 'right',
       marginRight: '8px'
     };
@@ -58,7 +53,7 @@ class LeftPanelSpot extends Component {
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
         <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" />
-        <span style={styleSpanAverage}>{Math.round(max / 1.852) + ' nds'}</span>
+        <span style={styleSpanAverage}>{knots(max) + ' nds'}</span>
       </div>
     </div>;
   }

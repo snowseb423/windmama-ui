@@ -52,12 +52,20 @@ body {
     border: 0;
     cursor: pointer;
   }
+  .animationWall {
+    animation-name: animationWall;
+    animation-duration: 200ms;
+    @keyframes animationWall {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  }
   .animation-circle {
     opacity: 0.15;
     stroke-width: 8;
-    animation-name: anim;
-    animation-duration: 1s;
-    @keyframes anim {
+    animation-name: animation-circle;
+    animation-duration: 700ms;
+    @keyframes animation-circle {
       0% {
         opacity: 0.15;
         stroke-width: 8;

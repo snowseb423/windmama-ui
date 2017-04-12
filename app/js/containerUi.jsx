@@ -4,6 +4,7 @@ import RightPanel from './rightPanel.jsx';
 import ContainerWidget from './containerWidget.jsx';
 import Header from './header.jsx';
 import Tooltip from './tooltip.jsx';
+import UpdateWall from './updateWall.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
 
@@ -59,15 +60,17 @@ class ContainerUi extends Component {
   }
   render() {
     const { leftActive, rightActive, onePlace, hoverId} = this.state;
-    const { displayDetail, detail, place, allId, mobile, viewportWidth, viewportHeight } = this.props.data;
+    const { displayDetail, detail, place, allId, mobile, viewportWidth, viewportHeight, idUpdate } = this.props.data;
     const propsWidget = { displayDetail, detail, onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight };
     const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile, viewportHeight };
     const propsTooltip = { hoverId, leftActive, detail, place };
+    const propsWall = { rightActive, detail, place, idUpdate, displayDetail };
     return <div id="ui" className="elements-ui-absolute">
       <Header leftActive={leftActive} rightActive={rightActive}/>
       <LeftPanel {...propsLeftPanel} />
       <ContainerWidget {...propsWidget} />
       {hoverId && !mobile && !displayDetail ? <Tooltip {...propsTooltip} /> : ''}
+      {!mobile ? <UpdateWall {...propsWall} /> : ''}
       <RightPanel active={rightActive} />
     </div>;
   }

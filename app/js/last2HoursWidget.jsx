@@ -1,12 +1,5 @@
 import React, { PropTypes } from 'react';
-import { windColor } from './common.js';
-
-function color(value) {
-  if (value / 1.852 <= 50)
-    return windColor[Math.round(( value /1.852))];
-  else
-    return windColor[49];
-}
+import { getColor, knots } from './common.js';
 
 function Last2HoursWidget(props) {
   var { detail } = props;
@@ -32,9 +25,9 @@ function Last2HoursWidget(props) {
       <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
         <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[i] +'deg)' }}/>
       </div>
-      <div style={{background: color(max[i]) }}>{ Math.round(Number(max[i]) / 1.852)}</div>
-      <div style={{background: color(avg[i]) }}>{ Math.round(Number(avg[i]) / 1.852)}</div>
-      <div style={{background: color(min[i]) }}>{ Math.round(Number(min[i]) / 1.852)}</div>
+      <div style={{background: getColor(max[i]) }}>{knots(max[i])}</div>
+      <div style={{background: getColor(avg[i]) }}>{knots(avg[i])}</div>
+      <div style={{background: getColor(min[i]) }}>{knots(min[i])}</div>
     </div>;
   });
   return <div className="container-single-widget">

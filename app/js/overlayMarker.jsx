@@ -3,7 +3,7 @@ import r from 'r-dom';
 import { SVGOverlay } from 'react-map-gl';
 import assign from 'object-assign';
 import { Actions } from './store/actions.js';
-import { windColor } from './common.js';
+import { getColor } from './common.js';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
 
@@ -29,11 +29,6 @@ class OverlayMarker extends Component {
       redraw: function redraw(opt) {
         return r.g(locations.map((e, i) => {
           var pixel = opt.project([e.longitude, e.latitude]);
-          var color;
-          if (e.max/1.852 <= 50)
-            color = windColor[Math.round((e.max/1.852))];
-          else
-            color = windColor[49];
           if (e.id === lastUpdate) {
             return r.g({
               key: i,
@@ -51,19 +46,19 @@ class OverlayMarker extends Component {
                 cy: 0,
                 r: 16,
                 fill: 'transparent',
-                stroke: color
+                stroke: getColor(e.max)
               }),
               r.circle({
                 cx: 0,
                 cy: 0,
                 r: 12,
                 fill: '#000',
-                stroke: color,
+                stroke: getColor(e.max),
                 strokeWidth: 1.5
               }),
               r.polyline({
                 points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
-                fill: color,
+                fill: getColor(e.max),
                 style: {
                   transform: 'rotateZ(' + e.heading + 'deg) '
                 }
@@ -85,7 +80,7 @@ class OverlayMarker extends Component {
                 cy: 0,
                 r: 16,
                 fill: 'transparent',
-                stroke: color,
+                stroke: getColor(e.max),
                 strokeWidth: 8,
                 style: { opacity: 0.15 }
               }),
@@ -94,12 +89,12 @@ class OverlayMarker extends Component {
                 cy: 0,
                 r: 12,
                 fill: '#000',
-                stroke: color,
+                stroke: getColor(e.max),
                 strokeWidth: 1.5
               }),
               r.polyline({
                 points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
-                fill: color,
+                fill: getColor(e.max),
                 style: {
                   transform: 'rotateZ(' + e.heading + 'deg) '
                 }

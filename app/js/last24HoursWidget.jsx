@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import { windColor } from './common.js';
+import { getColor, knots } from './common.js';
 
 function format2(number) {
   if (number <= 9)
@@ -78,9 +78,9 @@ function Last24HourslWidget(props) {
             <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
               <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>
             </div>
-            <div style={{background: windColor[Math.round(max[index]/1.852)] }}>{Math.round(max[index]/1.852)}</div>
-            <div style={{background: windColor[Math.round(avg[index]/1.852)] }}>{Math.round(avg[index]/1.852)}</div>
-            <div style={{background: windColor[Math.round(min[index]/1.852)] }}>{Math.round(min[index]/1.852)}</div>
+            <div style={{background: getColor(max[index]) }}>{knots(max[index])}</div>
+            <div style={{background: getColor(avg[index]) }}>{knots(avg[index])}</div>
+            <div style={{background: getColor(min[index]) }}>{knots(min[index])}</div>
           </div>;
         } else
           return '';

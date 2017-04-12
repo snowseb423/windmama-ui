@@ -15,10 +15,17 @@ const windColor = [
   '#7E35FF','#7E35FF','#7E35FF','#7E35FF','#7E35FF',
   '#7E35FF','#7E35FF','#7E35FF','#7E35FF','#7E35FF',
   '#7E35FF','#7E35FF','#7E35FF','#7E35FF'
-]; // 50 to 80 idem
+];
 
-function unitType(value) {
-  return (Math.round(value/1.852) + ' nds');
-}
+const getColor = (value) => {
+  if (value / 1.852 <= 50)
+    return windColor[Math.round(( value /1.852))];
+  else
+    return windColor[49];
+};
 
-export { windColor, unitType };
+const knots = (value) => {
+  return Math.round(value/1.852);
+};
+
+export { getColor, knots };

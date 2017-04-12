@@ -22,7 +22,6 @@ class Header extends Component {
     });
   }
   render() {
-    console.log('rerender');
     return <div>
       <div id="header" className="elements-ui-absolute">
         <div className={this.state.left ? 'container-left-menu button clicked' : 'container-left-menu button'} onClick={() => Actions.leftActivation()}>

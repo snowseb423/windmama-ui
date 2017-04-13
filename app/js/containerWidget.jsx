@@ -6,45 +6,22 @@ import Last24HoursWidget from './last24HoursWidget.jsx';
 class ContainerWidget extends Component {
   constructor(props) {
     super(props);
-    const { displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.props;
-    this.state = {
-      displayDetail,
-      rightActive,
-      leftActive,
-      viewportWidth,
-      viewportHeight
-    };
+    this.state = this.props;
   }
   shouldComponentUpdate(nextProps) {
-    console.log(nextProps);
-    if (nextProps.displayDetail !== this.state.displayDetail ||
-      nextProps.rightActive !== this.state.rightActive ||
-      nextProps.leftActive !== this.state.leftActive ||
-      nextProps.viewportWidth !== this.state.viewportWidth ||
-      nextProps.viewportHeight !== this.state.viewportHeight)
-      return true;
-    else if (nextProps.idUpdate === this.state.displayDetail)
-      return true;
-    else
+    if (nextProps === this.state) {
       return false;
-  }
-  componentDidUpdate(prevProps) {
-    this.setState({
-      displayDetail: prevProps.displayDetail,
-      leftActive: prevProps.leftActive,
-      rightActive: prevProps.rightActive,
-      viewportHeight: prevProps.viewportHeight,
-      viewportWidth: prevProps.viewportWidth
-    });
+    } else {
+      this.setState(nextProps);
+      return true;
+    }
   }
   render() {
-    const { displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.state;
-    const { detail, onePlace, mobile } = this.props;
-    console.log(this.props.idUpdate + ' ' + displayDetail);
+    const { onePlace, mobile, oneDetail, displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.props;
     var content = <div>
       <InfoWidget place={onePlace} />
-      <Last2HoursWidget detail={detail[displayDetail]} />
-      <Last24HoursWidget mobile={mobile} detail={detail[displayDetail]} />
+      <Last2HoursWidget detail={oneDetail} />
+      <Last24HoursWidget mobile={mobile} detail={oneDetail} />
     </div>;
     var widthContainer;
     var marginLeftContainer;
@@ -78,8 +55,8 @@ ContainerWidget.propTypes = {
   leftActive: PropTypes.bool,
   rightActive: PropTypes.bool,
   displayDetail: PropTypes.any,
-  detail: PropTypes.any,
   onePlace: PropTypes.any,
+  oneDetail: PropTypes.array,
   viewportWidth: PropTypes.number,
   viewportHeight: PropTypes.number
 };

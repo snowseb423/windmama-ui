@@ -67,7 +67,7 @@ class ContainerUi extends Component {
     return <div id="ui" className="elements-ui-absolute">
       <Header leftActive={leftActive} rightActive={rightActive}/>
       <LeftPanel {...propsLeftPanel} />
-      <ContainerWidget {...propsWidget} />
+      {displayDetail ? <ContainerWidget {...propsWidget} /> : ''}
       {hoverId && !mobile && !displayDetail ? <Tooltip {...propsTooltip} /> : ''}
       {!mobile ? <UpdateWall {...propsWall} /> : ''}
       <RightPanel active={rightActive} />

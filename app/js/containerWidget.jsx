@@ -42,7 +42,7 @@ class ContainerWidget extends Component {
       marginLeft: marginLeftContainer
     };
 
-    return <div id="cover-widgets" style={heightCoverWidget} className={displayDetail ? 'active' : ''}>
+    return <div id="cover-widgets" style={heightCoverWidget} className={'active'}>
       <div className="container-widgets" id="container-widgets" >
         {displayDetail ? content : ''}
       </div>

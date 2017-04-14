@@ -50,35 +50,39 @@ class UpdateWall extends Component {
   }
   render() {
     const { updates, displayDetail } = this.state;
-    const styleWall = {
+    const styleContainer = {
       position: 'absolute',
       right: this.state.rightActive ? 300 : 40,
       top: 120,
-      color: 'white',
-      fontSize: '14px',
       width: 400,
       height: 120,
+      transitionDuration: '500ms',
+      overflow: 'hidden'
+    };
+    const styleWall = {
+      color: 'white',
+      fontSize: '14px',
       textShadow: '0 0 4px #000',
       textAlign: 'right',
-      transitionDuration: '500ms',
-      overflow: 'hidden',
       opacity: displayDetail ? 0 : 1
     };
-    return <div style={styleWall}>
-      {updates.map((e, i) => {
-        const pStyle = {
-          transitionDuration: '200ms',
-          position: 'absolute',
-          width: 400,
-          color: getColor(e[1]),
-          transform: 'translateY('+ (i-2)*20 +'px)',
-          paddingTop: 2,
-          fontWeight: 'bold'
-        };
-        return <p className={i === 6 ? 'animationWall' : ''} key={e[4]} style={pStyle}>
-          {e[3]} - {e[0]} - max {knots(e[1])} nds - {e[2]}°
-        </p>;
-      })}
+    return <div style={styleContainer}>
+      <div style={styleWall}>
+        {updates.map((e, i) => {
+          const pStyle = {
+            transitionDuration: '200ms',
+            position: 'absolute',
+            width: 400,
+            color: getColor(e[1]),
+            transform: 'translateY('+ (i-2)*20 +'px)',
+            paddingTop: 2,
+            fontWeight: 'bold'
+          };
+          return <p className={i === 6 ? 'animationWall' : ''} key={e[4]} style={pStyle}>
+            {e[3]} - {e[0]} - max {knots(e[1])} nds - {e[2]}°
+          </p>;
+        })}
+      </div>
     </div>;
   }
 }

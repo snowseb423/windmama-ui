@@ -39,12 +39,15 @@ class ContainerMap extends Component {
     store.on(typeOfActions.DISPLAY_DETAIL, this._displayDetail);
     store.on(typeOfActions.CHANGE_VIEWPORT, this._resize);
   }
+  shouldComponentUpdate() {
+    return true;
+  }
   _resize() {
-    // const { viewportWidth, viewportHeight } = this.props.data;
-    // this.setState({
-    //   viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
-    // });
-    // this.forceUpdate(() => console.log(this.state.viewport.width));
+    const { viewportWidth, viewportHeight } = this.props.data;
+    this.setState({
+      viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
+    });
+    this.forceUpdate(() => console.log(this.state.viewport.width));
   }
   _displayDetail() {
     this.setState({displayDetail: this.props.data.displayDetail});
@@ -72,7 +75,7 @@ class ContainerMap extends Component {
   render() {
     const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
     const { idUpdate } = this.props.data;
-    return <MapGL style={{transitionDuration: '300ms', filter: displayDetail ? 'blur(5px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
+    return <MapGL style={{ filter: displayDetail ? 'blur(5px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
       <OverlayMarker {...viewport} {...options} locations={locations} idUpdate={idUpdate}/>
     </MapGL>;
   }

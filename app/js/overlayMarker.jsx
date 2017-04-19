@@ -6,6 +6,7 @@ import { Actions } from './store/actions.js';
 import { getColor } from './common.js';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
+import hexToRgba from 'hex-rgba';
 
 
 class OverlayMarker extends Component {
@@ -23,13 +24,13 @@ class OverlayMarker extends Component {
     }
   }
   render() {
-    const { locations } = this.props;
+    const { locations, mobile } = this.props;
     const { lastUpdate } = this.state;
     return r(SVGOverlay, assign({}, this.props, {
       redraw: function redraw(opt) {
         return r.g(locations.map((e, i) => {
           var pixel = opt.project([e.longitude, e.latitude]);
-          if (e.id === lastUpdate) {
+          if (e.id === lastUpdate && !mobile) {
             return r.g({
               key: i,
               onClick: () => Actions.displayDetail(e.id),
@@ -44,17 +45,8 @@ class OverlayMarker extends Component {
                 className: 'animation-circle',
                 cx: 0,
                 cy: 0,
-                r: 16,
-                fill: 'transparent',
-                stroke: getColor(e.max)
-              }),
-              r.circle({
-                cx: 0,
-                cy: 0,
-                r: 12,
-                fill: '#000',
-                stroke: getColor(e.max),
-                strokeWidth: 1.5
+                r: 14,
+                fill: hexToRgba(getColor(e.max), 20)
               }),
               r.polyline({
                 points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
@@ -78,19 +70,8 @@ class OverlayMarker extends Component {
               r.circle({
                 cx: 0,
                 cy: 0,
-                r: 16,
-                fill: 'transparent',
-                stroke: getColor(e.max),
-                strokeWidth: 8,
-                style: { opacity: 0.15 }
-              }),
-              r.circle({
-                cx: 0,
-                cy: 0,
-                r: 12,
-                fill: '#000',
-                stroke: getColor(e.max),
-                strokeWidth: 1.5
+                r: 14,
+                fill: hexToRgba(getColor(e.max), 20)
               }),
               r.polyline({
                 points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
@@ -117,5 +98,6 @@ OverlayMarker.propTypes = {
   latitude: PropTypes.number.isRequired,
   zoom: PropTypes.number.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  idUpdate: PropTypes.any
+  idUpdate: PropTypes.any,
+  mobile: PropTypes.bool
 };

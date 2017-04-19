@@ -61,29 +61,17 @@ body {
     }
   }
   .animation-circle {
-    opacity: 0.15;
-    stroke-width: 8;
     animation-name: animation-circle;
     animation-duration: 700ms;
     @keyframes animation-circle {
       0% {
-        opacity: 0.15;
-        stroke-width: 8;
         transform: scale(1);
       } 75% {
-        opacity: 1;
-        stroke-width: 0.5;
-        transform: scale(3.5);
+        transform: scale(3);
       } 90% {
-        opacity: 0;
-        stroke-width: 0.5;
-        transform: scale(3.5);
-      } 95% {
-        opacity: 0;
-        stroke-width: 8;
-        transform: scale(1);
+        transform: scale(3);
       } 100% {
-        opacity: 0.15;
+        transform: scale(1);
       }
     }
   }
@@ -227,6 +215,22 @@ body {
   @media only screen and (max-device-width: 1100px) {
     #widget-2-hours .one-plot,
     #widget-24-hours .one-plot { width: 8.333333%; }
+    #left-panel {
+      left: 0px;
+      border-right: 1px solid black;
+      &.active { left: -260px; }
+      .child-panel {
+        transition-duration: 0;
+        padding: 5px 0px;
+        background-color: rgba(0,0,0,0);
+        &:hover {
+          background-color: rgba(0,0,0,0);
+          span:first-child {
+            padding-left: 0px;
+          }
+        }
+      }
+    }
   }
   @media only screen and (max-device-width: 480px) {
     #cover-widgets #widget-2-hours .one-plot,

@@ -47,7 +47,6 @@ class ContainerMap extends Component {
     this.setState({
       viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
     });
-    this.forceUpdate(() => console.log(this.state.viewport.width));
   }
   _displayDetail() {
     this.setState({displayDetail: this.props.data.displayDetail});
@@ -74,9 +73,9 @@ class ContainerMap extends Component {
   }
   render() {
     const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
-    const { idUpdate } = this.props.data;
-    return <MapGL style={{ filter: displayDetail ? 'blur(5px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
-      <OverlayMarker {...viewport} {...options} locations={locations} idUpdate={idUpdate}/>
+    const { idUpdate, mobile } = this.props.data;
+    return <MapGL style={{ filter: displayDetail ? 'blur(10px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
+      <OverlayMarker mobile={mobile} {...viewport} {...options} locations={locations} idUpdate={idUpdate}/>
     </MapGL>;
   }
 }

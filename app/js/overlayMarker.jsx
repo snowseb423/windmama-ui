@@ -56,6 +56,31 @@ class OverlayMarker extends Component {
                 }
               })
             ]);
+          } else if (mobile) {
+            return r.g({
+              key: i,
+              onClick: () => Actions.displayDetail(e.id),
+              onMouseOver: () => Actions.hoverId(e.id),
+              style: {
+                pointerEvents: 'all',
+                cursor: 'pointer',
+                transform: 'translateX(' + pixel[0] + 'px) translateY(' + pixel[1] + 'px) scale(1)'
+              }
+            }, [
+              r.circle({
+                cx: 0,
+                cy: 0,
+                r: 14,
+                fill: hexToRgba(getColor(e.max), 20)
+              }),
+              r.polyline({
+                points: '-5,-6 0,-3 5,-6 0,7 -5,-6',
+                fill: getColor(e.max),
+                style: {
+                  transform: 'rotateZ(' + e.heading + 'deg) '
+                }
+              })
+            ]);
           } else {
             return r.g({
               key: i,

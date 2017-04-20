@@ -40,6 +40,11 @@ AppDispatcher.register((action) => {
       store.emit(typeOfActions.CHANGE_VIEWPORT);
       break;
 
+    case typeOfActions.PINCH_LEVEL:
+      store.pinchLevel = action.lvl;
+      store.emit(typeOfActions.PINCH_LEVEL);
+      break;
+
     case typeOfActions.UPDATE_DETAIL:
       var id = action.update[0];
       if (store.detail[id] && store.place[id]) {

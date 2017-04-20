@@ -7,8 +7,16 @@ import ContainerUi from './js/containerUi.jsx';
 import ContainerMap from './js/containerMap.jsx';
 
 
-var resize = debounce( () => Actions.changeViewport([window.innerWidth, window.innerHeight]) , 200 );
+var resize = debounce( () => {
+  Actions.changeViewport([window.innerWidth, window.innerHeight]);
+}, 200 );
+
+var pinch = (e) => {
+  Actions.pinchLevel(e.scale);
+};
+
 window.addEventListener('resize', resize);
+window.addEventListener('gestureend', pinch, false);
 
 render(
   <div style={{height:'100%'}} >

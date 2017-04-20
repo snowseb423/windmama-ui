@@ -12,6 +12,7 @@ class ContainerMap extends Component {
     this._loadSensor = this._loadSensor.bind(this);
     this._displayDetail = this._displayDetail.bind(this);
     this._resize = this._resize.bind(this);
+    this._pinchLevel = this._pinchLevel.bind(this);
     const { viewportWidth, viewportHeight } = this.props.data;
     this.state = {
       viewport: {
@@ -38,6 +39,7 @@ class ContainerMap extends Component {
     store.on(typeOfActions.UPDATE_DETAIL, this._loadSensor);
     store.on(typeOfActions.DISPLAY_DETAIL, this._displayDetail);
     store.on(typeOfActions.CHANGE_VIEWPORT, this._resize);
+    store.on(typeOfActions.PINCH_LEVEL, this._pinchLevel);
   }
   shouldComponentUpdate() {
     return true;
@@ -46,6 +48,18 @@ class ContainerMap extends Component {
     const { viewportWidth, viewportHeight } = this.props.data;
     this.setState({
       viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
+    });
+  }
+  _pinchLevel() {
+    var newZoom;
+    const { pinchLevel } = this.props.data;
+    const { zoom } = this.state.viewport;
+    if (pinchLevel < 1)
+      newZoom = zoom - (pinchLevel*2);
+    else
+      newZoom = zoom + (pinchLevel/2);
+    this.setState({
+      viewport: assign({}, this.state.viewport, {zoom: newZoom})
     });
   }
   _displayDetail() {

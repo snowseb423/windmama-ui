@@ -10,6 +10,7 @@ var initialState = {
     displayDetail: false,
     hoverId: false,
     idUpdate: false,
+    pinchLevel: 1,
     viewportWidth: window.innerWidth,
     viewportHeight: window.innerHeight
 };

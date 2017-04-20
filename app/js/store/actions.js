@@ -7,7 +7,8 @@ export var typeOfActions = {
   UPDATE_DETAIL: 'UPDATE_DETAIL',
   HOVER_ID: 'HOVER_ID',
   DISPLAY_DETAIL: 'DISPLAY_DETAIL',
-  CHANGE_VIEWPORT: 'CHANGE_VIEWPORT'
+  CHANGE_VIEWPORT: 'CHANGE_VIEWPORT',
+  PINCH_LEVEL: 'PINCH_LEVEL'
 };
 
 export var Actions = {
@@ -49,6 +50,12 @@ export var Actions = {
     AppDispatcher.dispatch({
       actionType: typeOfActions.CHANGE_VIEWPORT,
       size: size
+    });
+  },
+  pinchLevel: (lvl) => {
+    AppDispatcher.dispatch({
+      actionType: typeOfActions.PINCH_LEVEL,
+      lvl: lvl
     });
   }
 };

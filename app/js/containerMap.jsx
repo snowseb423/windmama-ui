@@ -52,12 +52,15 @@ class ContainerMap extends Component {
   }
   _pinchLevel() {
     var newZoom;
-    const { pinchLevel } = this.props.data;
+    var { pinchLevel } = this.props.data;
     const { zoom } = this.state.viewport;
-    if (pinchLevel < 1)
-      newZoom = zoom - (pinchLevel*2);
-    else
-      newZoom = zoom + (pinchLevel/2);
+    if (pinchLevel < 1) { // unzoom
+      pinchLevel = (1-pinchLevel)/2;
+      newZoom = zoom - pinchLevel;
+    } else if (pinchLevel > 1) { // zoom
+      pinchLevel = (pinchLevel-1)/2;
+      newZoom = zoom + pinchLevel;
+    }
     this.setState({
       viewport: assign({}, this.state.viewport, {zoom: newZoom})
     });

@@ -1,4 +1,4 @@
-@grey1: #313131;
+@grey1: #202020;
 @grey2: #313131;
 @speed0: 180ms;
 @speed1: 300ms;
@@ -27,7 +27,7 @@ body {
     text-shadow: 1px 1px 0px #333;
   }
   input {
-    background: rgba(0, 0, 0, 0.4);
+    background: @grey1;
     border-radius: 0;
     width: 100%;
     border: none;
@@ -76,7 +76,6 @@ body {
     }
   }
   #header {
-    border-bottom: 1px solid black;
     pointer-events: all;
     width: 100%;
     height: 60px;
@@ -177,7 +176,6 @@ body {
   }
   #left-panel, #right-panel {
     pointer-events: all;
-    background: @grey1;
     transition-duration: @speed2;
     padding-top: 60px;
     width: 260px;
@@ -187,8 +185,8 @@ body {
     top: 0;
   }
   #left-panel {
+    background: @grey2;
     left: 0px;
-    border-right: 1px solid black;
     &.active { left: -260px; }
     .child-panel {
       transition-duration: 0;
@@ -203,7 +201,7 @@ body {
     }
   }
   #right-panel {
-    border-left: 1px solid black;
+    background: @grey1;
     right: 0px;
     &.active { right: -260px; }
     .link-container {

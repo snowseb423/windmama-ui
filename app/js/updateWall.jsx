@@ -78,7 +78,7 @@ class UpdateWall extends Component {
             paddingTop: 2,
             fontWeight: 'bold'
           };
-          return <p className={i === 6 ? 'animationWall' : ''} key={e[4]} style={pStyle}>
+          return <p key={e[4]} style={pStyle}>
             {e[3]} - {e[0]} - max {knots(e[1])} nds - {e[2]}°
           </p>;
         })}

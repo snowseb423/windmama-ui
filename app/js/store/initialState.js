@@ -60,7 +60,10 @@ registerData('sendAllLocation', (data) => {
 
 registerData('sendPubsubData', (data) => {
   data = data.split('|');
-  data[1] = moment(data[1]).format('HH') + ':' + moment(data[1]).format('mm');
+  data[1] = [
+    moment(data[1]).format('D MMMM'),
+    moment(data[1]).format('HH:mm')
+  ];
   Actions.updateDetail(data);
 });
 

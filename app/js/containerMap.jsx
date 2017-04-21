@@ -76,7 +76,7 @@ class ContainerMap extends Component {
     const { allId, detail, place } = this.props.data;
     var allSpots = [];
     allId.forEach((e) => {
-      if (place[e][1] !== 'null') {
+      if (place[e][1] !== 'null' && typeof detail[e] !== 'undefined') {
         allSpots.push({
           'longitude': place[e][2],
           'latitude': place[e][1],

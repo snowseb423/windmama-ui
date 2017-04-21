@@ -26,7 +26,8 @@ class LeftPanel extends Component {
     });
   }
   render() {
-    const { detail, place, allId, leftActive , mobile, viewportHeight} = this.props;
+    const { detail, place, allId, leftActive , mobile, viewportHeight, viewportWidth, displayDetail } = this.props;
+    const { search } = this.state;
     var maxOrder = [];
     allId.forEach((e) => {
       if (typeof detail[e] !== 'undefined')
@@ -53,12 +54,26 @@ class LeftPanel extends Component {
       transitionDuration: '200ms',
       fontSize: '20px'
     };
+    const propsSpots = {
+      viewportWidth,
+      displayDetail,
+      mobile,
+      search
+    };
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <div style={{ overflowY: 'scroll', height: ( viewportHeight - 102 ) + 'px'}}>
        {maxOrder.map((item, i) =>
-         <LeftPanelSpot key={i} displayDetail={this.props.displayDetail} index={i} mobile={mobile} max={maxOrder[i].max} detail={detail[maxOrder[i].id]} id={maxOrder[i].id} search={this.state.search} place={place[maxOrder[i].id]} {...item} />
+         <LeftPanelSpot
+           {...item}
+           {...propsSpots}
+           key={i}
+           index={i}
+           max={maxOrder[i].max}
+           detail={detail[maxOrder[i].id]}
+           id={maxOrder[i].id}
+           place={place[maxOrder[i].id]} />
        )}
      </div>
     </div>;
@@ -72,7 +87,8 @@ LeftPanel.propTypes = {
   place: PropTypes.object,
   allId: PropTypes.array,
   mobile: PropTypes.bool,
-  viewportHeight: PropTypes.number
+  viewportHeight: PropTypes.number,
+  viewportWidth: PropTypes.number
 };
 
 export default LeftPanel;

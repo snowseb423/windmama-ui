@@ -15,7 +15,7 @@ function Last24HourslWidget(props) {
     var hour = [], heading = [], max = [], avg = [], min = [];
     var tempHour, tempHeading = [], tempMax = [], tempAvg = [], tempMin = [];
     detail.forEach((e) => {
-      let splitedHour = e[1].split(':')[0];
+      let splitedHour = e[1][1].split(':')[0];
       if (splitedHour !== tempHour) {
         tempHour = splitedHour;
         hour.push(splitedHour);
@@ -73,7 +73,7 @@ function Last24HourslWidget(props) {
           return <div className="one-plot" key={index}>
             { !mobile ? svg : ''}
             <div style={{background: 'rgba(255,255,255,0.25)', padding: '7px 0', color: '#fff',textShadow: '0 0 2px black', fontSize: '13px'}}>
-              { element + '/' + format2(( Number(element) + 1 )) + 'h' }
+              {element + 'h'}
             </div>
             <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
               <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[index] +'deg)' }}/>

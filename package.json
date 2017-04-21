@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^6.3.0",
     "exorcist": "^0.4.0",
     "hex-rgba": "^1.0.1",
+    "moment": "^2.18.1",
     "watch": "^0.17.1",
     "watchify": "^3.7.0"
   },

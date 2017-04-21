@@ -48,7 +48,7 @@ class Tooltip extends Component {
             <line x1={'50%'} y1={height - (now[2]/1)} x2={'150%'} y2={height - (prev[2]/1)} stroke={'#5bfa00'} strokeLinecap={'round'} strokeWidth={'2'} />
           </svg>
           <div style={{ background: 'rgba(255,255,255,0.25)', padding: '0', color: '#fff', textShadow: '0px 0px 2px black' , fontSize: '14px' }}>
-            {now[1]}<br/>
+            {now[1][1]}<br/>
             <img src="img/windheading.png" width={20} height={20} style={{transform: 'rotateZ('+ now[5] +'deg)'}} />
           </div>
         </div>;

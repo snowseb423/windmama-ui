@@ -17,15 +17,15 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
-    const { place, detail, max, search } = this.props;
+    const { place, detail, max, search, viewportWidth} = this.props;
     const id = detail[0][0];
     const heading = detail[0][5];
     const cityDetail = place[4];
     var city = place[3];
     if (city.search('"') > -1)
       city = city.split('"')[1];
-    if (city.length >= 20)
-      city = city.substring(0, 20) + '...';
+    if (city.length >= 19 && viewportWidth >= 480)
+      city = city.substring(0, 18) + '...';
     const styleSpanAverage = {
       color: getColor(max),
       float: 'right',
@@ -63,6 +63,7 @@ LeftPanelSpot.propTypes = {
   mobile: PropTypes.bool,
   id: PropTypes.string,
   max: PropTypes.number,
+  viewportWidth: PropTypes.number,
   detail: PropTypes.array,
   place: PropTypes.array,
   search: PropTypes.any,

@@ -11,7 +11,7 @@ function Last2HoursWidget(props) {
       hour = [],
       heading = [];
   detail.forEach((e) => {
-    hour.push(e[1]);
+    hour.push(e[1][1]);
     min.push(e[2]);
     avg.push(e[3]);
     max.push(e[4]);

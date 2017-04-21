@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import { Actions } from './actions.js';
+import moment from 'moment';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
 var initialState = {
@@ -37,7 +38,11 @@ registerData('sendAllData', (data) => {
     let id = Number(data[0].split('|')[0]);
     initialState.detail[id] = new Array;
     data.forEach((e) => {
-      let a = e.split('|');
+      var a = e.split('|');
+      a[1] = [
+        moment(a[1]).format('D MMMM'),
+        moment(a[1]).format('HH:mm')
+      ];
       initialState.detail[id].push(a);
     });
   } else if (data === 'end') {
@@ -54,7 +59,9 @@ registerData('sendAllLocation', (data) => {
 });
 
 registerData('sendPubsubData', (data) => {
-  Actions.updateDetail(data.split('|'));
+  data = data.split('|');
+  data[1] = moment(data[1]).format('HH') + ':' + moment(data[1]).format('mm');
+  Actions.updateDetail(data);
 });
 
 export default initialState;

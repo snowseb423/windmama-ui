@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Actions } from './store/actions.js';
+import moment from 'moment';
 
 function InfoWidget(props) {
-  const { place } = props;
+  const { place, oneDetail } = props;
   const styleCityName = {
     fontFamily: 'Abel',
     fontWeight: 'bolder',
@@ -10,12 +11,15 @@ function InfoWidget(props) {
     padding: '0 10px'
   };
   if(place) {
+    const day = moment(Date.now()).format('D MMMM') === oneDetail[0][1][0] ? 'Aujourd\'hui' : 'le ' + oneDetail[0][1][0];
     var info = <div style={styleCityName}>
-      {place[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a>
+      {place[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a><br/>
+      {'Dernier relevé ' + day + ' à ' + oneDetail[0][1][1]}
     </div>;
     if (place[4].indexOf('Unnamed Road') >= 0) {
       info = <div style={styleCityName}>
-        {place[4].substring(13) + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a>
+        {place[4].substring(13) + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a><br/>
+        {'Dernier relevé ' + day + ' à ' + oneDetail[0][1][1]}
       </div>;
     }
   }
@@ -29,7 +33,8 @@ function InfoWidget(props) {
 }
 
 InfoWidget.propTypes = {
-  place: PropTypes.any
+  place: PropTypes.any,
+  oneDetail: PropTypes.array
 };
 
 export default InfoWidget;

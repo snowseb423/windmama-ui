@@ -19,7 +19,7 @@ class ContainerWidget extends Component {
   render() {
     const { onePlace, mobile, oneDetail, displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.props;
     var content = <div>
-      <InfoWidget place={onePlace} />
+      <InfoWidget place={onePlace} oneDetail={oneDetail}/>
       <Last2HoursWidget detail={oneDetail} />
       <Last24HoursWidget mobile={mobile} detail={oneDetail} />
     </div>;

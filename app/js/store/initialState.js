@@ -41,7 +41,8 @@ registerData('sendAllData', (data) => {
       var a = e.split('|');
       a[1] = [
         moment(a[1]).format('D MMMM'),
-        moment(a[1]).format('HH:mm')
+        moment(a[1]).format('HH:mm'),
+        a[1]
       ];
       initialState.detail[id].push(a);
     });
@@ -62,7 +63,8 @@ registerData('sendPubsubData', (data) => {
   data = data.split('|');
   data[1] = [
     moment(data[1]).format('D MMMM'),
-    moment(data[1]).format('HH:mm')
+    moment(data[1]).format('HH:mm'),
+    data[1]
   ];
   Actions.updateDetail(data);
 });

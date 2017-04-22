@@ -2,13 +2,6 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import { getColor, knots } from './common.js';
 
-function format2(number) {
-  if (number <= 9)
-   return '0' + number;
-  else
-    return number;
-}
-
 function Last24HourslWidget(props) {
   var { detail, mobile } = props;
   if (detail) {

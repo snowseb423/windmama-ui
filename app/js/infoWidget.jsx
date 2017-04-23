@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Actions } from './store/actions.js';
 import moment from 'moment';
-// data[1] = moment(data[1], moment.ISO_8601).format('HH:mm:D:MMMM');
+import PropTypes from 'prop-types';
 
 function InfoWidget(props) {
   const { place, oneDetail } = props;

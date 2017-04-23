@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';
+import PropTypes from 'prop-types';
 
 class ContainerWidget extends Component {
   constructor(props) {

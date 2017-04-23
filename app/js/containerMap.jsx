@@ -1,6 +1,7 @@
 import assign from 'object-assign';
 import MapGL from 'react-map-gl';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import OverlayMarker from './overlayMarker.jsx';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';

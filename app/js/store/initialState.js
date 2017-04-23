@@ -2,7 +2,6 @@ import io from 'socket.io-client';
 import { Actions } from './actions.js';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
 
-
 var initialState = {
     detail: {},
     place: {},

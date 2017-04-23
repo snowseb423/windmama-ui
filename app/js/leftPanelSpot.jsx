@@ -1,6 +1,7 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { getColor, knots } from './common.js';
 import { Actions } from './store/actions.js';
+import PropTypes from 'prop-types';
 
 class LeftPanelSpot extends Component {
   constructor(props) {

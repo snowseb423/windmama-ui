@@ -51,14 +51,14 @@ class ContainerMap extends Component {
     });
   }
   _pinchLevel() {
-    var newZoom;
     var { pinchLevel } = this.props.data;
     const { zoom } = this.state.viewport;
+    var newZoom;
     if (pinchLevel < 1) { // unzoom
-      pinchLevel = (1-pinchLevel)/2;
+      pinchLevel = (1-pinchLevel)/4;
       newZoom = zoom - pinchLevel;
     } else if (pinchLevel > 1) { // zoom
-      pinchLevel = (pinchLevel-1)/2;
+      pinchLevel = (pinchLevel-1)/4;
       newZoom = zoom + pinchLevel;
     }
     this.setState({

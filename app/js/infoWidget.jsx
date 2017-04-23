@@ -3,6 +3,7 @@ import { Actions } from './store/actions.js';
 import moment from 'moment';
 
 function InfoWidget(props) {
+  // moment.locale('fr');
   const { place, oneDetail } = props;
   const styleCityName = {
     fontFamily: 'Abel',

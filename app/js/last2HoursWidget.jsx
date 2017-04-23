@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { getColor, knots } from './common.js';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 
 function Last2HoursWidget(props) {
   var { detail } = props;

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Actions } from './store/actions.js';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 
 function InfoWidget(props) {
   const { place, oneDetail } = props;

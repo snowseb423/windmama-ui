@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Actions } from './store/actions.js';
-import PropTypes from 'prop-types';
 
 class Header extends Component {
   constructor(props) {

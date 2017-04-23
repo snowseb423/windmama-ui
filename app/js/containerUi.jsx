@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PropTypes } from 'react';
 import LeftPanel from './leftPanel.jsx';
 import RightPanel from './rightPanel.jsx';
 import ContainerWidget from './containerWidget.jsx';

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import LeftPanelSpot from './leftPanelSpot.jsx';
-import PropTypes from 'prop-types';
 
 class LeftPanel extends Component {
   constructor(props) {

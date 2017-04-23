@@ -22,9 +22,9 @@ class LeftPanelSpot extends Component {
     const heading = detail[0][5];
     const cityDetail = place[4];
     var city = place[3];
-    if (city && city.search('"') > -1)
+    if (city.search('"') > -1)
       city = city.split('"')[1];
-    if (city && city.length >= 19 && viewportWidth >= 480)
+    if (city.length >= 19 && viewportWidth >= 480)
       city = city.substring(0, 18) + '...';
     const styleSpanAverage = {
       color: getColor(max),
@@ -41,7 +41,7 @@ class LeftPanelSpot extends Component {
       width: '100%',
       display: 'inherit'
     };
-    if (search === false)
+    if (search === '')
       styleContainer.display = 'inherit';
     else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
       styleContainer.display = 'inherit';

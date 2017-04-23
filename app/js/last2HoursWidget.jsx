@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { getColor, knots } from './common.js';
+import moment from 'moment';
 
 function Last2HoursWidget(props) {
   var { detail } = props;
@@ -11,7 +12,7 @@ function Last2HoursWidget(props) {
       hour = [],
       heading = [];
   detail.forEach((e) => {
-    hour.push(e[1]);
+    hour.push(moment(e[1], moment.ISO_8601).format('HH:mm'));
     min.push(e[2]);
     avg.push(e[3]);
     max.push(e[4]);
@@ -20,7 +21,7 @@ function Last2HoursWidget(props) {
   array = min.map((element, i) => {
     return <div className="one-plot" key={i}>
       <div style={{background: 'rgba(255,255,255,0.25)', padding: '7px 0', color: '#fff',textShadow: '0 0 2px black', fontSize: '13px'}}>
-        { hour[i][1] }
+        { hour[i] }
       </div>
       <div style={{background: 'rgba(180,180,180,0.5)', paddingTop: '5px'}}>
         <img src="img/windheading.png" alt="" style={{margin:'auto', width: '20px', height: '20px', transform: 'rotateZ('+ heading[i] +'deg)' }}/>

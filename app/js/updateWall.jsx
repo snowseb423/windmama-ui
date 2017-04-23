@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { knots, getColor } from './common.js';
+import moment from 'moment';
 
 class UpdateWall extends Component {
   constructor(props) {
@@ -78,8 +79,9 @@ class UpdateWall extends Component {
             paddingTop: 2,
             fontWeight: 'bold'
           };
+          let hour = moment(e[3], moment.ISO_8601).format('HH:mm');
           return <p key={e[4]} style={pStyle}>
-            {e[3][1]} - {e[0]} - max {knots(e[1])} nds - {e[2]}°
+            {hour} - {e[0]} - max {knots(e[1])} nds - {e[2]}°
           </p>;
         })}
       </div>

@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { Actions } from './actions.js';
-import moment from 'moment';
 const socket = io.connect('http://'+ window.location.hostname +':8080/');
+
 
 var initialState = {
     detail: {},
@@ -29,9 +29,9 @@ var initialState = {
     initialState.mobile = false;
 })();
 
-function registerData(chanel, callback) {
+const registerData = (chanel, callback) => {
   socket.on(chanel, (data) => { callback(data); });
-}
+};
 
 registerData('sendAllData', (data) => {
   if (data !== 'end') {
@@ -39,11 +39,6 @@ registerData('sendAllData', (data) => {
     initialState.detail[id] = new Array;
     data.forEach((e) => {
       var a = e.split('|');
-      a[1] = [
-        moment(a[1], 'moment.ISO_8601').format('D MMMM'),
-        moment(a[1], 'moment.ISO_8601').format('HH:mm'),
-        a[1]
-      ];
       initialState.detail[id].push(a);
     });
   } else if (data === 'end') {
@@ -61,11 +56,6 @@ registerData('sendAllLocation', (data) => {
 
 registerData('sendPubsubData', (data) => {
   data = data.split('|');
-  data[1] = [
-    moment(data[1], ['D MMMM', moment.ISO_8601]),
-    moment(data[1], ['HH:mm', moment.ISO_8601]),
-    data[1]
-  ];
   Actions.updateDetail(data);
 });
 

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import { getColor, knots } from './common.js';
+import moment from 'moment';
 
 function Last24HourslWidget(props) {
   var { detail, mobile } = props;
@@ -8,7 +9,7 @@ function Last24HourslWidget(props) {
     var hour = [], heading = [], max = [], avg = [], min = [];
     var tempHour, tempHeading = [], tempMax = [], tempAvg = [], tempMin = [];
     detail.forEach((e) => {
-      let splitedHour = e[1][1].split(':')[0];
+      let splitedHour = moment(e[1], moment.ISO_8601).format('HH');
       if (splitedHour !== tempHour) {
         tempHour = splitedHour;
         hour.push(splitedHour);

@@ -43,7 +43,7 @@ class LeftPanelSpot extends Component {
       width: '100%',
       display: 'inherit'
     };
-    if (search === '')
+    if (search === '' || search === false)
       styleContainer.display = 'inherit';
     else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
       styleContainer.display = 'inherit';

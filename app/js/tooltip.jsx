@@ -29,7 +29,7 @@ class Tooltip extends Component {
     var content;
     detail = detail[hoverId];
     detail = detail.slice(0, 18);
-    if (detail) {
+    if (detail && detail.length >= 18) {
       content = detail.map((e, i) => {
         let now = e;
         let next = i >= 1 ? detail[i-1]: now;
@@ -73,7 +73,7 @@ class Tooltip extends Component {
 
     return <div id="tooltip" style={{left: leftActive ? '275px' : '15px'}}>
       {content}
-      <div style={styleLocation}>{cityLocation}</div>
+      {detail.length >= 18 ? <div style={styleLocation}>{cityLocation}</div> : '' }
     </div>;
   }
 }

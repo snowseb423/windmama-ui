@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LeftPanelSpot from './leftPanelSpot.jsx';
 
 class LeftPanel extends Component {
@@ -60,21 +61,25 @@ class LeftPanel extends Component {
       mobile,
       search
     };
+    var spots = '';
+    if (leftActive) {
+      spots = maxOrder.map((item, i) =>
+        <LeftPanelSpot
+          {...item}
+          {...propsSpots}
+          key={i}
+          index={i}
+          max={maxOrder[i].max}
+          detail={detail[maxOrder[i].id]}
+          id={maxOrder[i].id}
+          place={place[maxOrder[i].id]} />
+      );
+    }
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
       <div style={{ overflowY: 'scroll', height: ( viewportHeight - 102 ) + 'px'}}>
-       {maxOrder.map((item, i) =>
-         <LeftPanelSpot
-           {...item}
-           {...propsSpots}
-           key={i}
-           index={i}
-           max={maxOrder[i].max}
-           detail={detail[maxOrder[i].id]}
-           id={maxOrder[i].id}
-           place={place[maxOrder[i].id]} />
-       )}
+        {spots}
      </div>
     </div>;
   }

@@ -1,4 +1,5 @@
-import { PropTypes, Component } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import r from 'r-dom';
 import { SVGOverlay } from 'react-map-gl';
 import assign from 'object-assign';

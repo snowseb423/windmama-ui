@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getColor, knots } from './common.js';
 import { Actions } from './store/actions.js';
 
@@ -17,6 +18,7 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
+    console.log('rerenderLeftPanelSpot');
     const { place, detail, max, search, viewportWidth} = this.props;
     const id = detail[0][0];
     const heading = detail[0][5];

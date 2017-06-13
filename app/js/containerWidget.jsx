@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import InfoWidget from './infoWidget.jsx';
 import Last2HoursWidget from './last2HoursWidget.jsx';
 import Last24HoursWidget from './last24HoursWidget.jsx';

@@ -27,23 +27,8 @@ class LeftPanel extends Component {
     });
   }
   render() {
-    const { detail, place, allId, leftActive , mobile, viewportHeight, viewportWidth, displayDetail } = this.props;
+    const { mobile, place, allId, leftActive, displayDetail } = this.props;
     const { search } = this.state;
-    var maxOrder = [];
-    allId.forEach((e) => {
-      if (typeof detail[e] !== 'undefined')
-        maxOrder.push({
-          id: detail[e][0][0],
-          max: parseInt(detail[e][0][4], 10)
-        });
-    });
-    maxOrder.sort((a, b) => {
-      if (a.max < b.max)
-        return 1;
-      else if (a.max > b.max)
-        return -1;
-      return 0;
-    });
     var iStyle = {
       position: 'absolute',
       marginLeft: '-26px',
@@ -55,45 +40,32 @@ class LeftPanel extends Component {
       transitionDuration: '200ms',
       fontSize: '20px'
     };
-    const propsSpots = {
-      viewportWidth,
-      displayDetail,
-      mobile,
-      search
-    };
-    var spots = '';
-    if (leftActive) {
-      spots = maxOrder.map((item, i) =>
-        <LeftPanelSpot
-          {...item}
-          {...propsSpots}
-          key={i}
-          index={i}
-          max={maxOrder[i].max}
-          detail={detail[maxOrder[i].id]}
-          id={maxOrder[i].id}
-          place={place[maxOrder[i].id]} />
-      );
-    }
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>
-      <div style={{ overflowY: 'scroll', height: ( viewportHeight - 102 ) + 'px'}}>
-        {spots}
-     </div>
+      <div>
+        {allId.map((e, key)=>{
+          const propsSpot = {
+            key,
+            mobile,
+            search,
+            displayDetail,
+            id: place[e][0],
+            city: place[e][4]
+          };
+          return <LeftPanelSpot {...propsSpot}/>;
+        })}
+      </div>
     </div>;
   }
 }
 
 LeftPanel.propTypes = {
   leftActive: PropTypes.bool,
-  detail: PropTypes.any,
-  displayDetail: PropTypes.any,
   place: PropTypes.object,
   allId: PropTypes.array,
   mobile: PropTypes.bool,
-  viewportHeight: PropTypes.number,
-  viewportWidth: PropTypes.number
+  displayDetail: PropTypes.any
 };
 
 export default LeftPanel;

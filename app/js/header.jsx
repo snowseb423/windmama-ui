@@ -23,12 +23,15 @@ class Header extends Component {
     });
   }
   render() {
+    var searchOrTitle = <h1 style={{cursor: 'pointer'}} onClick={() => Actions.displayDetail(false)}>WindMama.fr</h1>;
+    if (this.props.leftActive)
+      searchOrTitle = <input className="inputTitle"/>;
     return <div>
       <div id="header" className="elements-ui-absolute">
         <div className={this.state.left ? 'container-left-menu button clicked' : 'container-left-menu button'} onClick={() => Actions.leftActivation()}>
-          <i className="fa fa-arrow-down" aria-hidden="true" />
+          <i className="fa fa-search" aria-hidden="true" />
         </div>
-        <h1 style={{cursor: 'pointer'}} onClick={() => Actions.displayDetail(false)}>WindMama.fr</h1>
+        {searchOrTitle}
         <div className={this.state.right ? 'container-right-menu button clicked' : 'container-right-menu button'} onClick={() => Actions.rightActivation()}>
           <div/>
           <div/>

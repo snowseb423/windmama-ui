@@ -20,21 +20,14 @@ body {
   #left-panel    { z-index: 2; }
   #right-panel   { z-index: 2; }
   #header        { z-index: 3; }
+  textarea:focus, input:focus{
+    outline: none;
+  }
   h1 { font-size: 20px; }
   a {
     color: #0099d1;
     text-decoration: none;
     text-shadow: 1px 1px 0px #333;
-  }
-  input {
-    background: @grey1;
-    border-radius: 0;
-    width: 100%;
-    border: none;
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    padding: 10px 0px;
   }
   .elements-ui-absolute {
     position: fixed;
@@ -77,12 +70,12 @@ body {
       background: black;
       float: left;
       i {
-        transform: rotateZ(-180deg);
+        transform: rotateZ(0deg);
         transition-duration: @speed2;
         font-size: x-large;
         padding: 18px;
       }
-      &.clicked i { transform: rotateZ(0deg); }
+      &.clicked i { transform: rotateZ(-180deg); }
     }
     h1 {
       float: left;
@@ -94,6 +87,18 @@ body {
       text-align: center;
       font-size: 30px;
       float: left;
+    }
+    .inputTitle {
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 0px;
+      width: 184px;
+      height: 14px;
+      margin: 13px 0 0 13px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     }
     .container-right-menu {
       float: right;
@@ -128,7 +133,7 @@ body {
       text-align: center;
       width: 5.5555555%;
       float: left;
-    };
+    }
   }
   #cover-widgets {
     transition-duration: @speed2;

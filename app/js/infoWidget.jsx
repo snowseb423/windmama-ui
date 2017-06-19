@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions } from './store/actions.js';
 import moment from 'moment';
+import 'moment/locale/fr';
 
 function InfoWidget(props) {
-  // moment.locale('fr');
+  moment.locale('fr');
   const { place, oneDetail } = props;
   const styleCityName = {
     fontFamily: 'Abel',

@@ -22,10 +22,11 @@ class ContainerWidget extends Component {
   render() {
     const { onePlace, mobile, oneDetail, displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.props;
     var content = <div>
-      <InfoWidget place={onePlace} oneDetail={oneDetail}/>
+      <InfoWidget place={onePlace} oneDetail={oneDetail} displayDetail={displayDetail} />
       <Last2HoursWidget detail={oneDetail} />
       <Last24HoursWidget mobile={mobile} detail={oneDetail} />
     </div>;
+
     var widthContainer;
     var marginLeftContainer;
     if (!leftActive && !rightActive && !mobile) {

@@ -71,7 +71,7 @@ class ContainerUi extends Component {
       {displayDetail ? <ContainerWidget {...propsWidget} /> : ''}
       {hoverId && !mobile && !displayDetail ? <Tooltip {...propsTooltip} /> : ''}
       {!mobile ? <UpdateWall {...propsWall} /> : ''}
-      <RightPanel active={rightActive} />
+      <RightPanel rightActive={rightActive} />
     </div>;
   }
 }

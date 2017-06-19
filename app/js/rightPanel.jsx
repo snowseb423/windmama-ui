@@ -4,21 +4,9 @@ import PropTypes from 'prop-types';
 class RightPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      active: false
-    };
-  }
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.active !== this.state.active)
-      return true;
-    else if (nextProps.active === this.state.active)
-      return false;
-  }
-  componentDidUpdate(prevProps) {
-    this.setState({active: prevProps.active});
   }
   render() {
-    return <div className={this.state.active ? ' ' : 'active'} id="right-panel">
+    return <div className={this.props.rightActive ? ' ' : 'active'} id="right-panel">
       <div style={{padding: '10px', color: '#ccc'}}>
         <h1 style={{color: '#DDD'}}>Observation du vent en temps réel.</h1>
         Windmama recense les données météorologiques du
@@ -43,7 +31,7 @@ class RightPanel extends Component {
 }
 
 RightPanel.propTypes = {
-  active: PropTypes.bool
+  rightActive: PropTypes.bool
 };
 
 export default RightPanel;

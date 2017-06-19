@@ -7,17 +7,20 @@ import Last24HoursWidget from './last24HoursWidget.jsx';
 class ContainerWidget extends Component {
   constructor(props) {
     super(props);
-    this.state = this.props;
   }
   shouldComponentUpdate(nextProps) {
-    if (nextProps === this.state) {
-      return false;
-    } else {
-      this.setState(nextProps);
+    if ( nextProps.idUpdate === this.props.displayDetail ||
+         nextProps.leftActive !== this.props.leftActive ||
+         nextProps.rightActive !== this.props.rightActive ||
+         nextProps.displayDetail !== this.props.displayDetail ||
+         nextProps.viewportWidth !== this.props.viewportWidth ||
+         nextProps.viewportHeight !== this.props.viewportHeight)
       return true;
-    }
+    else
+      return false;
   }
   render() {
+    console.log('rerendu');
     const { onePlace, mobile, oneDetail, displayDetail, rightActive, leftActive, viewportWidth, viewportHeight } = this.props;
     var content = <div>
       <InfoWidget place={onePlace} oneDetail={oneDetail}/>

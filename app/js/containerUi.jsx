@@ -61,7 +61,7 @@ class ContainerUi extends Component {
   render() {
     const { leftActive, rightActive, onePlace, hoverId} = this.state;
     const { displayDetail, detail, place, allId, mobile, viewportWidth, viewportHeight, idUpdate } = this.props.data;
-    const propsWidget = { displayDetail, oneDetail: detail[displayDetail], onePlace, leftActive, rightActive, mobile, viewportWidth, viewportHeight };
+    const propsWidget = { displayDetail, oneDetail: detail[displayDetail], onePlace, idUpdate, leftActive, rightActive, mobile, viewportWidth, viewportHeight };
     const propsLeftPanel = { displayDetail, detail, place, allId, leftActive, mobile, viewportWidth, viewportHeight };
     const propsTooltip = { hoverId, leftActive, detail, place };
     const propsWall = { rightActive, detail, place, idUpdate, displayDetail };

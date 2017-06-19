@@ -7,6 +7,13 @@ class LeftPanelSpot extends Component {
   constructor(props) {
     super(props);
   }
+  shouldComponentUpdate(nextProps) {
+    if(nextProps.index !== this.props.index || nextProps.search !== this.props.search) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   sumFunc(id) {
     if (!this.props.mobile && !this.props.displayDetail) {
       Actions.displayDetail(id);
@@ -18,12 +25,8 @@ class LeftPanelSpot extends Component {
     }
   }
   render() {
-    console.log('rerenderLeftPanelSpot');
-    const { place, detail, max, search, viewportWidth} = this.props;
-    const id = detail[0][0];
-    const heading = detail[0][5];
-    const cityDetail = place[4];
-    var city = place[3];
+    const { search, viewportWidth, spot} = this.props;
+    var city = spot.city.split(',')[1];
     if (city) {
       if (city.search('"') > -1)
         city = city.split('"')[1];
@@ -31,12 +34,12 @@ class LeftPanelSpot extends Component {
         city = city.substring(0, 18) + '...';
     }
     const styleSpanAverage = {
-      color: getColor(max),
+      color: getColor(spot.max),
       float: 'right',
       marginRight: '8px'
     };
     const styleImgAverage = {
-      transform: 'rotateZ(' + heading + 'deg)',
+      transform: 'rotateZ(' + spot.heading + 'deg)',
       float: 'right'
     };
     var styleContainer = {
@@ -45,31 +48,28 @@ class LeftPanelSpot extends Component {
       width: '100%',
       display: 'inherit'
     };
-    if (search === '' || search === false)
+    if (search === '' || search === false || search === undefined)
       styleContainer.display = 'inherit';
-    else if (cityDetail.indexOf(search) >= 0 || cityDetail.toLowerCase().indexOf(search) >= 0 )
-      styleContainer.display = 'inherit';
-    else if(search === undefined)
+    else if (city.indexOf(search) >= 0 || city.toLowerCase().indexOf(search) >= 0 )
       styleContainer.display = 'inherit';
     else
       styleContainer.display = 'none';
-    return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(id)} onMouseOver={() => Actions.hoverId(this.props.id)} >
+    return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(spot.id)} onMouseOver={() => Actions.hoverId(spot.id)} >
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
         <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" />
-        <span style={styleSpanAverage}>{knots(max) + ' nds'}</span>
+        <span style={styleSpanAverage}>{knots(spot.max) + ' nds'}</span>
       </div>
     </div>;
   }
 }
 
 LeftPanelSpot.propTypes = {
+  leftActive: PropTypes.bool,
+  spot: PropTypes.object,
+  index: PropTypes.number,
   mobile: PropTypes.bool,
-  id: PropTypes.string,
-  max: PropTypes.number,
   viewportWidth: PropTypes.number,
-  detail: PropTypes.array,
-  place: PropTypes.array,
   search: PropTypes.any,
   displayDetail: PropTypes.any
 };

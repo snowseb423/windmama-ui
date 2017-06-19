@@ -12,6 +12,13 @@ class LeftPanel extends Component {
       scale: 'scale(0)'
     };
   }
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.leftActive || this.props.leftActive) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   changeOnResearch(){
     this.setState({search: document.getElementById('research').value});
     if (document.getElementById('research').value === '')
@@ -34,7 +41,10 @@ class LeftPanel extends Component {
       if (typeof detail[e] !== 'undefined')
         maxOrder.push({
           id: detail[e][0][0],
-          max: parseInt(detail[e][0][4], 10)
+          max: parseInt(detail[e][0][4], 10),
+          city: place[e][4],
+          heading: detail[e][0][5],
+          date: detail[e][0][1]
         });
     });
     maxOrder.sort((a, b) => {
@@ -59,22 +69,17 @@ class LeftPanel extends Component {
       viewportWidth,
       displayDetail,
       mobile,
-      search
+      search,
+      leftActive
     };
-    var spots = '';
-    if (leftActive) {
-      spots = maxOrder.map((item, i) =>
-        <LeftPanelSpot
-          {...item}
-          {...propsSpots}
-          key={i}
-          index={i}
-          max={maxOrder[i].max}
-          detail={detail[maxOrder[i].id]}
-          id={maxOrder[i].id}
-          place={place[maxOrder[i].id]} />
-      );
-    }
+    var spots = maxOrder.map((spot, i) =>
+      <LeftPanelSpot
+        {...propsSpots}
+        spot={spot}
+        key={Number(spot.id)}
+        index={i}
+       />
+    );
     return <div className={leftActive ? ' ' : 'active'} id="left-panel">
       <input id="research" type="text" placeholder="Recherche de spots" onChange={this.changeOnResearch}/>
       <i className="fa fa-times-circle" aria-hidden="true" style={iStyle} onClick={this.clearResearch}/>

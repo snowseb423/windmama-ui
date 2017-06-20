@@ -8,40 +8,39 @@ moment.locale('fr');
 class InfoWidget extends Component {
   constructor(props) {
     super(props);
-    this.updateTime = this.updateTime.bind(this);
-    this.clearDate = this.clearDate.bind(this);
+    this._updateTime = this._updateTime.bind(this);
+    this._clearDate = this._clearDate.bind(this);
     this.state = {
       last: this.props.oneDetail[0][1],
       diff: moment.utc(moment().diff(this.props.oneDetail[0][1]))
     };
   }
   componentWillMount() {
-    this.updateTime();
+    this._updateTime();
   }
-  componentWillUpdate(prevProps) {
-    if (prevProps.displayDetail !== this.props.displayDetail)
-      this.clearDate();
+  componentWillReceiveProps() {
+    this._clearDate();
   }
-  // componentDidUpdate(nextProps) {
-  //   if (nextProps.displayDetail !== this.props.displayDetail)
-  //     this.clearDate();
-  // }
+  componentDidUpdate(nextProps) {
+    if (nextProps.displayDetail !== this.props.displayDetail)
+    this._clearDate();
+  }
   componentWillUnmount() {
-    clearInterval(this.updateSeconds);
+    clearInterval(this._updateSeconds);
   }
-  clearDate() {
+  _clearDate() {
     this.setState({
       last: this.props.oneDetail[0][1],
       diff: moment.utc(moment().diff(this.props.oneDetail[0][1]))
     });
   }
-  updateTime() {
-    this.updateSeconds = setInterval(() => {
+  _updateTime() {
+    this._updateSeconds = setInterval(() => {
       this.setState({
         diff: moment(this.state.diff).add(1, 'seconds')
       });
     }, 1000);
-    this.updateSeconds;
+    this._updateSeconds;
   }
   render() {
     const { place } = this.props;
@@ -50,6 +49,9 @@ class InfoWidget extends Component {
       fontSize: '18px',
       padding: '0 10px'
     };
+    var diff = 'Il y a '+ moment(this.state.diff).format('m [minutes et] s [secondes.]');
+    if (moment(this.state.diff).valueOf() > 3600000)
+      diff = 'Le dernier relevé a plus de une heure.';
     return <div className="widget" style={{ padding: '10px 0', background: 'rgba(255, 255, 255, 0.25)', color: '#fff'}}>
       <div style={{ display: 'inline-block', width: '100%' }}>
         <button className="button" style={{ opacity: '0.4', float: 'left', marginLeft: '10px'}} onClick={() => alert('Cette fonction sera bientôt disponible')}><i className="fa fa-heart-o" /> favoris</button>
@@ -57,8 +59,8 @@ class InfoWidget extends Component {
       </div>
       <div style={styleCityName}>
         {place[4] + ', '}<a href={'http://pioupiou.fr/fr/' + place[0]} target="_blan">Pioupiou_n°{place[0]}</a><br/>
-        {'Dernier relevé à ' + moment(this.state.last).format('HH:mm') + ' le ' +
-        moment(this.state.last).format('D MMMM') + '. Il y a '+ moment(this.state.diff).format('HH:mm:ss')}
+        {'Dernier relevé : ' + moment(this.state.last).calendar() + ' (' + moment(this.state.last).format('D MMMM') + ').'}<br/>
+        {diff}
       </div>
     </div>;
   }

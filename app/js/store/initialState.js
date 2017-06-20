@@ -74,5 +74,4 @@ $.ajax({
   }
 });
 
-
 export default initialState;

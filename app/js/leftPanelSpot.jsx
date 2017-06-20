@@ -36,8 +36,7 @@ class LeftPanelSpot extends Component {
         city = city.substring(0, 18) + '...';
     }
     const styleSpanAverage = {
-      display: diff < 3600000 ? 'inherit' : 'none',
-      color: getColor(spot.max),
+      color: diff < 3600000 ? getColor(spot.max) : 'red',
       float: 'right',
       marginRight: '8px'
     };
@@ -69,7 +68,7 @@ class LeftPanelSpot extends Component {
         {
           diff < 3600000 ?
           <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" /> :
-          <span>--&nbsp;&nbsp;<i style={styleIconDisconnect} className="fa fa-exclamation-triangle" aria-hidden="true" /></span>
+          <i style={styleIconDisconnect} className="fa fa-exclamation-triangle" aria-hidden="true" />
         }
         <span style={styleSpanAverage}>{knots(spot.max) + ' nds'}</span>
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getColor, knots } from './common.js';
 import { Actions } from './store/actions.js';
+import moment from 'moment';
 
 class LeftPanelSpot extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class LeftPanelSpot extends Component {
   render() {
     const { search, viewportWidth, spot} = this.props;
     var city = spot.city.split(',')[1];
+    const diff = moment().valueOf() - moment(spot.date).valueOf();
     if (city) {
       if (city.search('"') > -1)
         city = city.split('"')[1];
@@ -34,6 +36,7 @@ class LeftPanelSpot extends Component {
         city = city.substring(0, 18) + '...';
     }
     const styleSpanAverage = {
+      display: diff < 3600000 ? 'inherit' : 'none',
       color: getColor(spot.max),
       float: 'right',
       marginRight: '8px'
@@ -42,9 +45,15 @@ class LeftPanelSpot extends Component {
       transform: 'rotateZ(' + spot.heading + 'deg)',
       float: 'right'
     };
+    const styleIconDisconnect = {
+      float: 'right',
+      color: 'red',
+      fontSize: 'large'
+    };
     var styleContainer = {
       fontSize: '14px',
-      color: '#ccc',
+      opacity: diff < 3600000 ? 1 : 0.65,
+      color: diff < 3600000 ? '#ccc' : 'red',
       width: '100%',
       display: 'inherit'
     };
@@ -57,7 +66,11 @@ class LeftPanelSpot extends Component {
     return <div style={styleContainer} className="child-panel button" onClick={() => this.sumFunc(spot.id)} onMouseOver={() => Actions.hoverId(spot.id)} >
       <span style={{ marginLeft: '7px'}}>{city}</span>
       <div style={{float: 'right', marginRight: '7px'}}>
-        <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" />
+        {
+          diff < 3600000 ?
+          <img style={styleImgAverage} alt="" src="img/windheading.png" width="20px" height="20px" /> :
+          <span>--&nbsp;&nbsp;<i style={styleIconDisconnect} className="fa fa-exclamation-triangle" aria-hidden="true" /></span>
+        }
         <span style={styleSpanAverage}>{knots(spot.max) + ' nds'}</span>
       </div>
     </div>;

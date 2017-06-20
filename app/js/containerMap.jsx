@@ -1,105 +1,75 @@
-import assign from 'object-assign';
-import MapGL from 'react-map-gl';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import OverlayMarker from './overlayMarker.jsx';
+import mapboxgl from 'mapbox-gl';
 import store from './store/store.js';
 import { typeOfActions } from './store/actions.js';
+import { getColor, windColor } from './common.js';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg';
 
 class ContainerMap extends Component {
   constructor(props) {
     super(props);
-    this._onChangeViewport = this._onChangeViewport.bind(this);
-    this._loadSensor = this._loadSensor.bind(this);
-    this._displayDetail = this._displayDetail.bind(this);
-    this._resize = this._resize.bind(this);
-    this._pinchLevel = this._pinchLevel.bind(this);
-    const { viewportWidth, viewportHeight } = this.props.data;
-    this.state = {
-      viewport: {
-        latitude: 46.7,
-        longitude: 3.5,
-        zoom: 5.5,
-        width: viewportWidth,
-        height: viewportHeight
-      },
-      options: {
-        startDragLngLat: false,
-        isDragging: false
-      },
-      mapboxDepend: {
-        mapStyle: 'mapbox://styles/arguelbenoit/cj0urisrp00m02rqpr2zw3tqp',
-        mapboxApiAccessToken: 'pk.eyJ1IjoiYXJndWVsYmVub2l0IiwiYSI6ImNpczN0aTRpbjAwMWQyb3FkM3d4d3dweWwifQ.TuZpfqS-HyuaUzbe1fIiTg'
-      },
-      locations: [],
-      displayDetail: false
-    };
+    this._initMarkers = this._initMarkers.bind(this);
+    this.state = { detailActive: false };
   }
   componentDidMount() {
-    store.on(typeOfActions.SEND_DATA, this._loadSensor);
-    store.on(typeOfActions.UPDATE_DETAIL, this._loadSensor);
-    store.on(typeOfActions.DISPLAY_DETAIL, this._displayDetail);
-    store.on(typeOfActions.CHANGE_VIEWPORT, this._resize);
-    store.on(typeOfActions.PINCH_LEVEL, this._pinchLevel);
-  }
-  shouldComponentUpdate() {
-    return true;
-  }
-  _resize() {
-    const { viewportWidth, viewportHeight } = this.props.data;
-    this.setState({
-      viewport: assign({}, this.state.viewport, {width: viewportWidth, height: viewportHeight})
+    this.mapgl = new mapboxgl.Map({
+      container: 'map',
+      center: [2.5, 46.7],
+      style: 'mapbox://styles/arguelbenoit/cj0urisrp00m02rqpr2zw3tqp',
+      zoom: 4.80
     });
+    store.on(typeOfActions.SEND_DATA, this._initMarkers);
   }
-  _pinchLevel() {
-    var { pinchLevel } = this.props.data;
-    const { zoom } = this.state.viewport;
-    var newZoom;
-    if (pinchLevel < 1) { // unzoom
-      pinchLevel = (1-pinchLevel)/4;
-      newZoom = zoom - pinchLevel;
-    } else if (pinchLevel > 1) { // zoom
-      pinchLevel = (pinchLevel-1)/4;
-      newZoom = zoom + pinchLevel;
-    }
-    this.setState({
-      viewport: assign({}, this.state.viewport, {zoom: newZoom})
-    });
-  }
-  _displayDetail() {
-    this.setState({displayDetail: this.props.data.displayDetail});
-  }
-  _onChangeViewport(newViewport) {
-    const viewport = assign({}, this.state.viewport, newViewport);
-    this.setState({viewport});
-  }
-  _loadSensor() {
-    const { allId, detail, place } = this.props.data;
-    var allSpots = [];
-    allId.forEach((e) => {
-      if (place[e][1] !== 'null' && typeof detail[e] !== 'undefined') {
-        allSpots.push({
-          'longitude': place[e][2],
-          'latitude': place[e][1],
-          'heading': detail[e][0][5],
-          'max': detail[e][0][4],
-          'id': detail[e][0][0]
+  _initMarkers() {
+    // console.log('_initMarkers');
+    const { data } = this.props;
+    this.mapgl.once('load', () => {
+      data.allId.forEach((element) => {
+        let detail = data.detail[element][0];
+        let place = data.place[element];
+        this.mapgl.addSource('sensor-' + element, {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [place[2], place[1]]
+                }
+              }
+            ]
+          }
         });
-      }
+        this.mapgl.addLayer({
+          'id': 'circle1-' + element,
+          'type': 'circle',
+          'source': 'sensor-' + element,
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': getColor(detail[4]),
+            'circle-opacity': 0.3
+          }
+        });
+        // this.mapgl.addLayer({
+        //   'id': 'sensor-' + element,
+        //   'type': 'symbol',
+        //   'source': 'sensor-' + element,
+        //   'layout': {
+        //     'icon-image': 'heading',
+        //     'icon-rotate': Number(detail[5]),
+        //     'icon-size': 0.06
+        //   }
+        // });
+      });
     });
-    this.setState({locations: allSpots});
   }
   render() {
-    const { viewport, mapboxDepend, options, locations, displayDetail } = this.state;
-    const { idUpdate, mobile } = this.props.data;
-    return <MapGL style={{ filter: displayDetail ? 'blur(10px)' : 'blur(0px)'}} onChangeViewport={this._onChangeViewport} {...viewport} {...mapboxDepend}>
-      <OverlayMarker mobile={mobile} {...viewport} {...options} locations={locations} idUpdate={idUpdate}/>
-    </MapGL>;
+    // console.log('render');
+    const { viewportWidth, viewportHeight } = this.props.data;
+    return <div style={{ height: viewportHeight, width: viewportWidth }} id="map" />;
   }
 }
-
-ContainerMap.propTypes = {
-  data: PropTypes.object
-};
 
 export default ContainerMap;

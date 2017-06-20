@@ -1,4 +1,4 @@
-const windColor = [
+  const windColor = [
   '#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF',
   '#FFFFFF','#DCFDFC','#A5FAF7','#9AFAF6','#67F7F1',
   '#51F9BD','#36FB7E','#2BFC64','#09FE15','#0AFE00',
